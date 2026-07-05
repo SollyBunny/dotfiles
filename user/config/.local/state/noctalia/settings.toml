@@ -5,7 +5,7 @@ enable_overdrive = true
 order = [ "default" ]
 
     [bar.default]
-    background_opacity = 0.8
+    background_opacity = 0.80000000000000004
     center = [ "active_window" ]
     end = [ "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
@@ -268,13 +268,13 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
 
 [widget.Freq]
 glyph = "clock"
