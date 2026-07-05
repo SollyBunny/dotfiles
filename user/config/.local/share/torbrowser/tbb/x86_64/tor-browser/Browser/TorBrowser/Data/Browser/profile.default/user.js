@@ -12,6 +12,10 @@ user_pref("widget.gtk.native-context-menus");
 
 user_pref("browser.aboutConfig.showWarning", false);
 
+// ctrl-shift-alt-i
+user_pref("devtools.debugger.remote-enabled", true);
+user_pref("devtools.chrome.enabled", true);
+
 // Torbrowser
 user_pref("intl.language_notification.shown", true);
 user_pref("torbrowser.about_torconnect.user_has_ever_clicked_connect", true);
@@ -19,5 +23,3 @@ user_pref("torbrowser.settings.quickstart.enabled", true);
 
 // Extensions
 user_pref("extensions.webextensions.ExtensionStorageIDB.migrated.pywalfox@frewacom.org", true);
-user_pref("extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net", true);
-user_pref("extensions.webextensions.uuids", "{\"{73a6fe31-595d-460b-a920-fcc0f8843232}\":\"1824ae40-f149-4fc4-b559-6287db2c0f39\",\"uBlock0@raymondhill.net\":\"304f660e-bd5a-46ec-8ee9-25c970b3d799\",\"pywalfox@frewacom.org\":\"8283b085-7760-4e61-937a-794dbbe3b491\",\"default-theme@mozilla.org\":\"405d9777-d891-4c2f-a004-1dfef1b24ab0\"}");
