@@ -1,0 +1,321 @@
+[audio]
+enable_overdrive = true
+
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    background_opacity = 0.8
+    center = [ "active_window" ]
+    end = [ "tray", "group:g1", "group:g4", "group:g3" ]
+    margin_edge = 0
+    margin_ends = 0
+    padding = 5
+    panel_overlap = 0
+    radius = 0
+    start = [ "group:g5", "group:g2", "group:g6" ]
+    thickness = 35
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "workspaces" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "date", "clock" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g4"
+        members = [ "volume", "brightness" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "network", "bluetooth" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g5"
+        members = [ "session", "control-center", "wallpaper" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g6"
+        members = [ "battery", "temp", "cpu", "cpu_clock_speed_2" ]
+        opacity = 1.0
+        padding = 6.0
+
+[battery]
+warning_threshold = 20
+
+[brightness]
+enable_ddcutil = true
+
+[calendar]
+enabled = true
+
+    [calendar.account.personal_google]
+    type = "google"
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 176.0
+    box_width = 272.0
+    cx = 683.0
+    cy = 120.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = false
+        clock_style = "digital"
+        format = "{:%H:%M:%S}"
+        shadow = true
+
+[dock]
+background_opacity = 0.80000000000000004
+radius = 12
+
+[idle]
+behavior_order = [ "lock", "Sleep" ]
+pre_action_fade_seconds = 10
+
+    [idle.behavior.Sleep]
+    action = "command"
+    command = "systemctl sleep"
+    enabled = true
+    timeout = 600
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 60
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 683.0
+    cy = 647.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 160.0
+    box_width = 336.0
+    cx = 683.0
+    cy = 224.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = true
+        background_opacity = 0.55000000000000004
+        background_padding = 16.0
+        background_radius = 32.0
+        clock_style = "digital"
+        format = "{:%H:%M:%S}"
+
+[notification]
+background_opacity = 0.80000000000000004
+
+[osd]
+background_opacity = 0.5
+
+[plugins]
+enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed" ]
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/SollyBunny/noctalia-plugins"
+    name = "SollyBunny"
+
+[shell]
+avatar_path = "/home/aurelia/Pictures/pfp.png"
+date_format = "%A, %Y-%M-%d"
+password_style = "random"
+polkit_agent = true
+settings_show_advanced = true
+time_format = "{:%H:%M:%S}"
+ui_scale = 0.80000000000000004
+
+    [shell.panel]
+    launcher_compact = true
+    transparency_mode = "soft"
+
+    [shell.screen_corners]
+    enabled = true
+    size = 12
+
+    [shell.screenshot]
+    directory = "~/Pictures/screenshots/"
+
+    [[shell.session.actions]]
+    action = "command"
+    command = "sudo loginctl lock-sessions"
+    countdown_seconds = 0.0
+    enabled = true
+    glyph = "lock-filled"
+    label = "Lock"
+    shortcut = "l"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "command"
+    command = "sudo loginctl lock-sessions && sleep 1 && systemctl sleep"
+    countdown_seconds = 0.0
+    enabled = true
+    glyph = "suspend"
+    label = "Sleep"
+    shortcut = "p"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "command"
+    command = "sudo loginctl lock-sessions && sleep 1 && systemctl hibernate"
+    countdown_seconds = 0.0
+    enabled = true
+    glyph = "hibernate"
+    label = "Hibernate"
+    shortcut = "h"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 0.0
+    enabled = true
+    variant = "destructive"
+
+[theme]
+builtin = "Dracula"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "qt" ]
+    community_ids = [ "pywalfox", "vscode", "zed", "discord", "steam", "telegram" ]
+
+[wallpaper]
+directory = "~/Pictures/wallpapers"
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+
+    [wallpaper.last]
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+
+[widget.Freq]
+glyph = "clock"
+tooltip = "CPU Frequency"
+type = "custom_button"
+
+[widget.active_window]
+capsule = true
+min_length = 0
+title_scroll = "on_hover"
+
+[widget.bongocat]
+script = "scripts/bongocat.lua"
+type = "scripted"
+
+[widget.clock]
+format = "{:%H:%M:%S %Z}"
+
+[widget.cpu]
+display = "text"
+
+[widget.cpu_clock_speed]
+show_glyph = false
+type = "noctalia/cpu_clock_speed:cpu_clock_speed"
+
+[widget.cpu_clock_speed_2]
+type = "noctalia/cpu_clock_speed:cpu_clock_speed"
+
+[widget.date]
+format = "{:%a %Y-%m-%d}"
+
+[widget.ram]
+display = "text"
+stat = "cpu_temp"
+
+[widget.temp]
+display = "text"
+
+[widget.tray]
+capsule = true
+
+[widget.workspaces]
+hide_when_empty = true
+labels_only_when_occupied = true

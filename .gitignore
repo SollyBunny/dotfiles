@@ -18,3 +18,8 @@ user/config/.config/mango/noctalia.conf
 
 user/config/.config/micro/backups
 user/config/.config/micro/buffers
+
+user/config/.local/state/noctalia/**
+!user/config/.local/state/noctalia/__link
+!user/config/.local/state/noctalia/settings.toml
+!user/config/.local/state/noctalia/.setup-complete
