@@ -4,4 +4,4 @@ await pacmanInstall("cage", "greetd");
 
 await runShellRoot("systemctl enable greetd");
 
-await yayInstall("mangowm-bin", "noctalia-git", "noctalia-greeter-git");
+await yayInstall("mangowm", "noctalia-git", "noctalia-greeter-git");

@@ -5,6 +5,7 @@ await pacmanInstall(
     "curl", "wget", "openssh",
     "nodejs", "npm",
     "zip", "unrar", "tar",
-    "base-devel", "clang", "llvm", "just", "jemalloc",
+    "base-devel", "clang", "llvm", "jemalloc", "pkgconf",
+    "just", "meson", "ninja",
     "less", "which", "tree", "jq",
 );
