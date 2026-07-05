@@ -1,0 +1,96 @@
+:root {
+  --tab-min-height: 2em !important;
+  --tab-label-height: 2.5em !important;
+  --tab-block-margin: 0 !important;
+  --split-view-padding-block: 0 !important;
+  --urlbar-container-border-width: 0 !important;
+  --border-width: 0 !important;
+  --badge-border-width: 0 !important;
+  --letterboxing-bgcolor: transparent !important;
+  --tab-selected-shadow: none !important;
+}
+
+html#main-window body {
+  background-color: #000000CC !important;
+}
+
+.browserContainer, toolbox {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+#browser {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+#nav-bar, tooltip, toolbox, panel {
+  border: none !important;
+}
+
+spacer {
+  border: none !important;
+  background-image: none !important;
+}
+
+.tab-background {
+  outline: 0 !important;
+  margin-inline: 0 !important;
+  border-radius: 0 !important;
+}
+
+#tabbrowser-tabs tab-split-view-wrapper {
+  border-radius: 0 !important;
+}
+
+.tabbrowser-tab {
+  padding: 0 !important;
+  height: var(--tab-label-height) !important;
+}
+
+.tab-group-label {
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+.tab-group-label-hover-highlight {
+  padding: 0 !important;
+}
+
+.titlebar-spacer {
+  width: unset !important;
+}
+
+#sidebar-main {
+  background-color: var(--toolbar-bgcolor) !important;
+}
+
+#sidebar-box {
+  padding-block-end: 0 !important;
+}
+
+#sidebar {
+  border-radius: 0 !important;
+}
+
+h4 {
+  margin: 0 !important;
+}
+
+.split-view-panel {
+  margin: 2px !important;
+}
+
+/* Make sidebar and tab splitter the same */
+#sidebar-splitter, .split-view-splitter {
+  background-color: var(--toolbar-bgcolor) !important;
+  border: none !important;
+  margin: 0 !important;
+  margin-block: 0 !important;
+  margin-block-end: 0 !important;
+  padding: 0 !important;
+  min-width: 6px !important;
+  width: 6px !important;
+}
+
+/* */
