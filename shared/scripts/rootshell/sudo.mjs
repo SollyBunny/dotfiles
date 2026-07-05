@@ -1,3 +1,5 @@
+#!/bin/env node
+
 // Used when programs need sudo
 
 import fs from "node:fs/promises";

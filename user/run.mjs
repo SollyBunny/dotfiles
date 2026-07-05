@@ -1,3 +1,5 @@
+#!/bin/env node
+
 import { getThisDir } from "#shared/shared.mjs";
 import fs from "node:fs";
 import path from "node:path";
