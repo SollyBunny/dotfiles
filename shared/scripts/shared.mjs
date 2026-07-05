@@ -48,6 +48,10 @@ export async function moveToBackup(file) {
         recursive: true,
         mode: fs.constants.COPYFILE_FICLONE_FORCE,
     });
+    await fs.rm(file, {
+        force: true,
+        recursive: true,
+    });
 }
 
 export async function filesEqual(a, b) {
