@@ -18,7 +18,7 @@ const files = (await fs.readdir(configRoot, {
 for (const file of files) {
     const fileInstall = path.join(path.sep, path.relative(configRoot, file));
     const fileInstallStat = await lstatSafe(fileInstall);
-    if (fileInstallStat.isFile() && await filesEqual(file, fileInstall)) {
+    if (fileInstallStat && fileInstallStat.isFile() && await filesEqual(file, fileInstall)) {
         if (fileInstallStat.gid !== 0 || fileInstallStat.uid !== 0)
             await runShellRoot(`chown root:root ${fileInstall}`)
         if (fileInstallStat.mode !== 0o644)
