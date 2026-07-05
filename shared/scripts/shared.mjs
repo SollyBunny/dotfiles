@@ -106,5 +106,6 @@ export async function pacmanInstall(...packages) {
 
 export async function yayInstall(...packages) {
     console.log("Installing with yay", ...packages);
+    await rootshell.init();
     return await runShell(`yay -S --needed --sudo "${process.argv0} ${path.join(__dir, "rootshell/sudo.mjs")}" -- ${packages.join(" ")}`, rootshell.ipcEnv);
 }

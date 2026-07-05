@@ -31,6 +31,8 @@ export default class RootShell {
         this.ipcEnv["IPC_SOCKET_PASSWORD"] = this.IPC_SOCKET_PASSWORD;
     }
     async init() {
+        if (this.#inited)
+            return;
         this.#inited = true;
 
         const cleanup = async () => {
