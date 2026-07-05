@@ -1,7 +1,5 @@
 #!/bin/env node
 
-// Used when programs need sudo
-
 import fs from "node:fs/promises";
 import net from "node:net";
 
@@ -28,7 +26,6 @@ for (let i = 0; i < 300; ++i) {
     if (await fs.stat(IPC_SOCKET_PATH, { throwIfNoEntry: false }))
         break;
     await new Promise(resolve => setTimeout(resolve, 100));
-    console.log(i)
 }
 
 const socket = net.createConnection(IPC_SOCKET_PATH);
@@ -39,11 +36,27 @@ socket.once("connect", () => {
 });
 
 socket.on("error", error => {
-    throw error;
-}).unref();
-
-socket.once("close", () => {
-    process.exit(0)
+    console.error(error);
+    process.exit(1);
 });
 
+function onMessage(message) {
+    message = JSON.parse(message);
+    if ("reject" in message) {
+        console.error(message.reject);
+        process.exit(1);
+    }
+    process.exit(message.resolve?.code ?? 0);
+}
 
+let partialMessage = "";
+socket.on("data", data => {
+    const newlineIndex = data.indexOf("\n");
+    if (newlineIndex === -1) {
+        partialMessage += data;
+    } else {
+        partialMessage += data.slice(0, newlineIndex);
+        onMessage(partialMessage);
+        partialMessage = data.slice(newlineIndex + 1);
+    }
+});
