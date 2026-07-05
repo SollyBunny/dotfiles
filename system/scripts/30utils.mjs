@@ -1,7 +1,7 @@
 import { pacmanInstall } from "#shared/shared.mjs";
 
 await pacmanInstall(
-    "mpv", "htop", "fastfetch",
+    "mpv", "htop", "fastfetch", "micro",
     "curl", "wget", "openssh",
     "nodejs", "npm",
     "zip", "unrar", "tar",
