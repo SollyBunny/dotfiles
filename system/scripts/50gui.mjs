@@ -1,6 +1,6 @@
 import { pacmanInstall, runShellRoot, yayInstall } from "#shared/shared.mjs";
 
-await pacmanInstall("kitty", "pavucontrol");
+await pacmanInstall("kitty", "pavucontrol", "zed");
 
 await pacmanInstall("cage", "greetd");
 
