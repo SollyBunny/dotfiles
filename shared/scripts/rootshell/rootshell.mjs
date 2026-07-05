@@ -9,37 +9,6 @@ import { getActiveResourcesInfo } from "node:process";
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 
-async function socketPid(socket) {
-    const ffi = await import("node:ffi");
-    const lib = new ffi.DynamicLibrary(null);
-    // https://www.man7.org/linux/man-pages/man2/getsockopt.2.html
-    const getsockopt = lib.getFunction("getsockopt", {
-        return: ffi.types.INT_32,
-        arguments: [ffi.types.INT_32, ffi.types.INT_32, ffi.types.INT_32, ffi.types.POINTER, ffi.types.POINTER],
-    });
-    // https://www.man7.org/linux/man-pages/man3/perror.3.html
-    const perror = lib.getFunction("perror", {
-        return: ffi.types.VOID,
-        arguments: [ffi.types.POINTER],
-    });
-    var SOL_SOCKET = 1;
-    var SO_PEERCRED = 17;
-    var SO_PASSCRED = 16;
-    const out = new Uint32Array(4).fill(0);
-    const byteLengthBuffer = new Uint32Array(1).fill(out.byteLength);
-    if (getsockopt(socket._handle.fd, SOL_SOCKET, SO_PEERCRED, ffi.getRawPointer(out), ffi.getRawPointer(byteLengthBuffer)) !== 0) {
-        perror("getsockopt");
-        throw new Error("getsockopt failed");
-    }
-    return out[0];
-}
-
-async function getPpid(pid) {
-    const stat = await fs.readFile(`/proc/${pid}/stat`, "utf8");
-    const fields = stat.split(" ");
-    return parseInt(fields[3]); // PPID is the 4th field
-}
-
 export default class RootShell {
     #inited = false;
     /**
@@ -51,83 +20,84 @@ export default class RootShell {
      */
     #child;
     /**
-     * @type {net.Server}
-     */
-    #socketServer;
-    /**
      * @type {net.Socket}
      */
     #socket;
-    #readyPromise;
-    #readyPromiseResolve;
+    constructor() {
+        this.IPC_SOCKET_PATH = `/run/user/${process.getuid()}/rootshell-${process.pid}.sock`;
+        this.IPC_SOCKET_PASSWORD = randomUUID();
+        this.ipcEnv = structuredClone(process.env);
+        this.ipcEnv["IPC_SOCKET_PATH"] = this.IPC_SOCKET_PATH;
+        this.ipcEnv["IPC_SOCKET_PASSWORD"] = this.IPC_SOCKET_PASSWORD;
+    }
     async init() {
         this.#inited = true;
-        this.#readyPromise = new Promise(resolve => this.#readyPromiseResolve = resolve);
 
-        const socketPath = `/run/user/${process.getuid()}/rootshell-${process.pid}.sock`;
         const cleanup = async () => {
             if (this.#child && !this.#child.killed)
                 this.#child.kill("SIGKILL");
-            if (this.#socketServer)
-                this.#socketServer.close();
-            if (await fs.stat(socketPath, { throwIfNoEntry: false }))
-                fs.unlink(socketPath);
+            if (this.#socket)
+                this.#socket.destroy();
         };
         process.on("exit", cleanup);
         process.on("SIGINT", cleanup);
         process.on("SIGTERM", cleanup);
 
-        const toUnref = [];
-
-        this.#socketServer = net.createServer(async socket => {
-            const pid = await socketPid(socket);
-            const ppid = await getPpid(pid);
-            if (this.#socket || (
-                pid !== this.#child.pid && ppid !== this.#child.pid
-            )) {
-                console.log(pid, ppid);
-                socket.destroy();
-                return;
-            }
-            this.#socket = socket;
-            let message = "";
-            socket.on("data", data => {
-                const newlineIndex = data.indexOf("\n");
-                if (newlineIndex === -1) {
-                    message += data;
-                } else {
-                    message += data.slice(0, newlineIndex);
-                    this.onMessage(message);
-                    message = data.slice(newlineIndex + 1);
-                }
-            }).unref();
-        });
-        toUnref.push(this.#socketServer.listen(socketPath));
-        toUnref.push(this.#socketServer);
-        process.stdout.unref();
-        process.stderr.unref();
-
         process.stdout.write("Root ");
         this.#child = spawn(
-            "/bin/su", ["-c", `${process.execPath} ${path.join(__dir, "daemon.mjs")} ${socketPath}`],
-            { stdio: "inherit", detached: true }
+            "/bin/su", ["-c", `${process.execPath} ${path.join(__dir, "daemon.mjs")}`],
+            {
+                stdio: "inherit",
+                detached: true,
+                env: this.ipcEnv
+            }
         );
         this.#child.on("exit", (code, signal) => {
             console.log(`Rootshell died with code ${code} signal ${signal}`);
             process.exit(1);
         }).unref();
 
-        await this.#readyPromise;
-        this.#readyPromise = undefined;
-        this.#readyPromiseResolve = undefined;
+        const toUnref = [];
+        let readyPromiseResolve;
+        const readyPromise = new Promise(resolve => { readyPromiseResolve = resolve; });
+        
+        // 30s timeout
+        for (let i = 0; i < 300; ++i) {
+            if (await fs.stat(this.IPC_SOCKET_PATH, { throwIfNoEntry: false }))
+                break;
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
 
+        this.#socket = net.createConnection(this.IPC_SOCKET_PATH);
+        this.#socket.once("connect", () => {
+            this.#socket.write(this.IPC_SOCKET_PASSWORD + "\n");
+            readyPromiseResolve();
+        });
+        toUnref.push(this.#socket.on("close", () => {
+            throw new Error("Socket closed");
+        }));
+        toUnref.push(this.#socket.on("error", error => {
+            throw error;
+        }));
+        let messagePartial = "";
+        toUnref.push(this.#socket.on("data", data => {
+            const newlineIndex = data.indexOf("\n");
+            if (newlineIndex === -1) {
+                messagePartial += data;
+            } else {
+                messagePartial += data.slice(0, newlineIndex);
+                this.onMessage(messagePartial);
+                messagePartial = data.slice(newlineIndex + 1);
+            }
+        }));
+
+        await readyPromise;
+        process.stdout.unref();
+        process.stderr.unref();
         toUnref.forEach(v => v.unref());
     }
     onMessage(message) {
-        if (message === "ready") {
-            this.#readyPromiseResolve?.();
-            return;
-        }
         message = JSON.parse(message);
         const waiting = this.#waiting.get(message.id);
         if (!waiting) return;

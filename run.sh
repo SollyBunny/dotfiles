@@ -5,8 +5,8 @@ if ! command -v node >/dev/null 2>&1; then
 fi
 
 if [ "$#" -gt 0 ]; then
-	node --experimental-ffi "$@"
+	node "$@"
 else
-	node --experimental-ffi ./run.mjs
+	node ./run.mjs
 fi
 

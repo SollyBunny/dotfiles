@@ -80,10 +80,10 @@ export async function ask(question, choices) {
     }
 }
 
-export function runShell(command) {
+export function runShell(command, env = undefined) {
     return new Promise((resolve, reject) => {
         const child = spawn("/bin/bash", ["-c", command], {
-            stdio: "inherit"
+            stdio: "inherit", env
         });
         child.on("error", reject);
         child.on("close", (code, signal) => resolve({ code, signal }));
@@ -106,5 +106,5 @@ export async function pacmanInstall(...packages) {
 
 export async function yayInstall(...packages) {
     console.log("Installing with yay", ...packages);
-    return await runShell(`yay -S --needed -- ${packages.join(" ")}`);
+    return await runShell(`yay -S --needed --sudo "${process.argv0} ${path.join(__dir, "rootshell/sudo.mjs")}" -- ${packages.join(" ")}`, rootshell.ipcEnv);
 }
