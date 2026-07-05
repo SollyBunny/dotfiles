@@ -31,18 +31,16 @@ console.log(IPC_SOCKET_PASSWORD, IPC_SOCKET_PATH)
 
 const socket = net.createConnection(this.IPC_SOCKET_PATH);
 
-console.log(id, "sudo", command);
-
-this.#socket.once("connect", () => {
-    this.#socket.write(this.IPC_SOCKET_PASSWORD + "\n");
-    this.#socket.write(JSON.stringify({ id, command }) + "\n");
+socket.once("connect", () => {
+    socket.write(this.IPC_SOCKET_PASSWORD + "\n");
+    socket.write(JSON.stringify({ id, command }) + "\n");
 });
 
-this.#socket.on("error", error => {
+socket.on("error", error => {
     throw error;
 }).unref();
 
-this.#socket.once("close", () => {
+socket.once("close", () => {
     process.exit(0)
 });
 
