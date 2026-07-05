@@ -1,3 +1,4 @@
-import { yayInstall } from "#shared/shared.mjs";
+import { commandExists, yayInstall } from "#shared/shared.mjs";
 
-yayInstall("librewolf-bin");
+if (!commandExists("librewolf"))
+    yayInstall("librewolf-bin");

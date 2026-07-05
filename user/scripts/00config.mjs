@@ -1,5 +1,5 @@
 import { getThisDir, moveToBackup, runShell } from "#shared/shared.mjs";
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -15,12 +15,12 @@ const configRoot = path.join(__dir, "../config");
  * 2. Files in ../config/
  * 3. Folders in ../config/* containing a file named __link
  */
-function getPathsToLink() {
+async function getPathsToLink() {
     const out = [];
 
     out.push(path.join(configRoot, ".local/bin"));
     
-    const dirents = fs.readdirSync(configRoot, {
+    const dirents = await fs.readdir(configRoot, {
         recursive: true,
         withFileTypes: true,
     });
@@ -34,12 +34,11 @@ function getPathsToLink() {
     return out;
 }
 
-const pathsToLink = getPathsToLink();
+const pathsToLink = await getPathsToLink();
 
 for (const target of pathsToLink) {
     const linkPath = path.join(os.homedir(), path.relative(configRoot, target));
     const targetRel = path.relative(path.dirname(linkPath), target);
-    moveToBackup(linkPath);
-    fs.symlinkSync(targetRel, linkPath)
-    console.log(linkPath, targetRel);
+    await moveToBackup(linkPath);
+    await fs.symlink(targetRel, linkPath);
 }

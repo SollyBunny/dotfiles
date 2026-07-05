@@ -1,3 +1,3 @@
-import { runShell } from "#shared/shared.mjs";
+import { runShellRoot } from "#shared/shared.mjs";
 
-runShell("sudo locale-gen");
+await runShellRoot("locale-gen");

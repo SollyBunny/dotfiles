@@ -1,33 +1,38 @@
-import { ask, pacmanInstall, runShell } from "#shared/shared.mjs";
+import { ask, pacmanInstall, runShellRoot } from "#shared/shared.mjs";
 
-const graphics = ask("What graphics backend to use?", ["intel", "nvidia", "amd"]);
+const graphics = await ask("What graphics backend to use?", ["intel", "nvidia", "amd"]);
 
 // https://wiki.archlinux.org/title/Hardware_video_acceleration
 
-pacmanInstall("mesa", "lib32-mesa");
+await pacmanInstall("mesa", "lib32-mesa");
 
 let LIBVA_DRIVER_NAME, VDPAU_DRIVER;
 
 if (graphics === "intel") {
-    pacmanInstall(
+    await pacmanInstall(
         "vulkan-intel", "lib32-vulkan-intel",
         "libva-intel-driver", "libvdpau-va-gl",
     );
     LIBVA_DRIVER_NAME = "i965";
     VDPAU_DRIVER = "va_gl";
 } else if (graphics === "nvidia") {
-    pacmanInstall(
+    await pacmanInstall(
         "nvidia-utils", "lib32-nvidia-utils"
     );
     LIBVA_DRIVER_NAME = "nvidia";
     VDPAU_DRIVER = "nvidia";
 } else if (graphics === "amd") {
-    pacmanInstall(
+    await pacmanInstall(
         "vulkan-radeon", "lib32-vulkan-radeon",
     );
     LIBVA_DRIVER_NAME = "amdgpu";
     VDPAU_DRIVER = "va_gl";
 }
 
-pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils");
+await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils");
 
+const rcFile =
+`export LIBVA_DRIVER_NAME=${LIBVA_DRIVER_NAME}
+export VDPAU_DRIVER=${VDPAU_DRIVER}`;
+
+await runShellRoot(`echo "${rcFile}" | tee /etc/profile.d/graphicsenv.sh`);

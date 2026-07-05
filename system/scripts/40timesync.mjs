@@ -1,4 +1,4 @@
-import { runShell } from "#shared/shared.mjs";
+import { runShellRoot } from "#shared/shared.mjs";
 
-runShell("sudo timedatectl set-ntp true");
-runShell("sudo systemctl enable --now systemd-timesyncd");
+await runShellRoot("timedatectl set-ntp true");
+await runShellRoot("systemctl enable --now systemd-timesyncd");

@@ -1,4 +1,4 @@
 import { commandExists, yayInstall } from "#shared/shared.mjs";
 
-if (!commandExists("sudo"))
-    yayInstall("doas-sudo-shim");
+if (!await commandExists("sudo"))
+    await yayInstall("doas-sudo-shim");

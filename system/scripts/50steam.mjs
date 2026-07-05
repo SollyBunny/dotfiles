@@ -1,4 +1,4 @@
 import { pacmanInstall, yayInstall } from "#shared/shared.mjs";
 
-pacmanInstall("steam");
-yayInstall("millennium-bin");
+await pacmanInstall("steam");
+await yayInstall("millennium-bin");

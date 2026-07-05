@@ -1,8 +1,8 @@
-import { pacmanInstall, runShell } from "#shared/shared.mjs";
+import { pacmanInstall, runShellRoot } from "#shared/shared.mjs";
 
-pacmanInstall("iw", "iwd");
-runShell("sudo systemctl enable --now iw");
+await pacmanInstall("iw", "iwd");
+await runShellRoot("systemctl enable --now iwd");
 
-runShell("sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf");
-runShell("sudo systemctl enable --now systemd-resolved");
-runShell("sudo systemctl enable --now systemd-networkd");
+await runShellRoot("ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf");
+await runShellRoot("systemctl enable --now systemd-resolved");
+await runShellRoot("systemctl enable --now systemd-networkd");
