@@ -21,21 +21,18 @@ const command = process.argv
     .map(arg => `'${arg.replaceAll("'", `'\"'\"'`)}'`)
     .join(" ");
 
-console.log(IPC_SOCKET_PASSWORD, IPC_SOCKET_PATH)
 // 30s timeout
 for (let i = 0; i < 300; ++i) {
-    if (await fs.stat(this.IPC_SOCKET_PATH, { throwIfNoEntry: false }))
+    if (await fs.stat(IPC_SOCKET_PATH, { throwIfNoEntry: false }))
         break;
     await new Promise(resolve => setTimeout(resolve, 100));
     console.log(i)
 }
 
-console.log(IPC_SOCKET_PASSWORD, IPC_SOCKET_PATH)
-
-const socket = net.createConnection(this.IPC_SOCKET_PATH);
+const socket = net.createConnection(IPC_SOCKET_PATH);
 
 socket.once("connect", () => {
-    socket.write(this.IPC_SOCKET_PASSWORD + "\n");
+    socket.write(IPC_SOCKET_PASSWORD + "\n");
     socket.write(JSON.stringify({ id, command }) + "\n");
 });
 
