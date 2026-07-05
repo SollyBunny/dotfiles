@@ -40,5 +40,6 @@ for (const target of pathsToLink) {
     const linkPath = path.join(os.homedir(), path.relative(configRoot, target));
     const targetRel = path.relative(path.dirname(linkPath), target);
     await moveToBackup(linkPath);
+    await fs.mkdir(path.dirname(linkPath), { recursive: true });
     await fs.symlink(targetRel, linkPath);
 }
