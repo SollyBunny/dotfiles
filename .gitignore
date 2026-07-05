@@ -14,6 +14,11 @@ user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Da
 user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/datareporting
 user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/chrome_debugger_profile
 
+user/config/.config/zed/themes/noctalia.json
+
+user/config/.config/kitty/current-theme.conf
+user/config/.config/kitty/themes/noctalia.conf
+
 user/config/.config/mango/noctalia.conf
 
 user/config/.config/micro/backups
