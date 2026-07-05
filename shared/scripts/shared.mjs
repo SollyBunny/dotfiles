@@ -5,6 +5,20 @@ import { fileURLToPath } from "node:url";
 import readline from "node:readline/promises";
 import RootShell from "./rootshell/rootshell.mjs";
 
+/**
+ * @param {Parameters<fs.lstat>} args 
+ * @returns {Promise<undefined | PromiseSettledResult<ReturnType<fs.lstat>>>}
+ */
+export async function lstatSafe(...args) {
+    try {
+        return await fs.lstat(...args);
+    } catch (e) {
+        if (e.code === "ENOENT")
+            return undefined;
+        throw e;
+    }
+}
+
 export function getThisDir(importMetaUrl) {
     const __filename = fileURLToPath(importMetaUrl);
     return path.dirname(__filename);
@@ -13,7 +27,7 @@ export function getThisDir(importMetaUrl) {
 const __dir = getThisDir(import.meta.url);
 
 export async function moveToBackup(file) {
-    const stat = await fs.lstat(file, { throwIfNoEntry: false });
+    const stat = await lstatSafe(file, { throwIfNoEntry: false });
     if (!stat) return;
     if (stat.isSymbolicLink()) {
         console.log("Removed symbolic link", file);
@@ -31,6 +45,7 @@ export async function moveToBackup(file) {
     await fs.cp(file, filePath(), {
         dereference: true,
         errorOnExist: true,
+        recursive: true,
         mode: fs.constants.COPYFILE_FICLONE_FORCE,
     });
 }

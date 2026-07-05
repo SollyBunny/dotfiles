@@ -13,3 +13,8 @@ user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Da
 user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/security_state
 user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/datareporting
 user/config/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/chrome_debugger_profile
+
+user/config/.config/mango/noctalia.conf
+
+user/config/.config/micro/backups
+user/config/.config/micro/buffers

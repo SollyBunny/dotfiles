@@ -1,4 +1,4 @@
-import { runShell, getThisDir, moveToBackup, runShellRoot, filesEqual } from "#shared/shared.mjs";
+import { runShell, getThisDir, moveToBackup, runShellRoot, filesEqual, lstatSafe } from "#shared/shared.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -17,7 +17,7 @@ const files = (await fs.readdir(configRoot, {
 
 for (const file of files) {
     const fileInstall = path.join(path.sep, path.relative(configRoot, file));
-    const fileInstallStat = await fs.lstat(fileInstall);
+    const fileInstallStat = await lstatSafe(fileInstall);
     if (fileInstallStat.isFile() && await filesEqual(file, fileInstall)) {
         if (fileInstallStat.gid !== 0 || fileInstallStat.uid !== 0)
             await runShellRoot(`chown root:root ${fileInstall}`)
