@@ -1,5 +1,5 @@
 import { getThisDir, moveToBackup, runShell } from "#shared/shared.mjs";
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -10,7 +10,7 @@ const __dir = getThisDir(import.meta.url);
 const configRoot = path.join(__dir, "librewolf");
 const profileRoot = path.join(os.homedir(), ".config/librewolf/librewolf");
 
-const profiles = fs.readFileSync(path.join(profileRoot, "profiles.ini"), "utf-8")
+const profiles = (await fs.readFile(path.join(profileRoot, "profiles.ini"), "utf-8"))
     .split("\n")
     .filter(v => v.startsWith("Path="))
     .map(v => v.slice(v.indexOf("=") + 1))
@@ -18,8 +18,11 @@ const profiles = fs.readFileSync(path.join(profileRoot, "profiles.ini"), "utf-8"
 
 for (const profile of profiles) {
     console.log(`Installing for profile ${profile}`);
-    moveToBackup(path.join(profile, "chrome"));
-    moveToBackup(path.join(profile, "user.js"));
-    fs.symlinkSync(path.join(configRoot, "chrome"), path.join(profile, "chrome"));
-    fs.symlinkSync(path.join(configRoot, "user.js"), path.join(profile, "user.js"));
+    for (const file of await fs.readdir(configRoot)) {
+        const target = path.join(configRoot, file);
+        const linkPath = path.join(profile, file);
+        const targetRel = path.relative(path.dirname(linkPath), target);
+        await moveToBackup(linkPath);
+        await fs.symlink(targetRel, linkPath);
+    }
 }

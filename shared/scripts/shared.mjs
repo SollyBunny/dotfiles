@@ -25,8 +25,8 @@ export async function moveToBackup(file) {
     await fs.mkdir(backupPath, { recursive: true });
     let fileName = path.resolve(file).replaceAll(path.sep, ".");
     let fileExt;
-    const filePath = () => path.join(backupPath, [fileName, fileExt].filter(v => v).join());
-    while (await fs.exists(filePath()))
+    const filePath = () => path.join(backupPath, [fileName, fileExt].filter(v => v).join("."));
+    while (await fs.stat(filePath(), { throwIfNoEntry: false }))
         fileExt = (fileExt ?? 0) + 1;
     await fs.cp(file, filePath(), {
         dereference: true,

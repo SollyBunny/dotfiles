@@ -4,4 +4,9 @@ if ! command -v node >/dev/null 2>&1; then
 	su -c "pacman -Sy --noconfirm nodejs"
 fi
 
-node --experimental-ffi ./run.mjs
+if [ "$#" -gt 0 ]; then
+	node --experimental-ffi "$@"
+else
+	node --experimental-ffi ./run.mjs
+fi
+
