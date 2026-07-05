@@ -1,5 +1,7 @@
 import { pacmanInstall, runShellRoot, yayInstall } from "#shared/shared.mjs";
 
+await pacmanInstall("kitty", "pavucontrol");
+
 await pacmanInstall("cage", "greetd");
 
 await runShellRoot("systemctl enable greetd");
