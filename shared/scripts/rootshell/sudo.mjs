@@ -1,5 +1,8 @@
 // Used when programs need sudo
 
+import fs from "node:fs/promises";
+import net from "node:net";
+
 const IPC_SOCKET_PATH = process.env["IPC_SOCKET_PATH"];
 if (!IPC_SOCKET_PATH) {
     console.error("Rootshell daemon not given IPC_SOCKET_PATH");
