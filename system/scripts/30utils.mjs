@@ -8,4 +8,5 @@ await pacmanInstall(
     "base-devel", "clang", "llvm", "jemalloc", "pkgconf",
     "just", "meson", "ninja",
     "less", "which", "tree", "jq",
+    "git-credential-oauth",
 );
