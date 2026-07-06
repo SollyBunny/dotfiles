@@ -6,7 +6,7 @@ import readline from "node:readline/promises";
 import RootShell from "./rootshell/rootshell.mjs";
 
 /**
- * @param {Parameters<fs.lstat>} args 
+ * @param {Parameters<fs.lstat>} args
  * @returns {Promise<undefined | PromiseSettledResult<ReturnType<fs.lstat>>>}
  */
 export async function lstatSafe(...args) {
@@ -31,7 +31,14 @@ export async function moveToBackup(file) {
 	if (!stat) return;
 	if (stat.isSymbolicLink()) {
 		console.log("Removed symbolic link", file);
-		await fs.unlink(file);
+		try {
+			await fs.unlink(file);
+		} catch (e) {
+			if (e.code === "EACCES")
+				await runShellRoot(`unlink -- ${file}`);
+			else
+				throw e;
+		}
 		return;
 	}
 	console.log("Backing up", file);
@@ -48,10 +55,17 @@ export async function moveToBackup(file) {
 		recursive: true,
 		mode: fs.constants.COPYFILE_FICLONE_FORCE,
 	});
-	await fs.rm(file, {
-		force: true,
-		recursive: true,
-	});
+	try {
+		await fs.rm(file, {
+			force: true,
+			recursive: true,
+		});
+	} catch (e) {
+		if (e.code === "EACCES")
+			await runShellRoot(`rm -rf -- ${file}`);
+		else
+			throw e;
+	}
 }
 
 export async function filesEqual(a, b) {
@@ -61,7 +75,7 @@ export async function filesEqual(a, b) {
 }
 
 /**
- * @param {string} question 
+ * @param {string} question
  * @param {string[]} choices
  * @returns {Promise<string>}
  */
