@@ -33,7 +33,7 @@
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
-            "pywalfox@frewacom.org.xpi": {
+            "pywalfox@frewacom.org": {
                 "install_url": "file:///usr/lib/librewolf/distribution/extensions/pywalfox@frewacom.org.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
