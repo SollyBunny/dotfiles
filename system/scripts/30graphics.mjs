@@ -29,7 +29,7 @@ if (graphics === "intel") {
 	VDPAU_DRIVER = "va_gl";
 }
 
-await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils");
+await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils", "mesa-utils");
 
 const rcFile =
 `export LIBVA_DRIVER_NAME=${LIBVA_DRIVER_NAME}
