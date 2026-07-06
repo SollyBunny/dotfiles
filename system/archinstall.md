@@ -137,56 +137,25 @@ Host *.aureliakunekomp.xyz
 ssh-copy-id user@hostname
 ```
 
-## Yay
-
-```sh
-doas pacman -S fakeroot debugedit
-cd /tmp
-git clone --depth 1 https://aur.archlinux.org/yay-bin.git
-git clone --depth 1 https://aur.archlinux.org/doas-sudo-shim.git
-cd yay-bin
-makepkg
-doas pacman -U *.pkg.tar.zst
-cd ..
-cd doas-sudo-shim
-makepkg
-doas pacman -U *.pkg.tar.zst
-cd
-rm /tmp/yay-bin /tmp/doas-sudo-shim -rf
-```
-
-## Useful programs
-
-```sh
-doas pacman -S htop nano micro git patch lynx fastfetch curl wget
-doas pacman -S ddcutil usbutils
-doas pacman -S less which
-doas pacman -S zip unrar tar
-doas pacman -S python nodejs npm pnpm
-doas pacman -S clang base-devel
-```
-
 ## Random stuff
 
 ```sh
-doas timedatectl set-ntp true
 doas hostnamectl hostname newhostname
 ```
 
-## Window manager
-
-```sh
-doas pacman -S wireplumber pipewire pipewire-pulse pipewire-alsa pipewire-jack
-doas pacman -S wev libnotify
-doas pacman -S adw-gtk-theme nwg-look
-```
-
-```sh
-yay -S mangowm noctalia-git noctalia-greeter-git greetd librewolf-bin python-pywalfox
-systemctl enable greetd
-```
+## CrypTab / FSTab
 
 ```
-# /etc/greetd/config.toml
-command = "cage -s noctalia-greeter"
+# /etc/fstab
+/dev/mapper/diskvg-swap	none      	swap	defaults 0 0
+/dev/mapper/diskvg-root	/         	btrfs	rw,relatime,ssd,space_cache=v2,subvol=/@,compress=zstd:3 0 0
+/dev/mapper/diskvg-root	/home     	btrfs	rw,relatime,ssd,space_cache=v2,subvol=/@home,compress=zstd:3 0 0
+/dev/mapper/diskvg-root	/snapshots	btrfs	rw,relatime,ssd,space_cache=v2,subvol=/@snapshots 0 0
+# /dev/nvme0n1p1
+UUID=F039-CA64			/boot/efi 	vfat	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro 0 2
+```
+
+```
+# /etc/crypttab
+datadisk UUID="1a1600c6-af53-4ffe-a309-21bd00220f87" /etc/datadisk.key nofail
 ```
