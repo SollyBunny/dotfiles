@@ -7,7 +7,7 @@ import path from "node:path";
 
 const __dir = getThisDir(import.meta.url);
 
-const configRoot = path.join(__dir, "librewolf");
+const dataRoot = path.join(__dir, "../data/librewolf");
 const profileRoot = path.join(os.homedir(), ".config/librewolf/librewolf");
 
 if (await fs.stat(path.join(profileRoot, "profiles.ini"), { throwIfNoEntry: false })) {
@@ -19,8 +19,8 @@ if (await fs.stat(path.join(profileRoot, "profiles.ini"), { throwIfNoEntry: fals
 
 	for (const profile of profiles) {
 		console.log(`Installing for profile ${profile}`);
-		for (const file of await fs.readdir(configRoot)) {
-			const target = path.join(configRoot, file);
+		for (const file of await fs.readdir(dataRoot)) {
+			const target = path.join(dataRoot, file);
 			const linkPath = path.join(profile, file);
 			const targetRel = path.relative(path.dirname(linkPath), target);
 			await moveToBackup(linkPath);
