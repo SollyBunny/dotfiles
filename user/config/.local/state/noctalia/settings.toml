@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.80000000000000004
-    center = [ "active_window" ]
+    center = [ "window_count", "group:g7", "window_count_3" ]
     end = [ "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
     margin_ends = 0
@@ -17,6 +17,7 @@ order = [ "default" ]
     thickness = 35
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g2"
         members = [ "workspaces" ]
@@ -24,6 +25,7 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g3"
         members = [ "date", "clock" ]
@@ -31,6 +33,7 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g4"
         members = [ "volume", "brightness" ]
@@ -38,6 +41,7 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g1"
         members = [ "network", "bluetooth" ]
@@ -45,6 +49,7 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g5"
         members = [ "session", "control-center", "wallpaper" ]
@@ -52,9 +57,18 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        enabled = true
         fill = "surface_variant"
         id = "g6"
         members = [ "battery", "temp", "cpu", "cpu_clock_speed_2" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        enabled = true
+        fill = "surface_variant"
+        id = "g7"
+        members = [ "active_window" ]
         opacity = 1.0
         padding = 6.0
 
@@ -168,7 +182,7 @@ background_opacity = 0.80000000000000004
 background_opacity = 0.5
 
 [plugins]
-enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed" ]
+enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed", "noctalia/window_count" ]
 
     [[plugins.source]]
     kind = "git"
@@ -282,8 +296,10 @@ tooltip = "CPU Frequency"
 type = "custom_button"
 
 [widget.active_window]
-capsule = true
+anchor = true
+capsule_fill = "#000000"
 min_length = 0
+show_empty_label = true
 title_scroll = "on_hover"
 
 [widget.bongocat]
@@ -315,6 +331,20 @@ display = "text"
 
 [widget.tray]
 capsule = true
+
+[widget.window_count]
+direction = "Left"
+type = "noctalia/window_count:window_count"
+
+[widget.window_count_2]
+direction = "Position"
+enabled = true
+type = "noctalia/window_count:window_count"
+
+[widget.window_count_3]
+direction = "Right"
+enabled = true
+type = "noctalia/window_count:window_count"
 
 [widget.workspaces]
 hide_when_empty = true
