@@ -186,7 +186,7 @@ enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed" ]
     name = "Local"
 
 [shell]
-avatar_path = "/home/aurelia/Pictures/pfp.png"
+avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
 date_format = "%A, %Y-%M-%d"
 password_style = "random"
 polkit_agent = true

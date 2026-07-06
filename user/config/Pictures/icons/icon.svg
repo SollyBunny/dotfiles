@@ -1,0 +1,37 @@
+<svg width="100" height="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<!--
+		sollybunny.xyz's icon
+		Heavy inspiration from http://getdrawings.com/get-drawing#bunny-rabbit-drawing-55.jpg
+		Thanks to https://yqnn.github.io/svg-path-editor/ for making pathing a lot less painless
+		Thanks to https://plnkr.co/edit/kGnGGyoOCKil02k04snu?preview for rounding the corners on the mouth
+	-->
+	<!-- Marshmellow Shadow -->
+	<g fill="rgba(0,0,0,0.5)" transform="translate(20) scale(4.90) rotate(10)">
+		<path d="M0 4C0-1 17-1 17 4L17 15C17 20 0 20 0 15" />
+		<path d="M2 3.5C2 5.5 15 5.5 15 3.5 15 .5 2 .5 2 3.5" />
+	</g>
+	<!-- Marshmellow -->
+	<g transform="translate(20) scale(4.7) rotate(10)">
+		<path fill="#fdf" d="M0 4C0-1 17-1 17 4L17 15C17 20 0 20 0 15" />
+		<path fill="#fff" d="M2 3.5C2 5.5 15 5.5 15 3.5 15 .5 2 .5 2 3.5" />
+	</g>
+	<!-- Blob Shadow -->
+	<g transform="translate(-2 -1) scale(1.05)" fill="rgba(0,0,0,0.5)">
+		<path transform="translate(70, 60) scale(4) rotate(10)" d="M0 0C1-3 4 0 2 1 5 0 5 4 2 3 3 4 1 6 0 4" />
+		<path transform="translate(24, 70) scale(4) rotate(-10)" d="M0 0C0-1 0-7 3.063-7.903 2-16 6-16 5-8 6-7 6-9 7-8 6-16 10-16 9-8 12-7 12-1 12 0 12 6 0 6 0 0" />
+	</g>
+	<!-- Blob -->
+	<g stroke="black" stroke-width="0.5" stroke-linejoin="round">
+		<path fill="#cff" transform="translate(70, 60) scale(4) rotate(10)" d="M0 0C1-3 4 0 2 1 5 0 5 4 2 3 3 4 1 6 0 4" />
+		<path fill="#bee" transform="translate(24, 70) scale(4) rotate(-10)" d="M0 0C0-1 0-7 3.063-7.903 2-16 6-16 5-8 6-7 6-9 7-8 6-16 10-16 9-8 12-7 12-1 12 0 12 6 0 6 0 0" />
+	</g>
+	<!-- Eyes -->
+	<g fill="black">
+		<circle r="1" cx="36" cy="48" />
+		<circle r="1" cx="54" cy="45" />
+	</g>
+	<!-- Mouth -->
+	<path stroke="black" transform="translate(43 47) rotate(-10)" stroke-width="0.5" stroke-linejoin="round" fill="#d14174" d="M1.4 0 3.6 0C4.3 0 4.7.65 4.35 1.25L3.15 3.75C2.8 4.35 2.2 4.35 1.85 3.75L.65 1.25C.3.65.7 0 1.4 0Z" />
+	<!-- Tummy -->
+	<path fill="#cff" transform="translate(35 70) scale(3) rotate(-10)" d="M0 0C0-5 9-5 9 0 9 4 0 4 0 0" />
+</svg>

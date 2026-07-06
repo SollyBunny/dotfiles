@@ -1,0 +1,37 @@
+<svg width="100" height="100" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<!--
+		sollybunny.xyz's icon (pfp form)
+		Heavy inspiration from http://getdrawings.com/get-drawing#bunny-rabbit-drawing-55.jpg
+		Thanks to https://yqnn.github.io/svg-path-editor/ for making pathing a lot less painless
+		Thanks to https://plnkr.co/edit/kGnGGyoOCKil02k04snu?preview for rounding the corners on the mouth
+	-->
+	<!-- Background -->
+	<!-- <pattern id="p1" height="20" width="20" patternUnits="userSpaceOnUse">
+		<rect x="0" y="0" width="10" height="10" fill="#fdf"/>
+		<rect x="10" y="10" width="10" height="10" fill="#fdf"/>
+    </pattern>
+	<rect fill="#dff" x="0" y="0" width="100%" height="100%" />
+    <rect transform="rotate(-20)" fill="url(#p1)" x="-100%" y="-100%" width="400%" height="400%" /> -->
+	<rect fill="#dff" x="0" y="0" width="100%" height="100%" />
+	<rect filter="blur(0.4px)" transform="rotate(-10)" fill="#fdf" x="-40%" y="25%" width="200%" height="60%" />
+	<rect filter="blur(0.4px)" transform="rotate(-10)" fill="#fff" x="-40%" y="45%" width="200%" height="20%" />
+	<!-- Blob Shadow -->
+	<g filter="blur(0.5px)" transform="translate(2 4)" fill="rgba(0,0,0,0.5)">
+		<path transform="translate(70, 60) scale(4) rotate(10)" d="M0 0C1-3 4 0 2 1 5 0 5 4 2 3 3 4 1 6 0 4" />
+		<path transform="translate(24, 70) scale(4) rotate(-10)" d="M0 0C0-1 0-7 3.063-7.903 2-16 6-16 5-8 6-7 6-9 7-8 6-16 10-16 9-8 12-7 12-1 12 0 12 6 0 6 0 0" />
+	</g>
+	<!-- Blob -->
+	<g stroke="#222" stroke-width="0.5" stroke-linejoin="round">
+		<path fill="#cff" transform="translate(70, 60) scale(4) rotate(10)" d="M0 0C1-3 4 0 2 1 5 0 5 4 2 3 3 4 1 6 0 4" />
+		<path fill="#bee" transform="translate(24, 70) scale(4) rotate(-10)" d="M0 0C0-1 0-7 3.063-7.903 2-16 6-16 5-8 6-7 6-9 7-8 6-16 10-16 9-8 12-7 12-1 12 0 12 6 0 6 0 0" />
+	</g>
+	<!-- Eyes -->
+	<g fill="#222">
+		<circle r="1" cx="36" cy="48" />
+		<circle r="1" cx="54" cy="45" />
+	</g>
+	<!-- Mouth -->
+	<path stroke="#222" transform="translate(43 47) rotate(-10)" stroke-width="0.7" stroke-linejoin="round" fill="#d14174" d="M1.4 0 3.6 0C4.3 0 4.7.65 4.35 1.25L3.15 3.75C2.8 4.35 2.2 4.35 1.85 3.75L.65 1.25C.3.65.7 0 1.4 0Z" />
+	<!-- Tummy -->
+	<path fill="#cff" transform="translate(35 70) scale(3) rotate(-10)" d="M0 0C0-5 9-5 9 0 9 4 0 4 0 0" />
+</svg>
