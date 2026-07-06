@@ -1,4 +1,4 @@
-import { getThisDir, moveToBackup, runShell } from "#shared/shared.mjs";
+import { getThisDir, moveToBackup } from "#shared/fs.mjs";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";

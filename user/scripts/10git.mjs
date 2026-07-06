@@ -1,4 +1,4 @@
-import { runShell } from "#shared/shared.mjs";
+import { runShell } from "#shared/shell.mjs";
 
 const timeoutHours = 6;
 

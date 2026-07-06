@@ -1,4 +1,4 @@
-import { ask, pacmanInstall, runShellRoot } from "#shared/shared.mjs";
+import { ask, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
 
 const graphics = await ask("What graphics backend to use?", ["intel", "nvidia", "amd"]);
 

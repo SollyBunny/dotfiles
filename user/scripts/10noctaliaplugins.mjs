@@ -1,7 +1,8 @@
-import { exists, runShell } from "#shared/shared.mjs";
+import { runShell } from "#shared/shell.mjs";
 import os from "node:os";
 import path from "node:path";
 import fs from "node:fs/promises";
+import { exists } from "#shared/fs.mjs";
 
 const LOCAL_PLUGINS_URL = "https://github.com/sollybunny/noctalia-plugins";
 

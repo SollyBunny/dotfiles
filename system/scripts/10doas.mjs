@@ -1,4 +1,5 @@
-import { commandExists, getThisDir, pacmanInstall, runShellRoot } from "#shared/shared.mjs";
+import { getThisDir } from "#shared/fs.mjs";
+import { commandExists, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
 import path from "node:path";
 
 // Run after modifying ../conf/doas.conf

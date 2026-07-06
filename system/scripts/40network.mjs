@@ -1,4 +1,4 @@
-import { pacmanInstall, runShellRoot } from "#shared/shared.mjs";
+import { pacmanInstall, runShellRoot } from "#shared/shell.mjs";
 
 await pacmanInstall("iw", "iwd");
 await runShellRoot("systemctl enable --now iwd");

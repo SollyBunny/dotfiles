@@ -1,3 +1,3 @@
-import { runShellRoot } from "#shared/shared.mjs";
+import { runShellRoot } from "#shared/shell.mjs";
 
 await runShellRoot("locale-gen");

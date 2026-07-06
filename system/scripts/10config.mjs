@@ -1,4 +1,5 @@
-import { runShell, getThisDir, moveToBackup, runShellRoot, filesEqual, lstatSafe } from "#shared/shared.mjs";
+import { filesEqual, getThisDir, lstatSafe, moveToBackup } from "#shared/fs.mjs";
+import { runShellRoot } from "#shared/shell.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 

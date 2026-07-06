@@ -1,4 +1,4 @@
-import { getThisDir, moveToBackup, runShell } from "#shared/shared.mjs";
+import { getThisDir, moveToBackup } from "#shared/fs.mjs";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -19,7 +19,7 @@ async function getPathsToLink() {
 	const out = [];
 
 	out.push(path.join(configRoot, ".local/bin"));
-	
+
 	const dirents = await fs.readdir(configRoot, {
 		recursive: true,
 		withFileTypes: true,
