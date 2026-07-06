@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import path from "node:path";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -15,6 +15,21 @@ export async function lstatSafe(...args) {
 	} catch (e) {
 		if (e.code === "ENOENT")
 			return undefined;
+		throw e;
+	}
+}
+
+/**
+ * @param file {Parameters<fs.stat>[0]}
+ * @return {Promise<boolean>}
+ */
+export async function exists(file) {
+	try {
+		await fs.stat(file);
+		return true;
+	} catch (e) {
+		if (e.code === "ENOENT")
+			return false;
 		throw e;
 	}
 }

@@ -181,9 +181,9 @@ enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed" ]
     name = "community"
 
     [[plugins.source]]
-    kind = "git"
-    location = "https://github.com/SollyBunny/noctalia-plugins"
-    name = "SollyBunny"
+    kind = "path"
+    location = "~/.config/noctalia/local-plugins"
+    name = "Local"
 
 [shell]
 avatar_path = "/home/aurelia/Pictures/pfp.png"

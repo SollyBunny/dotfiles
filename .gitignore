@@ -29,4 +29,6 @@ user/config/.local/state/noctalia/**
 !user/config/.local/state/noctalia/settings.toml
 !user/config/.local/state/noctalia/.setup-complete
 
+user/config/.config/noctalia/local-plugins
+
 user/config/.config/htop/htop_history
