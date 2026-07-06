@@ -3,14 +3,14 @@
 echo "Using makepkg-shallow $@" >&2
 
 git() {
-  echo "Using git-shallow $@" >&2
-  opt="$1"
-  shift
-  if [[ $# > 1 && "$opt" = "clone" ]]; then
-    command git "$opt" --depth 1 --shallow-submodules "$@"
-  else
-    command git "$opt" "$@"
-  fi
+	echo "Using git-shallow $@" >&2
+	opt="$1"
+	shift
+	if [[ $# > 1 && "$opt" = "clone" ]]; then
+		command git "$opt" --depth 1 --shallow-submodules "$@"
+	else
+		command git "$opt" "$@"
+	fi
 }
 
 source /usr/bin/makepkg "$@"

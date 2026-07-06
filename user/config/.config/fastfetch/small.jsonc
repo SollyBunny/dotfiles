@@ -1,30 +1,27 @@
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-  "modules": [
-  	"title",
-  	"datetime",
-    "kernel",
-    "packages",
-    "de",
-    "wm",
-    "cpu",
-    "gpu",
-    "memory",
-    "disk",
-    "battery",
-    "poweradapter",
-  ],
-  "logo": {
-    "type": "kitty",
-    "source": "~/.config/fastfetch/transarch.png",
-    "width": 15,
-    "padding": {
-    	"left": 2,
-    	"right": 2,
-    	"top": 1
-    }
-  },
-  "packages": {
-  	
-  }
+	"$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+	"modules": [
+		"title",
+		"datetime",
+		"kernel",
+		"packages",
+		"de",
+		"wm",
+		"cpu",
+		"gpu",
+		"memory",
+		"disk",
+		"battery",
+		"poweradapter",
+	],
+	"logo": {
+		"type": "kitty",
+		"source": "~/.config/fastfetch/transarch.png",
+		"width": 15,
+		"padding": {
+			"left": 2,
+			"right": 2,
+			"top": 1
+		}
+	}
 }

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <max_frequency_in_GHz>"
-    exit 1
+	echo "Usage: $0 <max_frequency_in_GHz>"
+	exit 1
 fi
 
 sudo cpupower frequency-set -g ondemand -u "${1}GHz"

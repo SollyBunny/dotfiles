@@ -5,58 +5,58 @@ import net from "node:net";
 
 const IPC_SOCKET_PATH = process.env["IPC_SOCKET_PATH"];
 if (!IPC_SOCKET_PATH) {
-    console.error("Rootshell daemon not given IPC_SOCKET_PATH");
-    process.exit(4);
+	console.error("Rootshell daemon not given IPC_SOCKET_PATH");
+	process.exit(4);
 }
 
 const IPC_SOCKET_PASSWORD = process.env["IPC_SOCKET_PASSWORD"];
 if (!IPC_SOCKET_PASSWORD) {
-    console.error("Rootshell daemon not given IPC_SOCKET_PASSWORD");
-    process.exit(5);
+	console.error("Rootshell daemon not given IPC_SOCKET_PASSWORD");
+	process.exit(5);
 }
 
 const id = "oneshot";
 const command = process.argv
-    .slice(2)
-    .map(arg => `'${arg.replaceAll("'", `'\"'\"'`)}'`)
-    .join(" ");
+	.slice(2)
+	.map(arg => `'${arg.replaceAll("'", `'\"'\"'`)}'`)
+	.join(" ");
 
 // 30s timeout
 for (let i = 0; i < 300; ++i) {
-    if (await fs.stat(IPC_SOCKET_PATH, { throwIfNoEntry: false }))
-        break;
-    await new Promise(resolve => setTimeout(resolve, 100));
+	if (await fs.stat(IPC_SOCKET_PATH, { throwIfNoEntry: false }))
+		break;
+	await new Promise(resolve => setTimeout(resolve, 100));
 }
 
 const socket = net.createConnection(IPC_SOCKET_PATH);
 
 socket.once("connect", () => {
-    socket.write(IPC_SOCKET_PASSWORD + "\n");
-    socket.write(JSON.stringify({ id, command }) + "\n");
+	socket.write(IPC_SOCKET_PASSWORD + "\n");
+	socket.write(JSON.stringify({ id, command }) + "\n");
 });
 
 socket.on("error", error => {
-    console.error(error);
-    process.exit(1);
+	console.error(error);
+	process.exit(1);
 });
 
 function onMessage(message) {
-    message = JSON.parse(message);
-    if ("reject" in message) {
-        console.error(message.reject);
-        process.exit(1);
-    }
-    process.exit(message.resolve?.code ?? 0);
+	message = JSON.parse(message);
+	if ("reject" in message) {
+		console.error(message.reject);
+		process.exit(1);
+	}
+	process.exit(message.resolve?.code ?? 0);
 }
 
 let partialMessage = "";
 socket.on("data", data => {
-    const newlineIndex = data.indexOf("\n");
-    if (newlineIndex === -1) {
-        partialMessage += data;
-    } else {
-        partialMessage += data.slice(0, newlineIndex);
-        onMessage(partialMessage);
-        partialMessage = data.slice(newlineIndex + 1);
-    }
+	const newlineIndex = data.indexOf("\n");
+	if (newlineIndex === -1) {
+		partialMessage += data;
+	} else {
+		partialMessage += data.slice(0, newlineIndex);
+		onMessage(partialMessage);
+		partialMessage = data.slice(newlineIndex + 1);
+	}
 });

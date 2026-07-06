@@ -1,6 +1,6 @@
 {
-    "clipboard": "terminal",
-    "colorscheme": "transparent",
-    "mkparents": true,
-    "softwrap": true
+	"clipboard": "terminal",
+	"colorscheme": "transparent",
+	"mkparents": true,
+	"softwrap": true
 }

@@ -1,6 +1,6 @@
 {
-    "type": "module",
-    "imports": {
-        "#shared/*": "./shared/scripts/*"
-    }
+	"type": "module",
+	"imports": {
+		"#shared/*": "./shared/scripts/*"
+	}
 }
