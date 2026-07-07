@@ -15,7 +15,7 @@ export default class RootShell {
 	 * @type {Map<string, { resolve: () => {}, reject: () => {} }>}
 	 */
 	#waiting = new Map();
-	/** 
+	/**
 	 * @type {ChildProcessByStdio}
 	 */
 	#child;
@@ -63,7 +63,7 @@ export default class RootShell {
 		const toUnref = [];
 		let readyPromiseResolve;
 		const readyPromise = new Promise(resolve => { readyPromiseResolve = resolve; });
-		
+
 		// 30s timeout
 		for (let i = 0; i < 300; ++i) {
 			if (await fs.stat(this.IPC_SOCKET_PATH, { throwIfNoEntry: false }))
@@ -73,26 +73,25 @@ export default class RootShell {
 		await new Promise(resolve => setTimeout(resolve, 100));
 
 		this.#socket = net.createConnection(this.IPC_SOCKET_PATH);
+
+		let messagePartial = "";
+		toUnref.push(this.#socket.on("data", data => {
+			messagePartial += data;
+			const messages = messagePartial.split("\n");
+			messagePartial = messages.pop();
+			for (const message of messages)
+				this.onMessage(message);
+		}));
+
 		this.#socket.once("connect", () => {
 			this.#socket.write(this.IPC_SOCKET_PASSWORD + "\n");
 			readyPromiseResolve();
 		});
-		toUnref.push(this.#socket.on("close", () => {
-			throw new Error("Socket closed");
+		toUnref.push(this.#socket.on("close", hadError => {
+			throw new Error(hadError ? "Socket closed with error" : "Socket closed");
 		}));
 		toUnref.push(this.#socket.on("error", error => {
 			throw error;
-		}));
-		let messagePartial = "";
-		toUnref.push(this.#socket.on("data", data => {
-			const newlineIndex = data.indexOf("\n");
-			if (newlineIndex === -1) {
-				messagePartial += data;
-			} else {
-				messagePartial += data.slice(0, newlineIndex);
-				this.onMessage(messagePartial);
-				messagePartial = data.slice(newlineIndex + 1);
-			}
 		}));
 
 		await readyPromise;

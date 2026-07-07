@@ -73,16 +73,13 @@ const server = net.createServer(socket => {
 		onMessage({ message, write, destroy });
 	}
 
-	let partialMessage = "";
+	let messagePartial = "";
 	socket.on("data", data => {
-		const newlineIndex = data.indexOf("\n");
-		if (newlineIndex === -1) {
-			partialMessage += data;
-		} else {
-			partialMessage += data.slice(0, newlineIndex);
-			onMessageInternal(partialMessage);
-			partialMessage = data.slice(newlineIndex + 1);
-		}
+		messagePartial += data;
+		const messages = messagePartial.split("\n");
+		messagePartial = messages.pop();
+		for (const message of messages)
+			onMessageInternal(message);
 	});
 });
 
