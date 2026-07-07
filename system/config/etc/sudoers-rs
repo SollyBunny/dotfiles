@@ -1,0 +1,14 @@
+# Keep your editor when running visudo
+Defaults!/usr/bin/visudo-rs env_keep += "SUDO_EDITOR EDITOR VISUAL"
+
+# The same if you choose to symlink visudo-rs to visudo
+Defaults!/usr/local/bin/visudo env_keep += "SUDO_EDITOR EDITOR VISUAL"
+
+# Sanitize your path
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin"
+
+Defaults pwfeedback
+
+# "root", and all members of the group "wheel" can run any command after providing a password.
+root ALL=(ALL:ALL) ALL
+%wheel ALL=(ALL:ALL) ALL
