@@ -10,4 +10,5 @@ await pacmanInstall(
 	"base-devel", "clang", "llvm", "jemalloc", "pkgconf",
 	"just", "meson", "ninja",
 	"less", "which", "tree", "jq", "patch",
+	"bash-completion",
 );
