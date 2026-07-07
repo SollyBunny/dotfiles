@@ -2,6 +2,7 @@ import { pacmanInstall } from "#shared/shell.mjs";
 
 await pacmanInstall(
 	"lynx", "mpv", "micro", "nano", "fastfetch", "numbat",
+	"imagemagick", "ffmpeg",
 	"htop", "cpupower",
 	"curl", "wget", "openssh", "git-credential-oauth",
 	"nodejs", "npm",
