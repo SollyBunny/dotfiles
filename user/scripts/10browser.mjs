@@ -10,14 +10,10 @@ const __dir = getThisDir(import.meta.url);
 const dataRoot = path.join(__dir, "../data/librewolf");
 const profileRoot = path.join(os.homedir(), ".config/librewolf/librewolf");
 
-if (await fs.stat(path.join(profileRoot, "profiles.ini"), { throwIfNoEntry: false })) {
-	const profiles = (await fs.readFile(path.join(profileRoot, "profiles.ini"), "utf-8"))
-		.split("\n")
-		.filter(v => v.startsWith("Path="))
-		.map(v => v.slice(v.indexOf("=") + 1))
-		.map(v => path.join(profileRoot, v));
-
-	for (const profile of profiles) {
+for (let profile of await fs.readdir(profileRoot)) {
+	profile = path.join(profileRoot, profile);
+	const stat = await fs.stat(path.join(profile, "prefs.js"), { throwIfNoEntry: false });
+	if (stat && stat.isDirectory()) {
 		console.log(`Installing for profile ${profile}`);
 		for (const file of await fs.readdir(dataRoot)) {
 			const target = path.join(dataRoot, file);
