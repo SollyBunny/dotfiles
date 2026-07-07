@@ -54,7 +54,7 @@ export async function moveToBackup(file) {
 			await fs.unlink(file);
 		} catch (e) {
 			if (e.code === "EACCES")
-				await runShellRoot(`unlink -- ${file}`);
+				await runShellRoot(`unlink -- "${file}"`);
 			else
 				throw e;
 		}
@@ -81,7 +81,7 @@ export async function moveToBackup(file) {
 		});
 	} catch (e) {
 		if (e.code === "EACCES")
-			await runShellRoot(`rm -rf -- ${file}`);
+			await runShellRoot(`rm -rf -- "${file}"`);
 		else
 			throw e;
 	}
