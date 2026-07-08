@@ -8,7 +8,7 @@ await pacmanInstall(
 	"nodejs", "npm",
 	"zip", "unzip", "unrar", "tar",
 	"base-devel", "clang", "llvm", "jemalloc", "pkgconf",
-	"just", "meson", "ninja",
+	"just", "meson", "ninja", "cmake",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man",
 );
