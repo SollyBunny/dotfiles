@@ -15,3 +15,4 @@ root ALL=(ALL:ALL) ALL
 
 %wheel ALL=(root) NOPASSWD: /usr/bin/cpupower
 %wheel ALL=(root) NOPASSWD: /usr/bin/loginctl lock-sessions
+%wheel ALL=(root) NOPASSWD: /usr/bin/fgconsole ""

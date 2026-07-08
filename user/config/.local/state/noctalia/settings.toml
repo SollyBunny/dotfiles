@@ -130,7 +130,7 @@ pre_action_fade_seconds = 10
 
     [idle.behavior.Sleep]
     action = "command"
-    command = "systemctl sleep"
+    command = "isthissessionactive && systemctl sleep"
     enabled = true
     timeout = 600
 

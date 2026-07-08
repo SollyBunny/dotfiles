@@ -1,0 +1,3 @@
+#!/bin/bash
+
+[[ "$(loginctl show-session "$XDG_SESSION_ID" -p VTNr | grep -o '[0-9]\+')" == "$(sudo fgconsole)" ]]
