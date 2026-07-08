@@ -12,3 +12,6 @@ Defaults pwfeedback
 # "root", and all members of the group "wheel" can run any command after providing a password.
 root ALL=(ALL:ALL) ALL
 %wheel ALL=(ALL:ALL) ALL
+
+%wheel ALL=(root) NOPASSWD: /usr/bin/cpupower
+%wheel ALL=(root) NOPASSWD: /usr/bin/loginctl lock-sessions
