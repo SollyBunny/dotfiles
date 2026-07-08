@@ -5,4 +5,14 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
+read MIN MAX < <(
+	cpupower frequency-info |
+	sed -nE 's/.*([0-9]+\.[0-9]+) GHz - ([0-9]+\.[0-9]+) GHz.*/\1 \2/p'
+)
+
+if awk "BEGIN { exit !($1 < $MIN || $1 > $MAX) }"; then
+	echo "Frequency out of range. Hardware supports between $MIN GHz - $MAX GHz"
+	exit 1
+fi
+
 sudo cpupower frequency-set -g ondemand -u "${1}GHz"
