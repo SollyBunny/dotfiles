@@ -1,6 +1,8 @@
 import { pacmanInstall, runShellRoot, yayInstall } from "#shared/shell.mjs";
 
-await pacmanInstall("xorg-xwayland", "cage", "ddcutil");
+await pacmanInstall("xorg-xwayland", "xorg-xeyes");
+
+await pacmanInstall("cage", "ddcutil");
 
 await pacmanInstall("greetd");
 await runShellRoot("systemctl enable greetd");
