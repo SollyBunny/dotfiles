@@ -208,6 +208,10 @@ settings_show_advanced = true
 time_format = "{:%H:%M:%S}"
 ui_scale = 0.80000000000000004
 
+    [shell.launcher]
+    app_grid = true
+    session_search = true
+
     [shell.panel]
     launcher_compact = true
     transparency_mode = "soft"
