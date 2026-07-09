@@ -9,7 +9,7 @@ export const rootshell = new RootShell();
  * @param {string[]} choices
  * @returns {Promise<string>}
  */
-export async function ask(question, choices) {
+export async function askChoice(question, choices) {
 	const rl = readline.createInterface({
 		input: process.stdin,
 		output: process.stdout,

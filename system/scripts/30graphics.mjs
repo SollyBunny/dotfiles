@@ -1,6 +1,6 @@
-import { ask, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
+import { askChoice, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
 
-const graphics = await ask("What graphics backend to use?", ["intel", "nvidia", "amd"]);
+const graphics = await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]);
 
 // https://wiki.archlinux.org/title/Hardware_video_acceleration
 
