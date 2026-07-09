@@ -19,4 +19,15 @@ fi
 printf '%s\n' "$formatted_env" > env.conf
 
 mmsg dispatch reload_config & disown
-notify-send "Reloaded MangoWM env"
+
+for pid in $(pgrep -x noctalia); do
+	if tr '\0' '\n' < /proc/$pid/environ 2>/dev/null | grep -q "WAYLAND_DISPLAY=$WAYLAND_DISPLAY"; then
+		kill "$pid"
+	fi
+done
+
+setsid noctalia &
+
+sleep 1
+
+notify-send "Reloaded MangoWM env / Restarted noctalia"
