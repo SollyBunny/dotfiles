@@ -24,6 +24,10 @@ export async function askChoice(question, choices) {
 	}
 }
 
+export async function askConfirm(question) {
+	return await askChoice(question, ["y", "n"]) === "y";
+}
+
 export function runShell(command, env = undefined) {
 	return new Promise((resolve, reject) => {
 		const child = spawn("/bin/bash", ["-c", command], {
