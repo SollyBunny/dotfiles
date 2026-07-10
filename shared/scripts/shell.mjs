@@ -65,18 +65,28 @@ async function getPacmanInstalledPkgs() {
 	return _pacmanInstalledPkgs;
 }
 
+let _pacmanUpdateRepoDone = false;
+async function pacmanUpdateRepo() {
+	if (_pacmanUpdateRepoDone)
+		return;
+	await runShellRoot("pacman -Sy");
+	_pacmanUpdateRepoDone = true;
+}
+
 export async function pacmanInstall(...packages) {
 	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
 	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
 	if (!packages.length)
 		return;
 	console.log("Installing", ...packages);
+	await pacmanUpdateRepo();
 	await runShellRoot(`pacman -S --noconfirm --needed --asexplicit -- ${packages.join(" ")}`);
 	await runShellRoot(`pacman -D --asexplicit -- ${packages.join(" ")}`);
 }
 
 export async function yayInstall(...packages) {
 	console.log("Installing with yay", ...packages);
+	await pacmanUpdateRepo();
 	await rootshell.init();
 	await runShell(`yay -S --needed --asexplicit --sudo sudo -- ${packages.join(" ")}`, rootshell.ipcEnv);
 	await runShellRoot(`pacman -D --asexplicit -- ${packages.join(" ")}`);
