@@ -13,7 +13,7 @@ const profileRoot = path.join(os.homedir(), ".config/librewolf/librewolf");
 for (let profile of await fs.readdir(profileRoot)) {
 	profile = path.join(profileRoot, profile);
 	const stat = await fs.stat(path.join(profile, "prefs.js"), { throwIfNoEntry: false });
-	if (stat && stat.isDirectory()) {
+	if (stat) {
 		console.log(`Installing for profile ${profile}`);
 		for (const file of await fs.readdir(dataRoot)) {
 			const target = path.join(dataRoot, file);
