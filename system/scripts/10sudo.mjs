@@ -1,4 +1,5 @@
-import { commandExists, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
+import { runShellRoot } from "#shared/shell.mjs";
+import { commandExists, pacmanInstall } from "#shared/install.mjs";
 import fs from "node:fs/promises";
 
 if (await commandExists("doas"))

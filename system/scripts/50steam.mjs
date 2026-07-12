@@ -1,4 +1,4 @@
-import { pacmanInstall, yayInstall } from "#shared/shell.mjs";
+import { pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 // Might need this
 // https://steamcommunity.com/discussions/forum/1/617328415077879473/

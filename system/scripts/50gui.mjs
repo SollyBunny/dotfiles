@@ -1,4 +1,5 @@
-import { askConfirm, pacmanInstall, runShellRoot, yayInstall } from "#shared/shell.mjs";
+import { askConfirm, runShellRoot } from "#shared/shell.mjs";
+import { pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall("xorg-xwayland", "xorg-xeyes");
 

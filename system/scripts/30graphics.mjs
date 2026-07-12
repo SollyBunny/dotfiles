@@ -1,4 +1,5 @@
-import { askChoice, pacmanInstall, runShellRoot } from "#shared/shell.mjs";
+import { askChoice, runShellRoot } from "#shared/shell.mjs";
+import { pacmanInstall } from "#shared/install.mjs";
 
 const graphics = await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]);
 

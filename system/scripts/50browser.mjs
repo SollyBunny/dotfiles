@@ -1,4 +1,4 @@
-import { commandExists, pacmanInstall, yayInstall } from "#shared/shell.mjs";
+import { commandExists, pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 if (!await commandExists("librewolf"))
 	await yayInstall("librewolf-bin");

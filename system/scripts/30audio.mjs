@@ -1,4 +1,4 @@
-import { pacmanInstall } from "#shared/shell.mjs";
+import { pacmanInstall } from "#shared/install.mjs";
 
 await pacmanInstall(
 	"wireplumber",
