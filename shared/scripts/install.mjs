@@ -2,7 +2,14 @@ import fs from "node:fs/promises";
 import { rootshell, runShell, runShellRoot } from "./shell.mjs";
 
 export async function commandExists(command) {
-	return (await runShell(`command -v "${command}" >/dev/null 2>&1`)).code === 0;
+	try  {
+		await runShell(`command -v "${command}" >/dev/null 2>&1`);
+		return true;
+	} catch (e) {
+		if (e.code === 1)
+			return false;
+		throw e;
+	}
 }
 
 let _pacmanInstalledPkgs;

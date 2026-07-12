@@ -1,11 +1,9 @@
 import { spawn } from "node:child_process";
-import { Socket } from "node:net";
 import path from "node:path";
 import net from "node:net";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
-import { getActiveResourcesInfo } from "node:process";
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -108,6 +106,9 @@ export default class RootShell {
 		else
 			waiting.reject(message.reject);
 	}
+	/**
+	 * @returns {Promise<{ code: number | null, signal: NodeJS.Signals | null }>}
+	 */
 	async run(command) {
 		if (!this.#inited)
 			await this.init();

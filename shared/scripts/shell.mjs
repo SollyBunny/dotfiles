@@ -1,9 +1,22 @@
 import { spawn } from "node:child_process";
 import readline from "node:readline/promises";
-import fs from "node:fs/promises";
 import RootShell from "./rootshell/rootshell.mjs";
 
 export const rootshell = new RootShell();
+
+function errorFromCommandRes({ code, signal }) {
+	let err;
+	if (signal !== null)
+		err = new Error(`Signal raised: ${signal}`);
+	else if (code !== null && code !== 0)
+		err = new Error(`Non zero status code: ${code}`);
+	if (err) {
+		err.code = code;
+		err.signal = signal;
+	}
+	return err;
+
+}
 
 /**
  * @param {string} question
@@ -35,10 +48,19 @@ export function runShell(command, env = undefined) {
 			stdio: "inherit", env
 		});
 		child.on("error", reject);
-		child.on("close", (code, signal) => resolve({ code, signal }));
+		child.on("close", (code, signal) => {
+			const err = errorFromCommandRes({ code, signal });
+			if (err)
+				reject(err);
+			else
+				resolve();
+		});
 	});
 }
 
 export async function runShellRoot(command) {
-	return await rootshell.run(command);
+	const { code, signal } = await rootshell.run(command);
+	const err = errorFromCommandRes({ code, signal });
+	if (err)
+		throw err;
 }
