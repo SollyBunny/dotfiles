@@ -14,6 +14,7 @@ const configRoot = path.join(__dir, "../config");
  * 1. .local/bin
  * 2. Files in ../config/
  * 3. Folders in ../config/* containing a file named __link
+ * 4. Files in ../config/* starting with __link.
  */
 async function getPathsToLink() {
 	const out = [];
@@ -29,6 +30,8 @@ async function getPathsToLink() {
 			out.push(path.join(dirent.parentPath, dirent.name));
 		else if (dirent.name === "__link")
 			out.push(dirent.parentPath);
+		else if (dirent.name.startsWith("__link."))
+			out.push(path.join(dirent.parentPath, dirent.name));
 	}
 
 	return out;
@@ -37,8 +40,14 @@ async function getPathsToLink() {
 const pathsToLink = await getPathsToLink();
 
 for (const target of pathsToLink) {
-	const linkPath = path.join(os.homedir(), path.relative(configRoot, target));
+	let linkPath = path.join(os.homedir(), path.relative(configRoot, target));
 	const targetRel = path.relative(path.dirname(linkPath), target);
+	{
+		// Remove __link. prefix after figuring out the targetRel
+		const linkPathParsed = path.parse(linkPath);
+		if (linkPathParsed.name.startsWith("__link."))
+			linkPath = path.join(linkPathParsed.dir, linkPathParsed.name.slice("__link.".length) + linkPathParsed.ext);
+	}
 	await moveToBackup(linkPath);
 	await fs.mkdir(path.dirname(linkPath), { recursive: true });
 	await fs.symlink(targetRel, linkPath);
