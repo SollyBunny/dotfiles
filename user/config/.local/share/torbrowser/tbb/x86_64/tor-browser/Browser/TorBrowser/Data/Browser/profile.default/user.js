@@ -12,6 +12,9 @@ user_pref("widget.gtk.native-context-menus");
 
 user_pref("browser.aboutConfig.showWarning", false);
 
+user_pref("signon.rememberSignons", true);
+user_pref("preferences-relay-integration-checkbox2", false); // https://relay.firefox.com/
+
 // ctrl-shift-alt-i
 user_pref("devtools.debugger.remote-enabled", true);
 user_pref("devtools.chrome.enabled", true);
