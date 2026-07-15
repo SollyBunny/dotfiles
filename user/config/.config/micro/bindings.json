@@ -1,9 +1,11 @@
 {
+	"Ctrl-Up": "ScrollUp",
+	"Ctrl-Down": "ScrollDown",
 	"Shift-Ctrl-Home": "SelectToStart",
 	"Shift-Ctrl-End": "SelectToEnd",
 	"Shift-Ctrl-Up": "SelectUp",
 	"Shift-Ctrl-Down": "SelectDown",
 	"Ctrl-Backspace": "DeleteWordLeft",
 	"Ctrl-Delete": "DeleteWordRight",
-	"Ctrl-G": "command-edit:goto "
+	"Ctrl-G": "command-edit:goto ",
 }
