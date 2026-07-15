@@ -26,7 +26,7 @@ if (graphics === "intel") {
 	await pacmanInstall(
 		"vulkan-radeon", "lib32-vulkan-radeon",
 	);
-	LIBVA_DRIVER_NAME = "amdgpu";
+	LIBVA_DRIVER_NAME = "radeonsi";
 	VDPAU_DRIVER = "va_gl";
 }
 
