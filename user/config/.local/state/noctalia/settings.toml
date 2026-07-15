@@ -6,15 +6,20 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.80000000000000004
-    center = [ "window_count", "group:g7", "window_count_3" ]
+    center = [ "window_count", "active_window", "window_count_4" ]
     end = [ "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
     margin_ends = 0
     padding = 5
     panel_overlap = 0
     radius = 0
+    radius_bottom_left = -15
+    radius_bottom_right = -15
     start = [ "group:g5", "group:g2", "group:g6" ]
     thickness = 35
+
+        [bar.default.dead_zone]
+        command = "noctalia msg panel-open control-center"
 
         [[bar.default.capsule_group]]
         enabled = true
@@ -52,7 +57,7 @@ order = [ "default" ]
         enabled = true
         fill = "surface_variant"
         id = "g5"
-        members = [ "session", "control-center", "wallpaper" ]
+        members = [ "session", "wallpaper" ]
         opacity = 1.0
         padding = 6.0
 
@@ -61,14 +66,6 @@ order = [ "default" ]
         fill = "surface_variant"
         id = "g6"
         members = [ "battery", "temp", "cpu", "cpu_clock_speed_2" ]
-        opacity = 1.0
-        padding = 6.0
-
-        [[bar.default.capsule_group]]
-        enabled = true
-        fill = "surface_variant"
-        id = "g7"
-        members = [ "active_window" ]
         opacity = 1.0
         padding = 6.0
 
@@ -84,17 +81,21 @@ enabled = true
     [calendar.account.personal_google]
     type = "google"
 
-[[control_center.shortcuts]]
-type = "wifi"
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
 
-[[control_center.shortcuts]]
-type = "bluetooth"
+    [[control_center.shortcuts]]
+    type = "wifi"
 
-[[control_center.shortcuts]]
-type = "caffeine"
+    [[control_center.shortcuts]]
+    type = "bluetooth"
 
-[[control_center.shortcuts]]
-type = "notification"
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "notification"
 
 [desktop_widgets]
 schema_version = 2
@@ -122,7 +123,7 @@ widget_order = [ "desktop-widget-0000000000000001" ]
 
 [dock]
 background_opacity = 0.80000000000000004
-radius = 12
+radius = 15
 
 [idle]
 behavior_order = [ "lock", "Sleep" ]
@@ -139,10 +140,13 @@ pre_action_fade_seconds = 10
     enabled = true
     timeout = 60
 
+[location]
+auto_locate = true
+
 [lockscreen_widgets]
-enabled = true
+enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@VGA-1", "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001" ]
+widget_order = [ "lockscreen-login-box@VGA-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -230,7 +234,6 @@ avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
 date_format = "%A, %Y-%M-%d"
 password_style = "random"
 polkit_agent = true
-settings_show_advanced = true
 time_format = "{:%H:%M:%S}"
 ui_scale = 0.80000000000000004
 
@@ -239,12 +242,19 @@ ui_scale = 0.80000000000000004
     session_search = true
 
     [shell.panel]
+    control_center_placement = "floating"
+    control_center_position = "center"
+    floating_offset = 10
     launcher_compact = true
+    session_placement = "floating"
+    session_position = "center"
     transparency_mode = "soft"
+    wallpaper_placement = "floating"
+    wallpaper_position = "center"
 
     [shell.screen_corners]
     enabled = true
-    size = 12
+    size = 15
 
     [shell.screenshot]
     directory = "~/Pictures/screenshots/"
@@ -327,6 +337,7 @@ type = "custom_button"
 
 [widget.active_window]
 anchor = true
+capsule = true
 capsule_fill = "#000000"
 min_length = 0
 show_empty_label = true
@@ -364,6 +375,7 @@ capsule = true
 
 [widget.window_count]
 direction = "Left"
+enabled = true
 type = "noctalia/window_count:window_count"
 
 [widget.window_count_2]
@@ -374,6 +386,10 @@ type = "noctalia/window_count:window_count"
 [widget.window_count_3]
 direction = "Right"
 enabled = true
+type = "noctalia/window_count:window_count"
+
+[widget.window_count_4]
+direction = "Right"
 type = "noctalia/window_count:window_count"
 
 [widget.workspaces]
