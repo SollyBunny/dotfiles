@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ "$#" -eq 0 ]; then
+	exec pacman -h
+fi
+
+need_root=0
+
+for arg in "$@"; do
+	case "$arg" in
+		-*S*|-*R*|-*U*|-*y*)
+			need_root=1
+		;;
+	esac
+done
+
+PACMAN=/usr/bin/pacman
+
+if [ "$need_root" -eq 1 ] && [ "$(id -u)" -ne 0 ]; then
+	exec sudo "$PACMAN" "$@"
+else
+	exec "$PACMAN" "$@"
+fi
