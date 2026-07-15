@@ -16,3 +16,7 @@ if (await askConfirm("Install mangowm, noctalia and noctalia-greeter (requires c
 // Required by noctalia templates
 await pacmanInstall("adw-gtk-theme", "nwg-look");
 await yayInstall("python-pywalfox");
+
+// Required by noctalia greeter
+await pacmanInstall("accountsservice");
+await runShellRoot("systemctl enable --now accounts-daemon");
