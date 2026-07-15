@@ -4,12 +4,12 @@ import RootShell from "./rootshell/rootshell.mjs";
 
 export const rootshell = new RootShell();
 
-function errorFromCommandRes({ code, signal }) {
+function errorFromCommandRes({ command, code, signal }) {
 	let err;
 	if (signal !== null)
-		err = new Error(`Signal raised: ${signal}`);
+		err = new Error(`Signal raised: ${signal}`, { cause: command });
 	else if (code !== null && code !== 0)
-		err = new Error(`Non zero status code: ${code}`);
+		err = new Error(`Non zero status code: ${code}`, { cause: command });
 	if (err) {
 		err.code = code;
 		err.signal = signal;
@@ -49,7 +49,7 @@ export function runShell(command, env = undefined) {
 		});
 		child.on("error", reject);
 		child.on("close", (code, signal) => {
-			const err = errorFromCommandRes({ code, signal });
+			const err = errorFromCommandRes({ command, code, signal });
 			if (err)
 				reject(err);
 			else
@@ -60,7 +60,7 @@ export function runShell(command, env = undefined) {
 
 export async function runShellRoot(command) {
 	const { code, signal } = await rootshell.run(command);
-	const err = errorFromCommandRes({ code, signal });
+	const err = errorFromCommandRes({ command, code, signal });
 	if (err)
 		throw err;
 }
