@@ -6,7 +6,7 @@ await pacmanInstall(
 	"usbutils", "usb_modeswitch",
 	"htop", "cpupower",
 	"curl", "wget", "openssh", "git-credential-oauth",
-	"nodejs", "npm",
+	"nodejs", "npm", "jdk-openjdk",
 	"zip", "unzip", "unrar", "tar",
 	"base-devel", "clang", "llvm", "jemalloc", "pkgconf",
 	"just", "meson", "ninja", "cmake",
