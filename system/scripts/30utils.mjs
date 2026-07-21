@@ -3,7 +3,7 @@ import { pacmanInstall } from "#shared/install.mjs";
 await pacmanInstall(
 	"lynx", "mpv", "micro", "nano", "fastfetch", "numbat",
 	"imagemagick", "ffmpeg",
-	"usbutils", "usb_modeswitch",
+	"usbutils", "usb_modeswitch", "smartmontools",
 	"htop", "cpupower",
 	"curl", "wget", "openssh", "git-credential-oauth",
 	"nodejs", "npm", "jdk-openjdk",
