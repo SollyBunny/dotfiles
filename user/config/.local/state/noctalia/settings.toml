@@ -18,7 +18,7 @@ order = [ "default" ]
     radius = 0
     radius_bottom_left = 15
     radius_bottom_right = 15
-    start = [ "group:g5", "group:g2", "group:g6" ]
+    start = [ "group:g5", "group:g2", "group:g6", "group:g7", "summary" ]
     thickness = 35
 
         [bar.default.dead_zone]
@@ -69,6 +69,14 @@ order = [ "default" ]
         fill = "surface_variant"
         id = "g6"
         members = [ "battery", "temp", "cpu", "widget" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        enabled = true
+        fill = "surface_variant"
+        id = "g7"
+        members = [ "network_rx", "network_tx" ]
         opacity = 1.0
         padding = 6.0
 
@@ -202,9 +210,12 @@ background_opacity = 0.80000000000000004
 [osd]
 background_opacity = 0.5
 
+[plugin_settings."gustav0ar/drive-health"]
+system_collector_enabled = true
+
 [plugins]
 auto_update = true
-enabled = [ "noctalia/translator", "aurelia/cpu_clock_speed", "aurelia/window_count" ]
+enabled = [ "noctalia/translator", "aurelia/window_count", "aurelia/cpu_clock_speed", "gustav0ar/drive-health" ]
 
     [[plugins.source]]
     kind = "git"
@@ -366,6 +377,10 @@ format = "{:%a %Y-%m-%d}"
 [widget.ram]
 display = "text"
 stat = "cpu_temp"
+
+[widget.summary]
+capsule = true
+type = "gustav0ar/drive-health:summary"
 
 [widget.temp]
 display = "text"
