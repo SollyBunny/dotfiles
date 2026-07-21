@@ -8,7 +8,7 @@ await pacmanInstall("cage", "ddcutil", "wev", "wl-clipboard");
 await pacmanInstall("greetd");
 await runShellRoot("systemctl enable greetd");
 
-await pacmanInstall("kitty", "pavucontrol", "zed");
+await pacmanInstall("kitty", "pavucontrol", "zed", "gimp");
 
 if (await askConfirm("Install mangowm, noctalia and noctalia-greeter (requires compile)?"))
 	await yayInstall("mangowm", "noctalia-git", "noctalia-greeter-git");
