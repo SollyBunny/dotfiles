@@ -1,3 +1,5 @@
+config_version = 2
+
 [audio]
 enable_overdrive = true
 
@@ -6,15 +8,16 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.80000000000000004
-    center = [ "window_count", "active_window", "window_count_4" ]
+    center = [ "widget_2", "active_window", "widget_3" ]
+    concave_edge_corners = true
     end = [ "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
     margin_ends = 0
     padding = 5
     panel_overlap = 0
     radius = 0
-    radius_bottom_left = -15
-    radius_bottom_right = -15
+    radius_bottom_left = 15
+    radius_bottom_right = 15
     start = [ "group:g5", "group:g2", "group:g6" ]
     thickness = 35
 
@@ -57,7 +60,7 @@ order = [ "default" ]
         enabled = true
         fill = "surface_variant"
         id = "g5"
-        members = [ "session", "wallpaper" ]
+        members = [ "session", "wallpaper", "clipboard" ]
         opacity = 1.0
         padding = 6.0
 
@@ -65,7 +68,7 @@ order = [ "default" ]
         enabled = true
         fill = "surface_variant"
         id = "g6"
-        members = [ "battery", "temp", "cpu", "cpu_clock_speed_2" ]
+        members = [ "battery", "temp", "cpu", "widget" ]
         opacity = 1.0
         padding = 6.0
 
@@ -146,12 +149,32 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@VGA-1" ]
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@VGA-1"]
     box_height = 70.0
@@ -173,38 +196,6 @@ widget_order = [ "lockscreen-login-box@VGA-1" ]
         show_login_button = true
         show_password_hint = true
 
-    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 70.0
-    box_width = 400.0
-    cx = 683.0
-    cy = 647.0
-    output = "eDP-1"
-    rotation = 0.0
-    type = "login_box"
-
-        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        show_caps_lock = true
-        show_keyboard_layout = true
-        show_login_button = true
-        show_password_hint = true
-
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
-    box_height = 160.0
-    box_width = 336.0
-    cx = 683.0
-    cy = 224.0
-    output = "eDP-1"
-    rotation = 0.0
-    type = "clock"
-
-        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
-        background = true
-        background_opacity = 0.55000000000000004
-        background_padding = 16.0
-        background_radius = 32.0
-        clock_style = "digital"
-        format = "{:%H:%M:%S}"
-
 [notification]
 background_opacity = 0.80000000000000004
 
@@ -212,7 +203,8 @@ background_opacity = 0.80000000000000004
 background_opacity = 0.5
 
 [plugins]
-enabled = [ "noctalia/translator", "noctalia/cpu_clock_speed", "noctalia/window_count" ]
+auto_update = true
+enabled = [ "noctalia/translator", "aurelia/cpu_clock_speed", "aurelia/window_count" ]
 
     [[plugins.source]]
     kind = "git"
@@ -234,6 +226,7 @@ avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
 date_format = "%A, %Y-%M-%d"
 password_style = "random"
 polkit_agent = true
+screen_time_enabled = true
 time_format = "{:%H:%M:%S}"
 ui_scale = 0.80000000000000004
 
@@ -307,6 +300,9 @@ ui_scale = 0.80000000000000004
     enabled = true
     variant = "destructive"
 
+[system.monitor]
+gpu_poll_seconds = 2
+
 [theme]
 builtin = "Dracula"
 mode = "dark"
@@ -322,10 +318,16 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+
+    [wallpaper.monitors.VGA-1]
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
@@ -339,6 +341,7 @@ type = "custom_button"
 anchor = true
 capsule = true
 capsule_fill = "#000000"
+interactive = false
 min_length = 0
 show_empty_label = true
 title_scroll = "on_hover"
@@ -357,9 +360,6 @@ display = "text"
 show_glyph = false
 type = "noctalia/cpu_clock_speed:cpu_clock_speed"
 
-[widget.cpu_clock_speed_2]
-type = "noctalia/cpu_clock_speed:cpu_clock_speed"
-
 [widget.date]
 format = "{:%a %Y-%m-%d}"
 
@@ -373,10 +373,18 @@ display = "text"
 [widget.tray]
 capsule = true
 
-[widget.window_count]
-direction = "Left"
-enabled = true
-type = "noctalia/window_count:window_count"
+[widget.widget]
+type = "aurelia/cpu_clock_speed:widget"
+
+[widget.widget_2]
+direction = "left"
+interactive = false
+type = "aurelia/window_count:widget"
+
+[widget.widget_3]
+direction = "right"
+interactive = false
+type = "aurelia/window_count:widget"
 
 [widget.window_count_2]
 direction = "Position"
@@ -386,10 +394,6 @@ type = "noctalia/window_count:window_count"
 [widget.window_count_3]
 direction = "Right"
 enabled = true
-type = "noctalia/window_count:window_count"
-
-[widget.window_count_4]
-direction = "Right"
 type = "noctalia/window_count:window_count"
 
 [widget.workspaces]
