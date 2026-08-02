@@ -14,3 +14,5 @@ await pacmanInstall(
 	"bash-completion", "man-db",
 	"yt-dlp",
 );
+
+await yayInstall("cpulimit");
