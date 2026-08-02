@@ -8,6 +8,11 @@
 	--badge-border-width: 0 !important;
 	--letterboxing-bgcolor: transparent !important;
 	--tab-selected-shadow: none !important;
+	--panel-padding: 2px !important;
+	--panel-subview-body-padding: 2px !important;
+	--panel-header-back-icon-padding: 2px !important;
+	--panel-menuitem-padding: 4px !important;
+	--panel-menuitem-margin: 1px 5px !important;
 }
 
 html#main-window body {
@@ -93,4 +98,18 @@ h4 {
 	width: 6px !important;
 }
 
-/* */
+/* Context menus */
+menupopup {
+	--panel-background: inherit !important;
+	--panel-color: inherit !important;
+	--panel-padding: inherit !important;
+	--panel-border-radius: inherit !important;
+	--panel-border-color: inherit !important;
+}
+
+menu, menuitem {
+	&:where([_moz-menuactive]:not([disabled])) {
+		color: var(--button-text-color-ghost-hover) !important;
+		background-color: var(--button-background-color-ghost-hover) !important;
+	}
+}
