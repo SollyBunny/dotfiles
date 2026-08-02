@@ -12,4 +12,5 @@ await pacmanInstall(
 	"just", "meson", "ninja", "cmake",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man-db",
+	"yt-dlp",
 );
