@@ -8,7 +8,6 @@ user_pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-f
 
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.tabs.allow_transparent_browser");
-user_pref("widget.gtk.native-context-menus");
 
 user_pref("browser.aboutConfig.showWarning", false);
 
