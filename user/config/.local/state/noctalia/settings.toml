@@ -1,4 +1,7 @@
-config_version = 2
+config_version = 11
+
+[accessibility]
+ui_scale = 0.7500000037252903
 
 [audio]
 enable_overdrive = true
@@ -18,11 +21,12 @@ order = [ "default" ]
     radius = 0
     radius_bottom_left = 15
     radius_bottom_right = 15
+    scale = 0.80000000447034836
     start = [ "group:g5", "group:g2", "group:g6", "group:g7", "summary" ]
     thickness = 35
 
-        [bar.default.dead_zone]
-        command = "noctalia msg panel-open control-center"
+        [bar.default.dead_zone.actions]
+        left = "exec noctalia msg panel-open control-center"
 
         [[bar.default.capsule_group]]
         enabled = true
@@ -157,7 +161,7 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -165,8 +169,8 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 960.0
     cy = 961.0
     output = "HDMI-A-1"
@@ -177,16 +181,21 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@VGA-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 960.0
     cy = 961.0
     output = "VGA-1"
@@ -197,12 +206,42 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@VGA-1" ]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 683.0
+    cy = 586.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
 [notification]
 background_opacity = 0.80000000000000004
