@@ -1,0 +1,7 @@
+normal:		normal:				default
+default:	normal:				default
+
+alink:		reverse:			white:		black
+status:		reverse:			black:		blue
+alert:		bold:				black:		red
+whereis:	reverse+underline:	magenta:	cyan
