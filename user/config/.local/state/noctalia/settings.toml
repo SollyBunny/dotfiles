@@ -26,7 +26,10 @@ order = [ "default" ]
     thickness = 35
 
         [bar.default.dead_zone.actions]
-        left = "exec noctalia msg panel-open control-center"
+        left = "panel-toggle control-center home"
+        right = "none"
+        scroll_down = "volume-down 5"
+        scroll_up = "volume-up 5"
 
         [[bar.default.capsule_group]]
         enabled = true
