@@ -1,7 +1,8 @@
 import { pacmanInstall } from "#shared/install.mjs";
 
 await pacmanInstall(
-	"lynx", "mpv", "micro", "nano", "fastfetch", "numbat",
+	"mpv", "mpv-mpris", "yt-dlp",
+	"lynx", "micro", "nano", "fastfetch", "numbat",
 	"imagemagick", "ffmpeg", "perl-image-exiftool",
 	"usbutils", "usb_modeswitch", "smartmontools", "nvme-cli",
 	"htop", "cpupower",
@@ -12,7 +13,6 @@ await pacmanInstall(
 	"just", "meson", "ninja", "cmake",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man-db",
-	"yt-dlp",
 );
 
 await yayInstall("cpulimit");
