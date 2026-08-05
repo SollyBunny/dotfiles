@@ -13,6 +13,10 @@
 	--panel-header-back-icon-padding: 2px !important;
 	--panel-menuitem-padding: 4px !important;
 	--panel-menuitem-margin: 1px 5px !important;
+	/* TorBrowser doesn't do this automatically yet */
+	--panel-background: var(--arrowpanel-background);
+	--panel-color: var(--arrowpanel-color);
+	--panel-border-color: var(--arrowpanel-border-color);
 }
 
 html#main-window body {
