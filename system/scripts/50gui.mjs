@@ -2,8 +2,9 @@ import { askConfirm, runShellRoot } from "#shared/shell.mjs";
 import { pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall("xorg-xwayland", "xorg-xeyes");
+await pacmanInstall("wlr-randr", "wl-clipboard", "wtype", "wev");
 
-await pacmanInstall("cage", "ddcutil", "wev", "wl-clipboard");
+await pacmanInstall("cage", "ddcutil");
 
 await pacmanInstall("greetd");
 await runShellRoot("systemctl enable greetd");
