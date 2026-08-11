@@ -28,13 +28,38 @@
                 "installation_mode": "allowed",
                 "allowed_types": ["dictionary", "extension", "sitepermission", "theme"]
             },
+            "pywalfox@frewacom.org": {
+                "install_url": "file:///usr/lib/librewolf/distribution/extensions/pywalfox@frewacom.org.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
             "uBlock0@raymondhill.net": {
                 "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
-            "pywalfox@frewacom.org": {
-                "install_url": "file:///usr/lib/librewolf/distribution/extensions/pywalfox@frewacom.org.xpi",
+            "keepassxc-browser@keepassxc.org": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
+            "sponsorBlocker@ajay.app": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
+            "{88ebde3a-4581-4c6b-8019-2a05a9e3e938}": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/hide-youtube-shorts/latest.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
+            "{762f9885-5a13-4abd-9c77-433dcd38b8fd}": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
+            "firefox-extension@tampermonkey.net": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/tampermonkey/latest.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
