@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if SDL2_PATH=$(find /usr/lib -name 'libSDL2.so*' 2>/dev/null | head -n1) && [ -n "$SDL2_PATH" ]; then
+	export SDL_DYNAMIC_API="$SDL2_PATH"
+else
+	unset SDL_DYNAMIC_API
+fi
+
+if SDL3_PATH=$(find /usr/lib -name 'libSDL3.so*' 2>/dev/null | head -n1) && [ -n "$SDL3_PATH" ]; then
+	export SDL3_DYNAMIC_API="$SDL3_PATH"
+else
+	unset SDL3_DYNAMIC_API
+fi
+
+if [ "$#" -eq 0 ]; then
+	echo "SDL_DYNAMIC_API:  ${SDL_DYNAMIC_API:-<not found>}"
+	echo "SDL3_DYNAMIC_API: ${SDL3_DYNAMIC_API:-<not found>}"
+	echo "Usage: $0 program [args...]"
+	exit 0
+fi
+
+exec "$@"
