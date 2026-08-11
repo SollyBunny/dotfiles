@@ -1,4 +1,4 @@
-import { pacmanInstall } from "#shared/install.mjs";
+import { pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall(
 	"mpv", "mpv-mpris", "yt-dlp",
