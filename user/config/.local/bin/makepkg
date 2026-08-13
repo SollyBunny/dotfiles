@@ -1,16 +1,21 @@
-#!/bin/bash 
+#!/bin/bash
 
-echo "Using makepkg-shallow $@" >&2
-
-git() {
-	echo "Using git-shallow $@" >&2
-	opt="$1"
-	shift
-	if [[ $# > 1 && "$opt" = "clone" ]]; then
-		command git "$opt" --depth 1 --shallow-submodules "$@"
-	else
-		command git "$opt" "$@"
-	fi
-}
+if [[ -z "${MAKEPKG_SHALLOW_DISABLE:-}" ]]; then
+	echo "Using makepkg-shallow $@" >&2
+	echo "Use MAKEPKG_SHALLOW_DISABLE=1 to disable" >&2
+	git() {
+		echo "Using git-shallow $@" >&2
+		opt="$1"
+		shift
+		if [[ $# > 1 && "$opt" = "clone" ]]; then
+			command git "$opt" --depth 1 --shallow-submodules "$@"
+		else
+			command git "$opt" "$@"
+		fi
+	}
+else
+	echo "Not using makepkg-shallow" >&2
+	echo "Unset MAKEPKG_SHALLOW_DISABLE to enable" >&2
+fi
 
 source /usr/bin/makepkg "$@"
