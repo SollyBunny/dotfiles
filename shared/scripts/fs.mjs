@@ -88,6 +88,11 @@ export async function moveToBackup(file) {
 	}
 }
 
+let getTempPathCounter = 0;
+export function getTempPath() {
+	return path.join(process.env.XDG_RUNTIME_DIR || "/tmp", `${process.pid}.${++getTempPathCounter}.tmp`);
+}
+
 export async function safeWrite(file, text) {
 	if (await exists(file)) {
 		if (await fs.readFile(file) === text)
@@ -95,7 +100,20 @@ export async function safeWrite(file, text) {
 		await moveToBackup(file);
 	}
 	const fileTemp = file + `${crypto.randomBytes(8).toString("hex")}.tmp`;
-	await fs.writeFile(fileTemp, text, { flag: "wx" });
+	{
+		// Write file and move it next to output
+		// This fixes issues with permissions and fs boundaaries
+		const fileTempTemp = getTempPath();
+		await fs.writeFile(fileTempTemp, text, { flag: "wx" });
+		try {
+			await fs.cp(fileTempTemp, fileTemp);
+		} catch (e) {
+			if (e.code === "EACCES")
+				await runShellRoot(`cp -- "${fileTempTemp}" "${fileTemp}"`);
+			else
+				throw e;
+		}
+	}
 	// Atomic move
 	try {
 		await fs.rename(fileTemp, file);
