@@ -22,7 +22,7 @@ for (const file of files) {
 	if (fileInstallStat && fileInstallStat.isFile() && await filesEqual(file, fileInstall)) {
 		if (fileInstallStat.gid !== 0 || fileInstallStat.uid !== 0)
 			await runShellRoot(`chown root:root "$fileInstall"`, { fileInstall });
-		if (fileInstallStat.mode & 0o777 !== 0o644)
+		if ((fileInstallStat.mode & 0o777) !== 0o644)
 			await runShellRoot(`chmod 644 "$fileInstall"`, { fileInstall });
 		continue;
 	}
