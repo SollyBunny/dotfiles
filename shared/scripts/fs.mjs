@@ -95,7 +95,7 @@ export function getTempPath() {
 
 export async function safeWrite(file, text) {
 	if (await exists(file)) {
-		if (await fs.readFile(file) === text)
+		if (await fs.readFile(file, "utf-8") === text)
 			return; // Do nothing!
 		await moveToBackup(file);
 	}
