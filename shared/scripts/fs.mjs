@@ -1,6 +1,7 @@
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 import { runShellRoot } from "./shell.mjs";
 
 export function getThisDir(importMetaUrl) {
@@ -82,6 +83,25 @@ export async function moveToBackup(file) {
 	} catch (e) {
 		if (e.code === "EACCES")
 			await runShellRoot(`rm -rf -- "${file}"`);
+		else
+			throw e;
+	}
+}
+
+export async function safeWrite(file, text) {
+	if (await exists(file)) {
+		if (await fs.readFile(file) === text)
+			return; // Do nothing!
+		await moveToBackup(file);
+	}
+	const fileTemp = file + `${crypto.randomBytes(8).toString("hex")}.tmp`;
+	await fs.writeFile(fileTemp, text, { flag: "wx" });
+	// Atomic move
+	try {
+		await fs.rename(fileTemp, file);
+	} catch (e) {
+		if (e.code === "EACCES")
+			await runShellRoot(`mv -- "${fileTemp}" "${file}"`);
 		else
 			throw e;
 	}

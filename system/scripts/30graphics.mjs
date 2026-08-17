@@ -2,8 +2,9 @@ import { askChoice, runShellRoot } from "#shared/shell.mjs";
 import { pacmanInstall } from "#shared/install.mjs";
 import { exists } from "#shared/fs.mjs";
 import fs from "node:fs/promises";
+import { getConfigOr } from "#shared/config.mjs";
 
-const graphics = await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]);
+const graphics = await getConfigOr("graphics backend", async () => await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]));
 
 // https://wiki.archlinux.org/title/Hardware_video_acceleration
 
@@ -30,6 +31,8 @@ if (graphics === "intel") {
 	);
 	LIBVA_DRIVER_NAME = "radeonsi";
 	VDPAU_DRIVER = "va_gl";
+} else {
+	throw new Error(`Invalid graphics backend "${graphics}"`);
 }
 
 await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils", "mesa-utils");
