@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 
 import { getThisDir } from "#shared/fs.mjs";
 import fs from "node:fs";
