@@ -55,7 +55,7 @@ export async function moveToBackup(file) {
 			await fs.unlink(file);
 		} catch (e) {
 			if (e.code === "EACCES")
-				await runShellRoot(`unlink -- "${file}"`);
+				await runShellRoot(`unlink -- "$file"`, { file });
 			else
 				throw e;
 		}
@@ -82,7 +82,7 @@ export async function moveToBackup(file) {
 		});
 	} catch (e) {
 		if (e.code === "EACCES")
-			await runShellRoot(`rm -rf -- "${file}"`);
+			await runShellRoot(`rm -rf -- "$file"`, { file });
 		else
 			throw e;
 	}
@@ -109,7 +109,7 @@ export async function safeWrite(file, text) {
 			await fs.cp(fileTempTemp, fileTemp);
 		} catch (e) {
 			if (e.code === "EACCES")
-				await runShellRoot(`cp -- "${fileTempTemp}" "${fileTemp}"`);
+				await runShellRoot(`cp -- "$fileTempTemp" "$fileTemp"`, { fileTempTemp, fileTemp });
 			else
 				throw e;
 		}
@@ -119,7 +119,7 @@ export async function safeWrite(file, text) {
 		await fs.rename(fileTemp, file);
 	} catch (e) {
 		if (e.code === "EACCES")
-			await runShellRoot(`mv -- "${fileTemp}" "${file}"`);
+			await runShellRoot(`mv -- "$fileTemp" "$file"`, { fileTemp, file });
 		else
 			throw e;
 	}

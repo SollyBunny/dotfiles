@@ -3,7 +3,7 @@ import { rootshell, runShell, runShellRoot } from "./shell.mjs";
 
 export async function commandExists(command) {
 	try  {
-		await runShell(`command -v "${command}" >/dev/null 2>&1`);
+		await runShell(`command -v "$command" >/dev/null 2>&1`, { command });
 		return true;
 	} catch (e) {
 		if (e.code === 1)
@@ -18,7 +18,7 @@ async function getPacmanInstalledPkgs() {
 		_pacmanInstalledPkgs = new Set();
 		const filename = `/run/user/${process.getuid()}/pkglist`;
 		try {
-			await runShell(`pacman -Qeq > ${filename}`);
+			await runShell(`pacman -Qeq > "$filename"`, { filename });
 			(await fs.readFile(filename, "utf-8"))
 				.split("\n")
 				.filter(v => v)
@@ -45,14 +45,14 @@ export async function pacmanInstall(...packages) {
 		return;
 	console.log("Installing", ...packages);
 	await pacmanUpdateRepo();
-	await runShellRoot(`pacman -S --noconfirm --needed --asexplicit -- ${packages.join(" ")}`);
-	await runShellRoot(`pacman -D --asexplicit -- ${packages.join(" ")}`);
+	await runShellRoot(`pacman -S --noconfirm --needed --asexplicit -- $packages`, { packages: packages.join(" ") });
+	await runShellRoot(`pacman -D --asexplicit -- $packages`, { packages: packages.join(" ") });
 }
 
 export async function yayInstall(...packages) {
 	console.log("Installing with yay", ...packages);
 	await pacmanUpdateRepo();
 	await rootshell.init();
-	await runShell(`yay -S --needed --asexplicit --sudo sudo -- ${packages.join(" ")}`, rootshell.ipcEnv);
-	await runShellRoot(`pacman -D --asexplicit -- ${packages.join(" ")}`);
+	await runShell(`yay -S --needed --asexplicit --sudo sudo -- $packages`, { ...rootshell.ipcEnv, packages: packages.join(" ") });
+	await runShellRoot(`pacman -D --asexplicit -- $packages`, { packages: packages.join(" ") });
 }

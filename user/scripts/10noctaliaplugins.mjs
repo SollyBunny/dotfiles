@@ -9,8 +9,8 @@ const LOCAL_PLUGINS_URL = "https://github.com/sollybunny/noctalia-plugins";
 const localPluginsPath = path.join(os.homedir(), ".config/noctalia/local-plugins");
 
 if (await exists(path.join(localPluginsPath, ".git"))) {
-	await runShell(`cd ${localPluginsPath} && git pull`);
+	await runShell(`cd "$localPluginsPath" && git pull`, { localPluginsPath });
 } else {
 	await fs.mkdir(localPluginsPath, { recursive: true });
-	await runShell(`git clone --depth 1 ${LOCAL_PLUGINS_URL} ${localPluginsPath}`);
+	await runShell(`git clone --depth 1 "$LOCAL_PLUGINS_URL" "$localPluginsPath"`, { LOCAL_PLUGINS_URL, localPluginsPath });
 }
