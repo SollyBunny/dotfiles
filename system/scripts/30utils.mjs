@@ -1,7 +1,7 @@
 import { pacmanInstall, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall(
-	"lynx", "micro", "nano", "fastfetch", "numbat",
+	"lynx", "micro", "nano", "fastfetch", "numbat", "yt-dlp",
 	"imagemagick", "ffmpeg", "perl-image-exiftool",
 	"usbutils", "usb_modeswitch", "smartmontools", "nvme-cli",
 	"htop", "cpupower",
