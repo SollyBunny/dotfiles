@@ -13,20 +13,21 @@ if (process.getuid() !== 0) {
 	process.exit(3);
 }
 
+const requiredEnv = ["IPC_SOCKET_PATH", "IPC_SOCKET_PASSWORD", "IPC_SOCKET_UID", "IPC_SOCKET_GID"];
+for (const key of requiredEnv) {
+	if (!process.env[key]) {
+		console.error(`Missing env ${key}`);
+		process.exit(1);
+	}
+}
+
 const IPC_SOCKET_PATH = process.env["IPC_SOCKET_PATH"];
-if (!IPC_SOCKET_PATH) {
-	console.error("Rootshell daemon not given IPC_SOCKET_PATH");
-	process.exit(4);
-}
-
 const IPC_SOCKET_PASSWORD = process.env["IPC_SOCKET_PASSWORD"];
-if (!IPC_SOCKET_PASSWORD) {
-	console.error("Rootshell daemon not given IPC_SOCKET_PASSWORD");
-	process.exit(5);
-}
+const IPC_SOCKET_UID = Number(process.env["IPC_SOCKET_UID"]);
+const IPC_SOCKET_GID = Number(process.env["IPC_SOCKET_GID"]);
 
-delete process.env["IPC_SOCKET_PATH"];
-delete process.env["IPC_SOCKET_PASSWORD"];
+for (const key of requiredEnv)
+	delete process.env[key];
 
 function populateEnv(env) {
 	if (!env)
@@ -99,7 +100,8 @@ const server = net.createServer(socket => {
 });
 
 server.listen(IPC_SOCKET_PATH, async () => {
-	await fs.chmod(IPC_SOCKET_PATH, 0o666);
+	await fs.chown(IPC_SOCKET_PATH, IPC_SOCKET_UID, IPC_SOCKET_GID);
+	await fs.chmod(IPC_SOCKET_PATH, 0o600);
 });
 
 function cleanup() {

@@ -28,6 +28,8 @@ export default class RootShell {
 		this.ipcEnv = structuredClone(process.env);
 		this.ipcEnv["IPC_SOCKET_PATH"] = this.IPC_SOCKET_PATH;
 		this.ipcEnv["IPC_SOCKET_PASSWORD"] = this.IPC_SOCKET_PASSWORD;
+		this.ipcEnv["IPC_SOCKET_UID"] = process.getuid();
+		this.ipcEnv["IPC_SOCKET_GID"] = process.getgid();
 		this.ipcEnv["PATH"] = path.join(__dir, "bin") + ":" + this.ipcEnv["PATH"];
 	}
 	async init() {
