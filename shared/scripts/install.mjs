@@ -45,8 +45,8 @@ export async function pacmanInstall(...packages) {
 		return;
 	console.log("Installing", ...packages);
 	await pacmanUpdateRepo();
-	await runShellRoot(`pacman -S --noconfirm --needed --asexplicit -- $packages`, { packages: packages.join(" ") });
-	await runShellRoot(`pacman -D --asexplicit -- $packages`, { packages: packages.join(" ") });
+	await runShellRoot(["pacman", "-S", "--noconfirm", "--needed", "--asexplicit", "--", ...packages]);
+	await runShellRoot(["pacman", "-D", "--asexplicit", "--", ...packages]);
 }
 
 export async function yayInstall(...packages) {
@@ -57,6 +57,6 @@ export async function yayInstall(...packages) {
 	console.log("Installing with yay", ...packages);
 	await pacmanUpdateRepo();
 	await rootshell.init();
-	await runShell(`yay -S --needed --asexplicit --sudo sudo -- $packages`, { ...rootshell.ipcEnv, packages: packages.join(" ") });
-	await runShellRoot(`pacman -D --asexplicit -- $packages`, { packages: packages.join(" ") });
+	await runShell(["yay", "-S", "--needed", "--asexplicit", "--sudo", "sudo", "--", ...packages], rootshell.ipcEnv);
+	await runShellRoot(["pacman", "-D", "--asexplicit", "--", ...packages]);
 }
