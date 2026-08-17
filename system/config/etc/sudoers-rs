@@ -7,6 +7,7 @@ Defaults!/usr/local/bin/visudo env_keep += "SUDO_EDITOR EDITOR VISUAL"
 # Sanitize your path
 Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin"
 
+# Turn on stars when typing, TODO: get • symbol
 Defaults pwfeedback
 
 # "root", and all members of the group "wheel" can run any command after providing a password.
