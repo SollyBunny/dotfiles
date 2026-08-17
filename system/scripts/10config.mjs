@@ -1,5 +1,6 @@
-import { filesEqual, getThisDir, lstatSafe, moveToBackup } from "#shared/fs.mjs";
+import { getBackupPath, getThisDir, lstatSafe } from "#shared/fs.mjs";
 import { runShellRoot } from "#shared/shell.mjs";
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -21,15 +22,18 @@ const files = (await fs.readdir(configRoot, {
 
 for (const file of files) {
 	const mode = RESTRICTED_FILES.indexOf(path.parse(file).base) === -1 ? 0o644 : 0o440;
-	const fileInstall = path.join(path.sep, path.relative(configRoot, file));
-	const fileInstallStat = await lstatSafe(fileInstall);
-	if (fileInstallStat && fileInstallStat.isFile() && await filesEqual(file, fileInstall)) {
-		if (fileInstallStat.gid !== 0 || fileInstallStat.uid !== 0)
-			await runShellRoot(`chown -- root:root "$fileInstall"`, { fileInstall });
-		if ((fileInstallStat.mode & 0o777) !== mode)
-			await runShellRoot(`chmod -- ${mode.toString(8)} "$fileInstall"`, { fileInstall });
-		continue;
+	const fileDestination = path.join(path.sep, path.relative(configRoot, file));
+	const backupSuffix = `.${crypto.randomBytes(8).toString("hex")}.bak`;
+	await runShellRoot(
+		`install -C -D -p -v --backup --suffix="${backupSuffix}" --mode=${mode.toString(8)} --group=root --owner=root -- "$file" "$fileDestination"`,
+		{ file, fileDestination }
+	);
+	const installBackup = `${fileDestination}${backupSuffix}`;
+	if (await lstatSafe(installBackup)) {
+		const backupPath = await getBackupPath(fileDestination);
+		await runShellRoot(
+			`mv -- "$installBackup" "$backupPath" && chown ${process.getuid()}:${process.getgid()} -- "$backupPath"`,
+			{ installBackup, backupPath }
+		);
 	}
-	await moveToBackup(fileInstall);
-	await runShellRoot(`install -D -p -v --mode=${mode.toString(8)} --group=root --owner=root -- "$file" "$fileInstall"`, { file, fileInstall })
 }
