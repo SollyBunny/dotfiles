@@ -13,5 +13,5 @@ for (const executable of ["sudo", "su", "visudo", "sudoedit"]) {
 	const sudorsPath = `/usr/bin/${executable}-rs`;
 	const sudoPath = `/usr/local/bin/${executable}`;
 	if (await fs.stat(sudoPath, { throwIfNoEntry: false }) === undefined)
-		await runShellRoot(`ln -s "$sudorsPath" "$sudoPath"`, { sudorsPath, sudoPath });
+		await runShellRoot(`ln -s -- "$sudorsPath" "$sudoPath"`, { sudorsPath, sudoPath });
 }
