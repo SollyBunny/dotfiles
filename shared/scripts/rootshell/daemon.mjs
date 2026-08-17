@@ -25,20 +25,29 @@ if (!IPC_SOCKET_PASSWORD) {
 	process.exit(5);
 }
 
-const runShellEnv = structuredClone(process.env);
 delete process.env["IPC_SOCKET_PATH"];
 delete process.env["IPC_SOCKET_PASSWORD"];
 
-function runShell(command) {
+function populateEnv(env) {
+	if (!env)
+		return undefined;
+	const out = structuredClone(process.env);
+	for (const key in env)
+		out[key] = env[key];
+	return out;
+}
+
+function runShell(command, env) {
+	env = populateEnv(env);
 	return new Promise((resolve, reject) => {
 		let child;
 		if (Array.isArray(command)) {
 			child = spawn(command[0], command.slice(1), {
-				stdio: "inherit", env: runShellEnv
+				stdio: "inherit", env
 			});
 		} else {
 			child = spawn("/bin/bash", ["-c", command], {
-				stdio: "inherit", env: runShellEnv
+				stdio: "inherit", env
 			});
 		}
 		child.on("error", reject);
@@ -49,7 +58,7 @@ function runShell(command) {
 async function onMessage({ message, write, destroy }) {
 	message = JSON.parse(message);
 	try {
-		const out = await runShell(message.command);
+		const out = await runShell(message.command, message.env);
 		write(JSON.stringify({ id: message.id, resolve: out }));
 	} catch (e) {
 		write(JSON.stringify({ id: message.id, reject: e }));

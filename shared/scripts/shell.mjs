@@ -15,7 +15,15 @@ function errorFromCommandRes({ command, code, signal }) {
 		err.signal = signal;
 	}
 	return err;
+}
 
+function populateEnv(env) {
+	if (!env)
+		return undefined;
+	const out = structuredClone(process.env);
+	for (const key in env)
+		out[key] = env[key];
+	return out;
 }
 
 /**
@@ -43,6 +51,7 @@ export async function askConfirm(question) {
 }
 
 export function runShell(command, env = undefined) {
+	env = populateEnv(env);
 	return new Promise((resolve, reject) => {
 		let child;
 		if (Array.isArray(command)) {
@@ -65,8 +74,8 @@ export function runShell(command, env = undefined) {
 	});
 }
 
-export async function runShellRoot(command) {
-	const { code, signal } = await rootshell.run(command);
+export async function runShellRoot(command, env = undefined) {
+	const { code, signal } = await rootshell.run(command, env);
 	const err = errorFromCommandRes({ command, code, signal });
 	if (err)
 		throw err;

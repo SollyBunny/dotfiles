@@ -109,14 +109,14 @@ export default class RootShell {
 	/**
 	 * @returns {Promise<{ code: number | null, signal: NodeJS.Signals | null }>}
 	 */
-	async run(command) {
+	async run(command, env = undefined) {
 		if (!this.#inited)
 			await this.init();
 		const id = String(Math.random()).slice(2) + String(performance.now()).replace(".", "");
 		const keepAlive = setInterval(() => {}, 1e9);
 		const out = await new Promise((resolve, reject) => {
 			this.#waiting.set(id, { resolve, reject });
-			this.#socket.write(JSON.stringify({ id, command }) + "\n");
+			this.#socket.write(JSON.stringify({ id, command, env }) + "\n");
 		});
 		clearInterval(keepAlive);
 		return out;
