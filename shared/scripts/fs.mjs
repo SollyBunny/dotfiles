@@ -50,7 +50,7 @@ export async function moveToBackup(file) {
 	const stat = await lstatSafe(file, { throwIfNoEntry: false });
 	if (!stat) return;
 	if (stat.isSymbolicLink()) {
-		console.log("Removed symbolic link", file);
+		// console.log("Removed symbolic link", file);
 		try {
 			await fs.unlink(file);
 		} catch (e) {
