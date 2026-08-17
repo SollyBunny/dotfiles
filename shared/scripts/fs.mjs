@@ -46,6 +46,19 @@ export async function filesEqual(a, b) {
 	return aContents.equals(bContents);
 }
 
+export async function getBackupPath(file) {
+	const backupPath = path.join(__dir, "../../backup");
+	await fs.mkdir(backupPath, { recursive: true });
+	let fileName = path.resolve(file).replaceAll(path.sep, ".");
+	let fileExt;
+	const filePath = () => path.join(backupPath, [fileName, fileExt].filter(v => v).join("."));
+	for (let i = 0; i < 20 && await exists(filePath()); ++i)
+		fileExt = (fileExt ?? 0) + 1;
+	if (await exists(filePath()))
+		throw new Error(`Couldn't make backup path for ${file}, clear the backup folder`);
+	return filePath();
+}
+
 export async function moveToBackup(file) {
 	const stat = await lstatSafe(file, { throwIfNoEntry: false });
 	if (!stat) return;
@@ -62,14 +75,8 @@ export async function moveToBackup(file) {
 		return;
 	}
 	console.log("Backing up", file);
-	const backupPath = path.join(__dir, "../../backup");
-	await fs.mkdir(backupPath, { recursive: true });
-	let fileName = path.resolve(file).replaceAll(path.sep, ".");
-	let fileExt;
-	const filePath = () => path.join(backupPath, [fileName, fileExt].filter(v => v).join("."));
-	while (await fs.stat(filePath(), { throwIfNoEntry: false }))
-		fileExt = (fileExt ?? 0) + 1;
-	await fs.cp(file, filePath(), {
+	const filePath = await getBackupPath(file);
+	await fs.cp(file, filePath, {
 		dereference: true,
 		errorOnExist: true,
 		recursive: true,
