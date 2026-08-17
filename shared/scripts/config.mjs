@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { exists, getThisDir, safeWrite } from "./fs.mjs";
+import { exists, getThisDir } from "./fs.mjs";
 
 const CONFIG_FILE = path.join(getThisDir(import.meta.url), "../../config.json");
 
@@ -9,7 +9,7 @@ async function readConfig() {
 }
 
 async function writeConfig(config) {
-	await safeWrite(CONFIG_FILE, JSON.stringify(config, null, "\t"));
+	await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, "\t"));
 }
 
 export async function setConfig(key, value) {
