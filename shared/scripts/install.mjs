@@ -42,10 +42,11 @@ async function pacmanUpdateRepo() {
 const _checkDuplicateInstallPkgs = new Set();
 function checkDuplicateInstall(packages) {
 	packages = new Set(packages);
-	const duplicates = Set.intersection(packages, _checkDuplicateInstallPkgs);
-	if (duplicates)
-		throw new Error(`Packages installed multiple times: ${Array.from(duplicates).join(", ")}`);
-	_checkDuplicateInstallPkgs = Set.union(packages, _checkDuplicateInstallPkgs);
+	const duplicates = new Set([...packages].filter(pkg => _checkDuplicateInstallPkgs.has(pkg)));
+	if (duplicates.size)
+		throw new Error(`Packages installed multiple times: ${[...duplicates].join(", ")}`);
+	for (const pkg of packages)
+		_checkDuplicateInstallPkgs.add(pkg);
 }
 
 export async function pacmanInstall(...packages) {
