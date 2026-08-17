@@ -3,6 +3,8 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import { runShellRoot } from "./shell.mjs";
+import { createReadStream } from "node:fs";
+import { pipeline } from "node:stream/promises";
 
 export function getThisDir(importMetaUrl) {
 	const __filename = fileURLToPath(importMetaUrl);
@@ -44,6 +46,12 @@ export async function filesEqual(a, b) {
 	const aContents = await fs.readFile(a);
 	const bContents = await fs.readFile(b);
 	return aContents.equals(bContents);
+}
+
+export async function fileHash(file) {
+	const hash = crypto.createHash("md5");
+	await pipeline(createReadStream(file), hash);
+	return hash.digest("hex");
 }
 
 export async function getBackupPath(file) {
