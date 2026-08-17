@@ -39,7 +39,17 @@ async function pacmanUpdateRepo() {
 	_pacmanUpdateRepoDone = true;
 }
 
+const _checkDuplicateInstallPkgs = new Set();
+function checkDuplicateInstall(packages) {
+	packages = new Set(packages);
+	const duplicates = Set.intersection(packages, _checkDuplicateInstallPkgs);
+	if (duplicates)
+		throw new Error(`Packages installed multiple times: ${Array.from(duplicates).join(", ")}`);
+	_checkDuplicateInstallPkgs = Set.union(packages, _checkDuplicateInstallPkgs);
+}
+
 export async function pacmanInstall(...packages) {
+	checkDuplicateInstall(packages);
 	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
 	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
 	if (!packages.length)
@@ -51,6 +61,7 @@ export async function pacmanInstall(...packages) {
 }
 
 export async function yayInstall(...packages) {
+	checkDuplicateInstall(packages);
 	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
 	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
 	if (!packages.length)
