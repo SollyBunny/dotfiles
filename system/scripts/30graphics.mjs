@@ -1,6 +1,6 @@
 import { askChoice, runShellRoot } from "#shared/shell.mjs";
 import { pacmanInstall } from "#shared/install.mjs";
-import { exists } from "#shared/fs.mjs";
+import { exists, safeWrite } from "#shared/fs.mjs";
 import fs from "node:fs/promises";
 import { getConfigOr } from "#shared/config.mjs";
 
@@ -37,10 +37,8 @@ if (graphics === "intel") {
 
 await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils", "mesa-utils");
 
-const rcFilePath = "/etc/profile.d/graphicsenv.sh";
 const rcFileContents = "" +
 	`export LIBVA_DRIVER_NAME=${LIBVA_DRIVER_NAME}\n` +
 	`export VDPAU_DRIVER=${VDPAU_DRIVER}\n`;
 
-if (!await exists(rcFilePath) || await fs.readFile(rcFilePath, "utf-8") !== rcFileContents)
-	await runShellRoot(`echo "${rcFileContents}" | tee /etc/profile.d/graphicsenv.sh`);
+await safeWrite("/etc/profile.d/graphicsenv.sh", rcFileContents);
