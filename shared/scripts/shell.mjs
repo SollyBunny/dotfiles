@@ -44,9 +44,16 @@ export async function askConfirm(question) {
 
 export function runShell(command, env = undefined) {
 	return new Promise((resolve, reject) => {
-		const child = spawn("/bin/bash", ["-c", command], {
-			stdio: "inherit", env
-		});
+		let child;
+		if (Array.isArray(command)) {
+			child = spawn(command[0], command.slice(1), {
+				stdio: "inherit", env
+			});
+		} else {
+			child = spawn("/bin/bash", ["-c", command], {
+				stdio: "inherit", env
+			});
+		}
 		child.on("error", reject);
 		child.on("close", (code, signal) => {
 			const err = errorFromCommandRes({ command, code, signal });

@@ -31,10 +31,16 @@ delete process.env["IPC_SOCKET_PASSWORD"];
 
 function runShell(command) {
 	return new Promise((resolve, reject) => {
-		const child = spawn("/bin/bash", ["-c", command], {
-			stdio: "inherit",
-			env: runShellEnv,
-		});
+		let child;
+		if (Array.isArray(command)) {
+			child = spawn(command[0], command.slice(1), {
+				stdio: "inherit", env: runShellEnv
+			});
+		} else {
+			child = spawn("/bin/bash", ["-c", command], {
+				stdio: "inherit", env: runShellEnv
+			});
+		}
 		child.on("error", reject);
 		child.on("close", (code, signal) => resolve({ code, signal }));
 	});
