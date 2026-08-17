@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import { rootshell, runShell, runShellRoot } from "./shell.mjs";
+import { getTempPath } from "./fs.mjs";
 
 export async function commandExists(command) {
 	try  {
@@ -16,7 +17,7 @@ let _pacmanInstalledPkgs;
 async function getPacmanInstalledPkgs() {
 	if (_pacmanInstalledPkgs === undefined) {
 		_pacmanInstalledPkgs = new Set();
-		const filename = `/run/user/${process.getuid()}/pkglist`;
+		const filename = getTempPath();
 		try {
 			await runShell(`pacman -Qeq > "$filename"`, { filename });
 			(await fs.readFile(filename, "utf-8"))

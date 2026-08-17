@@ -4,6 +4,7 @@ import net from "node:net";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
+import { getTempPath } from "#shared/fs.mjs";
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -22,7 +23,7 @@ export default class RootShell {
 	 */
 	#socket;
 	constructor() {
-		this.IPC_SOCKET_PATH = `/run/user/${process.getuid()}/rootshell-${process.pid}.sock`;
+		this.IPC_SOCKET_PATH = getTempPath(".sock");
 		this.IPC_SOCKET_PASSWORD = randomUUID();
 		this.ipcEnv = structuredClone(process.env);
 		this.ipcEnv["IPC_SOCKET_PATH"] = this.IPC_SOCKET_PATH;
