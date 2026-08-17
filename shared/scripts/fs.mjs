@@ -88,9 +88,8 @@ export async function moveToBackup(file) {
 	}
 }
 
-let getTempPathCounter = 0;
-export function getTempPath() {
-	return path.join(process.env.XDG_RUNTIME_DIR || "/tmp", `${process.pid}.${++getTempPathCounter}.tmp`);
+export function getTempPath(ext) {
+	return path.join(process.env.XDG_RUNTIME_DIR || "/tmp", `${process.pid}.${crypto.randomBytes(8).toString("hex")}${ext ?? ".tmp"}`);
 }
 
 export async function safeWrite(file, text) {
