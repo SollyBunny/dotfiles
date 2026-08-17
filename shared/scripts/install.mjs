@@ -50,6 +50,10 @@ export async function pacmanInstall(...packages) {
 }
 
 export async function yayInstall(...packages) {
+	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
+	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
+	if (!packages.length)
+		return;
 	console.log("Installing with yay", ...packages);
 	await pacmanUpdateRepo();
 	await rootshell.init();
