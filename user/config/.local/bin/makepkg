@@ -2,7 +2,7 @@
 
 if [[ -z "${MAKEPKG_SHALLOW_DISABLE:-}" ]]; then
 	echo "Using makepkg-shallow $@" >&2
-	echo "Use MAKEPKG_SHALLOW_DISABLE=1 to disable" >&2
+	echo "Set MAKEPKG_SHALLOW_DISABLE=1 to disable" >&2
 	git() {
 		echo "Using git-shallow $@" >&2
 		opt="$1"
