@@ -9,8 +9,8 @@ await pacmanInstall("cage", "ddcutil");
 await pacmanInstall("greetd");
 await runShellRoot("systemctl enable greetd");
 
-if (await askConfirm("Install mangowm, noctalia and noctalia-greeter (requires compile)?"))
-	await yayInstall("mangowm", "noctalia-git", "noctalia-greeter-git");
+await pacmanInstall("noctalia");
+await yayInstall("mangowm", "noctalia-greeter-git");
 
 // Required by noctalia templates
 await pacmanInstall("adw-gtk-theme", "nwg-look");
