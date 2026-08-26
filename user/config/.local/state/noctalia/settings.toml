@@ -318,7 +318,8 @@ enabled = [
     "aurelia/window_count",
     "aurelia/cpu_clock_speed",
     "gustav0ar/drive-health",
-    "noctalia/kaomoji"
+    "noctalia/kaomoji",
+    "aurelia/bash_launcher"
 ]
 
     [[plugins.source]]
@@ -433,16 +434,16 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
 
     [wallpaper.monitors.HDMI-A-1]
     path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.monitors.VGA-1]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
+    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
