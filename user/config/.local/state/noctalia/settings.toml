@@ -13,7 +13,7 @@ order = [ "default" ]
     background_opacity = 0.80000000000000004
     center = [ "widget_2", "active_window", "widget_3" ]
     concave_edge_corners = true
-    end = [ "tray", "group:g1", "group:g4", "group:g3" ]
+    end = [ "bar", "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
     margin_ends = 0
     padding = 5
@@ -185,8 +185,8 @@ widget_order = [
     cx = 960.0
     cy = 961.0
     output = "HDMI-A-1"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -212,8 +212,8 @@ widget_order = [
     cx = 960.0
     cy = 961.0
     output = "VGA-1"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -331,7 +331,8 @@ enabled = [
     "aurelia/cpu_clock_speed",
     "gustav0ar/drive-health",
     "noctalia/kaomoji",
-    "aurelia/bash_launcher"
+    "aurelia/bash_launcher",
+    "noctalia/timer"
 ]
 
     [[plugins.source]]
@@ -486,6 +487,10 @@ capsule_fill = "#000000"
 interactive = false
 min_length = 0
 title_scroll = "on_hover"
+
+[widget.bar]
+capsule = true
+type = "noctalia/timer:bar"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
