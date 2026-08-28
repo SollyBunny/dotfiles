@@ -4,7 +4,7 @@ await pacmanInstall(
 	"lynx", "micro", "nano", "fastfetch", "numbat", "yt-dlp",
 	"imagemagick", "ffmpeg", "perl-image-exiftool",
 	"usbutils", "usb_modeswitch", "smartmontools", "nvme-cli",
-	"htop", "cpupower",
+	"htop", "cpupower", "cloudflared",
 	"curl", "wget", "openssh", "git-credential-oauth",
 	"nodejs", "npm", "jdk-openjdk",
 	"zip", "unzip", "unrar", "tar",
