@@ -8,8 +8,6 @@ await pacmanInstall(
 	"curl", "wget", "openssh", "git-credential-oauth",
 	"nodejs", "npm", "jdk-openjdk",
 	"zip", "unzip", "unrar", "tar",
-	"base-devel", "clang", "llvm", "jemalloc", "pkgconf",
-	"just", "meson", "ninja", "cmake",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man-db",
 );
