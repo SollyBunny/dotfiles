@@ -1,7 +1,4 @@
-import { commandExists, pacmanInstall, yayInstall } from "#shared/install.mjs";
+import { pacmanInstall } from "#shared/install.mjs";
 
-if (!await commandExists("librewolf"))
-	await yayInstall("librewolf-bin");
-
-if (!await commandExists("torbrowser-launcher"))
-	await pacmanInstall("torbrowser-launcher");
+await pacmanInstall("librewolf");
+await pacmanInstall("torbrowser-launcher");
