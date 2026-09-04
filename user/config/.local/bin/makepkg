@@ -1,21 +1,48 @@
 #!/bin/bash
 
 if [[ -z "${MAKEPKG_SHALLOW_DISABLE:-}" ]]; then
-	echo "Using makepkg-shallow $@" >&2
-	echo "Set MAKEPKG_SHALLOW_DISABLE=1 to disable" >&2
+	echo "makepkg-shallow $@" >&2
+	echo "makepkg-shallow: Set MAKEPKG_SHALLOW_DISABLE=1 to disable" >&2
 	git() {
-		echo "Using git-shallow $@" >&2
+		echo "git-shallow $@" >&2
 		opt="$1"
 		shift
 		if [[ $# > 1 && "$opt" = "clone" ]]; then
 			command git "$opt" --depth 1 --shallow-submodules "$@"
+		elif [[ $# > 1 && "$opt" = "describe" ]]; then
+			pwd >&2
+			if ! command git describe --tags --abbrev=7 >/dev/null 2>&1; then
+				shallow_file=$(command git rev-parse --git-path shallow)
+				if [ ! -f "$shallow_file" ]; then
+					echo "git-shallow: repository is not shallow, still cannot describe a tag" >&2
+				else
+					remote=$(command git remote 2>/dev/null | head -n1)
+					if [ -z "$remote" ]; then
+						echo "git-shallow: no remote configured, cannot fetch a tag" >&2
+					else
+						tags=$(command git ls-remote --tags --sort=version:refname "$remote" 2>/dev/null | grep -v '^{\^}' || true)
+						if [ -z "$tags" ]; then
+							tags=$(command git ls-remote --tags "$remote" 2>/dev/null | grep -v '^{\^}' || true)
+						fi
+						latest_tag=$(printf '%s\n' "$tags" | tail -n1 | awk '{print $2}' | sed 's|refs/tags/||')
+						if [ -n "$latest_tag" ]; then
+							echo "git-shallow: describe couldn't find a tag, fetching history up to '$latest_tag' (commits only)" >&2
+							command git fetch --filter=tree:0 --depth=1 "$remote" "refs/tags/$latest_tag:refs/tags/$latest_tag" >&2 || true
+							command git fetch --filter=tree:0 --shallow-exclude="refs/tags/$latest_tag" "$remote" >&2 || true
+							command git fetch --filter=tree:0 --deepen=1 "$remote" >&2 || true
+						else
+							echo "git-shallow: remote '$remote' has no tags, cannot describe" >&2
+						fi
+					fi
+				fi
+			fi
+			command git "$opt" "$@"
 		else
 			command git "$opt" "$@"
 		fi
 	}
 else
-	echo "Not using makepkg-shallow" >&2
-	echo "Unset MAKEPKG_SHALLOW_DISABLE to enable" >&2
+	echo "makepkg-shallow: Unset MAKEPKG_SHALLOW_DISABLE to enable" >&2
 fi
 
 source /usr/bin/makepkg "$@"
