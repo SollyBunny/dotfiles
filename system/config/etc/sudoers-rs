@@ -10,6 +10,9 @@ Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin"
 # Turn on stars when typing, TODO: get • symbol
 Defaults pwfeedback
 
+# Keep display variables
+Defaults env_keep += "DISPLAY XAUTHORITY WAYLAND_DISPLAY"
+
 # "root", and all members of the group "wheel" can run any command after providing a password.
 root ALL=(ALL:ALL) ALL
 %wheel ALL=(ALL:ALL) ALL

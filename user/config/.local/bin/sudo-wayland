@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export WAYLAND_DISPLAY="$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+exec sudo "$@"
