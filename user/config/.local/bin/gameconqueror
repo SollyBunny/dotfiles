@@ -2,6 +2,11 @@
 
 DATADIR=/usr/share/gameconqueror
 
+if [ ! -d "$DATADIR" ]; then
+    echo "install gameconqueror!" >&2
+    exit 1
+fi
+
 if [ "$(id -u)" -eq 0 ]; then
 	exec "$DATADIR/GameConqueror.py" "$@"
 fi
