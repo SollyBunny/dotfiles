@@ -21,7 +21,10 @@ const files = (await fs.readdir(configRoot, {
 	.map(v => path.join(v.parentPath, v.name));
 
 for (const file of files) {
-	const mode = RESTRICTED_FILES.indexOf(path.parse(file).base) === -1 ? 0o644 : 0o440;
+	let mode = RESTRICTED_FILES.indexOf(path.parse(file).base) === -1 ? 0o644 : 0o440;
+	if (((await lstatSafe(file))?.mode & 0o111) !== 0) // If source file executable
+		mode |= 0o111 // Make destination executable
+
 	const fileDestination = path.join(path.sep, path.relative(configRoot, file));
 	const backupSuffix = `.${crypto.randomBytes(8).toString("hex")}.bak`;
 	await runShellRoot(
