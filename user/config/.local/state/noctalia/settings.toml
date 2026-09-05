@@ -11,7 +11,7 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.80000000000000004
-    center = [ "widget_2", "active_window", "widget_3" ]
+    center = [ "window_count_left", "active_window", "window_count_right" ]
     concave_edge_corners = true
     end = [ "bar", "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
@@ -32,6 +32,8 @@ order = [ "default" ]
         scroll_up = "volume-up 5"
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g2"
@@ -40,6 +42,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g3"
@@ -48,6 +52,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g4"
@@ -56,6 +62,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g1"
@@ -64,6 +72,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g5"
@@ -72,6 +82,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g6"
@@ -80,6 +92,8 @@ order = [ "default" ]
         padding = 6.0
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         enabled = true
         fill = "surface_variant"
         id = "g7"
@@ -461,16 +475,16 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
+    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
+    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
 
     [wallpaper.monitors.VGA-1]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/qmgcmc1fp5ee1.png"
+    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
@@ -486,6 +500,7 @@ capsule = true
 capsule_fill = "#000000"
 interactive = false
 min_length = 0
+monitor_focus_behavior = "focused"
 title_scroll = "on_hover"
 
 [widget.bar]
@@ -526,16 +541,6 @@ capsule = true
 [widget.widget]
 type = "aurelia/cpu_clock_speed:widget"
 
-[widget.widget_2]
-direction = "left"
-interactive = false
-type = "aurelia/window_count:widget"
-
-[widget.widget_3]
-direction = "right"
-interactive = false
-type = "aurelia/window_count:widget"
-
 [widget.window_count_2]
 direction = "Position"
 enabled = true
@@ -546,6 +551,20 @@ direction = "Right"
 enabled = true
 type = "noctalia/window_count:window_count"
 
+[widget.window_count_left]
+direction = "left"
+interactive = false
+monitor_focus_behavior = "focused"
+type = "aurelia/window_count:widget"
+
+[widget.window_count_right]
+direction = "right"
+interactive = false
+monitor_focus_behavior = "focused"
+type = "aurelia/window_count:widget"
+
 [widget.workspaces]
+focused_output_only = true
 hide_when_empty = true
 labels_only_when_occupied = true
+max_label_chars = 10
