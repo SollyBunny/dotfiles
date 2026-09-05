@@ -1,0 +1,25 @@
+#!/bin/sh
+
+DATADIR=/usr/share/gameconqueror
+
+if [ "$(id -u)" -eq 0 ]; then
+	exec "$DATADIR/GameConqueror.py" "$@"
+fi
+
+PKEXEC=$(command -v pkexec)
+
+if [ -z "$PKEXEC" ]; then
+	echo "install policykit!" >&2
+	exit 1
+fi
+
+if [ -z "$WAYLAND_DISPLAY" ]; then
+	echo "no WAYLAND_DISPLAY" >&2
+	exit 1
+fi
+
+WAYLAND_DISPLAY_NEW="$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+
+"$PKEXEC" env \
+	WAYLAND_DISPLAY="$WAYLAND_DISPLAY_NEW" \
+	"$DATADIR/GameConqueror.py" "$@"
