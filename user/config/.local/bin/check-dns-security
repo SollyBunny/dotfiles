@@ -1,0 +1,36 @@
+#!/bin/sh
+
+default_interface=$(ip route show default | awk 'NR==1 {print $5}')
+if [ -z "$default_interface" ]; then
+	echo "Found no default interface" >&2
+	exit 0
+fi
+
+resolvectl_status=$(resolvectl --json=short status)
+dns_status=$(printf '%s' "$resolvectl_status" |
+	jq -r --arg default_interface "$default_interface" '
+		.[] |
+		select(.ifname == $default_interface) |
+		[.dnssec, .dnssecSupported, .dnsOverTLS] |
+		@tsv
+	')
+if [ -z "$dns_status" ]; then
+	echo "No status for interface \"$default_interface\"" >&2
+	exit 0
+fi
+
+dnssec=$(printf '%s' "$dns_status" | cut -f1)
+dnssec_supported=$(printf '%s' "$dns_status" | cut -f2)
+dnsovertls=$(printf '%s' "$dns_status" | cut -f3)
+
+if [ "$dnssec" != "yes" ]; then
+	notify-send \
+		"DNS security warning" \
+		"DNSSEC is not active (supported: $dnssec_supported)"
+fi
+
+if [ "$dnsovertls" != "yes" ]; then
+	notify-send \
+		"DNS security warning" \
+		"DNS-over-TLS is not active"
+fi

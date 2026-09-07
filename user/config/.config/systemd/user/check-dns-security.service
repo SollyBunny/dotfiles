@@ -1,0 +1,6 @@
+[Unit]
+Description=Check DNS security
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/check-dns-security
