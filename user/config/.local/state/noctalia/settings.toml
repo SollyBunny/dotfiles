@@ -468,7 +468,19 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "qt" ]
-    community_ids = [ "pywalfox", "vscode", "zed", "discord", "steam", "telegram" ]
+    community_ids = [
+        "opencode",
+        "pywalfox",
+        "discord",
+        "telegram",
+        "gimp",
+        "libreoffice",
+        "micro",
+        "vscode",
+        "zed",
+        "prismlauncher",
+        "steam"
+    ]
 
 [wallpaper]
 directory = "~/Pictures/wallpapers"
