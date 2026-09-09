@@ -11,6 +11,7 @@ user/config/.config/mango/env.conf
 
 user/config/.config/micro/backups
 user/config/.config/micro/buffers
+user/config/.config/micro/colorschemes/noctalia.micro
 
 user/config/.local/state/noctalia/**
 !user/config/.local/state/noctalia/__link
