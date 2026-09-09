@@ -54,6 +54,11 @@ spacer {
 	border-radius: 0 !important;
 }
 
+toolbarspring {
+	min-width: unset !important;
+	min-height: unset !important;
+}
+
 .tabbrowser-tab {
 	padding: 0 !important;
 	height: var(--tab-label-height) !important;
