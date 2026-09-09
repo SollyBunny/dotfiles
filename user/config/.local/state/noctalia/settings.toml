@@ -509,7 +509,6 @@ type = "custom_button"
 [widget.active_window]
 anchor = true
 capsule = true
-capsule_fill = "#000000"
 interactive = false
 min_length = 0
 monitor_focus_behavior = "focused"
