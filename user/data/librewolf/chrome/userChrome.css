@@ -105,7 +105,8 @@ h4 {
 
 /* Context menus */
 menupopup {
-	--panel-background: inherit !important;
+	--panel-background: inherit !important; /* Old Versions */
+	--panel-background-color: inherit !important;
 	--panel-color: inherit !important;
 	--panel-padding: inherit !important;
 	--panel-border-radius: inherit !important;
