@@ -22,8 +22,8 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",
-    "light": "Noctalia Dark Transparent",
-    "dark": "Noctalia Dark Transparent",
+    "light": "Noctalia Light Transparent",
+    "dark": "Noctalia Dark Transparent"
   },
   "show_whitespaces": "all",
 }
