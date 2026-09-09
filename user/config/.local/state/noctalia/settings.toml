@@ -11,23 +11,21 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.80000000000000004
+    capsule_radius = 8
     center = [ "window_count_left", "active_window", "window_count_right" ]
-    concave_edge_corners = true
+    concave_edge_corners = false
     end = [ "bar", "tray", "group:g1", "group:g4", "group:g3" ]
     margin_edge = 0
     margin_ends = 0
-    padding = 5
+    padding = 10
     panel_overlap = 0
     radius = 0
-    radius_bottom_left = 15
-    radius_bottom_right = 15
     scale = 0.80000000447034836
     start = [ "group:g5", "group:g2", "group:g6", "group:g7", "summary" ]
     thickness = 35
 
         [bar.default.dead_zone.actions]
         left = "panel-toggle control-center home"
-        right = "none"
         scroll_down = "volume-down 5"
         scroll_up = "volume-up 5"
 
