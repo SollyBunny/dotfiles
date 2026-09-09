@@ -16,12 +16,13 @@
 	--panel-menuitem-margin: 1px 5px !important;
 	/* TorBrowser doesn't do this automatically yet */
 	--panel-background: var(--arrowpanel-background);
+	--panel-background-color: var(--arrowpanel-background); /* New versions */
 	--panel-color: var(--arrowpanel-color);
 	--panel-border-color: var(--arrowpanel-border-color);
 }
 
 html#main-window body {
-	background-color: #000000CC !important;
+	background-color: var(--panel-background-color) !important;
 }
 
 .browserContainer, toolbox {
