@@ -364,7 +364,7 @@ enabled = [
 
 [shell]
 avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
-date_format = "%A, %Y-%M-%d"
+date_format = "%a, %d %b, %Y-%m-%d"
 password_style = "random"
 polkit_agent = true
 screen_time_enabled = true
@@ -521,7 +521,7 @@ script = "scripts/bongocat.lua"
 type = "scripted"
 
 [widget.clock]
-format = "{:%H:%M:%S %Z}"
+format = "%H:%M:%S %Z"
 
 [widget.cpu]
 display = "text"
@@ -531,7 +531,7 @@ show_glyph = false
 type = "noctalia/cpu_clock_speed:cpu_clock_speed"
 
 [widget.date]
-format = "{:%a %Y-%m-%d}"
+format = "%a, %d %b, %Y-%m-%d"
 
 [widget.ram]
 display = "text"
