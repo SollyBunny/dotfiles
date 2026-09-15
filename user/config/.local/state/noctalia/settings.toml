@@ -344,7 +344,8 @@ enabled = [
     "gustav0ar/drive-health",
     "noctalia/kaomoji",
     "aurelia/bash_launcher",
-    "noctalia/timer"
+    "noctalia/timer",
+    "cleboost/zed-provider"
 ]
 
     [[plugins.source]]
