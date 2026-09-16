@@ -58,6 +58,11 @@
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
+            "keepassxc-browser@keepassxc.org": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi",
+                "installation_mode": "normal_installed",
+                "private_browsing": true
+            },
             "google@search.mozilla.org": {
                 "installation_mode": "blocked"
             },
