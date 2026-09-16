@@ -7,7 +7,9 @@ notify-send "Reloaded MangoWM config"
 cd "$(dirname "$0")"
 
 formatted_env=$(
-	env -i HOME="$HOME" bash -l -c "env" | grep -vE '^(PWD|SHLVL|_)=' | while IFS='=' read -r key value; do
+	env -i $(systemctl --user show-environment | xargs) bash -l -c "env" |
+	grep -vE '^(PWD|SHLVL|_)=' |
+	while IFS='=' read -r key value; do
 		printf 'env=%s,%s\n' "$key" "$value"
 	done
 )
@@ -30,4 +32,4 @@ setsid noctalia &
 
 sleep 1
 
-notify-send "Reloaded MangoWM env / Restarted noctalia"
+notify-send "Reloaded MangoWM env / Restarted noctalia" &
