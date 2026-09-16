@@ -28,13 +28,28 @@
                 "installation_mode": "allowed",
                 "allowed_types": ["dictionary", "extension", "sitepermission", "theme"]
             },
-            "pywalfox@frewacom.org": {
-                "install_url": "file:///usr/lib/librewolf/distribution/extensions/pywalfox@frewacom.org.xpi",
+            "uBlock0@raymondhill.net": {
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
-            "uBlock0@raymondhill.net": {
-                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi",
+            "google@search.mozilla.org": {
+                "installation_mode": "blocked"
+            },
+            "bing@search.mozilla.org": {
+                "installation_mode": "blocked"
+            },
+            "amazondotcom@search.mozilla.org": {
+                "installation_mode": "blocked"
+            },
+            "ebay@search.mozilla.org": {
+                "installation_mode": "blocked"
+            },
+            "twitter@search.mozilla.org": {
+                "installation_mode": "blocked"
+            },
+            "pywalfox@frewacom.org": {
+                "install_url": "file:///usr/lib/librewolf/distribution/extensions/pywalfox@frewacom.org.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
             },
@@ -62,21 +77,6 @@
                 "install_url": "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi",
                 "installation_mode": "normal_installed",
                 "private_browsing": true
-            },
-            "google@search.mozilla.org": {
-                "installation_mode": "blocked"
-            },
-            "bing@search.mozilla.org": {
-                "installation_mode": "blocked"
-            },
-            "amazondotcom@search.mozilla.org": {
-                "installation_mode": "blocked"
-            },
-            "ebay@search.mozilla.org": {
-                "installation_mode": "blocked"
-            },
-            "twitter@search.mozilla.org": {
-                "installation_mode": "blocked"
             }
         },
         "SearchEngines": {
