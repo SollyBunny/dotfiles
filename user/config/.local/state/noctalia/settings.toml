@@ -21,6 +21,7 @@ order = [ "default" ]
     panel_overlap = 0
     radius = 0
     scale = 0.80000000447034836
+    shadow = false
     start = [ "group:g5", "group:g2", "group:g6", "group:g7", "summary" ]
     thickness = 35
 
@@ -107,6 +108,8 @@ enable_ddcutil = true
 
 [calendar]
 enabled = true
+event_date_format = "%a, %d %b, %Y-%m-%d"
+event_time_format = "%H:%M:%S"
 
     [calendar.account.personal_google]
     type = "google"
@@ -114,6 +117,10 @@ enabled = true
 [control_center]
 sidebar = "full"
 sidebar_section = "full"
+
+    [control_center.calendar]
+    show_events_card = false
+    show_week_numbers = true
 
     [[control_center.shortcuts]]
     type = "wifi"
@@ -195,7 +202,7 @@ widget_order = [
     box_height = 196.0
     box_width = 720.0
     cx = 960.0
-    cy = 961.0
+    cy = 961.00006103515625
     output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -336,7 +343,7 @@ background_opacity = 0.5
 system_collector_enabled = true
 
 [plugins]
-auto_update = "all"
+auto_update = "official"
 enabled = [
     "noctalia/translator",
     "aurelia/window_count",
@@ -365,11 +372,15 @@ enabled = [
 
 [shell]
 avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
+button_borders = false
+card_borders = false
 date_format = "%a, %d %b, %Y-%m-%d"
+input_borders = false
 password_style = "random"
 polkit_agent = true
+popup_borders = false
 screen_time_enabled = true
-time_format = "{:%H:%M:%S}"
+time_format = "%H:%M:%S"
 ui_scale = 0.80000000000000004
 
     [shell.launcher]
