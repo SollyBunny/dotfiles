@@ -1,7 +1,6 @@
-import { askChoice, runShellRoot } from "#shared/shell.mjs";
+import { askChoice } from "#shared/shell.mjs";
 import { pacmanInstall } from "#shared/install.mjs";
 import { exists, safeWrite } from "#shared/fs.mjs";
-import fs from "node:fs/promises";
 import { getConfigOr } from "#shared/config.mjs";
 
 const graphics = await getConfigOr("graphics backend", async () => await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]));
