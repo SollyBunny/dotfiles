@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 
 formatted_env=$(
 	env -i $(systemctl --user show-environment | xargs) bash -l -c "env" |
-	grep -vE '^(PWD|SHLVL|WAYLAND_DISPLAY|DISPLAY_)=' |
+	grep -vE '^(PWD|SHLVL|WAYLAND_DISPLAY|DISPLAY|MANGO_INSTANCE_SIGNATURE|_)=' |
 	while IFS='=' read -r key value; do
 		printf 'env=%s,%s\n' "$key" "$value"
 	done
