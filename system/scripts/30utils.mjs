@@ -6,7 +6,6 @@ await pacmanInstall(
 	"usbutils", "usb_modeswitch", "smartmontools", "nvme-cli",
 	"htop", "cpupower", "cloudflared",
 	"curl", "wget", "openssh", "git-credential-oauth",
-	"nodejs", "npm", "jdk-openjdk",
 	"zip", "unzip", "unrar", "tar",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man-db",
