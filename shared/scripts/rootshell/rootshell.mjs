@@ -47,15 +47,13 @@ export default class RootShell {
 		process.on("SIGINT", cleanup);
 		process.on("SIGTERM", cleanup);
 
-		process.stdout.write("Root ");
-		this.#child = spawn(
-			"/bin/su", ["-c", `${process.execPath} ${path.join(__dir, "daemon.mjs")}`],
-			{
-				stdio: "inherit",
-				detached: true,
-				env: this.ipcEnv
-			}
-		);
+		const spawnConf = {
+			stdio: "inherit",
+			detached: true,
+			env: this.ipcEnv
+		};
+		const spawnArgs = [process.execPath, path.join(__dir, "daemon.mjs")];
+		this.#child = spawn("/bin/env", ["--", "su", "-c", spawnArgs.join(" ")], spawnConf);
 		this.#child.on("exit", (code, signal) => {
 			console.log(`Rootshell died with code ${code} signal ${signal}`);
 			process.exit(1);
