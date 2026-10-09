@@ -107,7 +107,6 @@ warning_threshold = 30
 enable_ddcutil = true
 
 [calendar]
-enabled = true
 event_date_format = "%a, %d %b, %Y-%m-%d"
 event_time_format = "%H:%M:%S"
 
