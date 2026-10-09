@@ -101,7 +101,7 @@ order = [ "default" ]
         padding = 6.0
 
 [battery]
-warning_threshold = 20
+warning_threshold = 30
 
 [brightness]
 enable_ddcutil = true
