@@ -9,6 +9,7 @@ await pacmanInstall(
 	"zip", "unzip", "unrar", "tar",
 	"less", "which", "tree", "jq", "patch",
 	"bash-completion", "man-db",
+	"bind", "ethtool",
 );
 
 await yayInstall("cpulimit");
