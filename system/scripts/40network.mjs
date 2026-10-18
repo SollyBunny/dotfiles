@@ -1,9 +1,8 @@
+import { pacmanInstall, serviceEnable } from "#shared/install.mjs";
 import { runShellRoot } from "#shared/shell.mjs";
-import { pacmanInstall } from "#shared/install.mjs";
 
 await pacmanInstall("iw", "iwd");
-await runShellRoot("systemctl enable --now iwd");
+await serviceEnable("iwd");
 
 await runShellRoot("ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf");
-await runShellRoot("systemctl enable --now systemd-resolved");
-await runShellRoot("systemctl enable --now systemd-networkd");
+await serviceEnable("systemd-resolved", "systemd-networkd");

@@ -73,3 +73,23 @@ export async function yayInstall(...packages) {
 	await runShell(["yay", "-S", "--needed", "--asexplicit", "--sudo", "sudo", "--", ...packages], rootshell.ipcEnv);
 	await runShellRoot(["pacman", "-D", "--asexplicit", "--", ...packages]);
 }
+
+export async function serviceEnable(...services) {
+	const filename = getTempPath();
+	for (const service of services) {
+		await runShell(`systemctl is-enabled -- "${service}" > "${filename}" || true`);
+		const enabled = (await fs.readFile(filename, "utf-8")).trim();
+		switch (enabled) {
+			case "disabled":
+				await runShellRoot(["systemctl", "enable", "--now", "--", service]);
+				break;
+			case "enabled":
+				break;
+			case "masked":
+				console.warn(`Service ${service} is masked`);
+				break;
+			default:
+				throw new Error(`Service ${service} is unknown state: ${enabled}`);
+		}
+	}
+}
