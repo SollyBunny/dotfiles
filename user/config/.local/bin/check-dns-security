@@ -23,14 +23,17 @@ dnssec=$(printf '%s' "$dns_status" | cut -f1)
 dnssec_supported=$(printf '%s' "$dns_status" | cut -f2)
 dnsovertls=$(printf '%s' "$dns_status" | cut -f3)
 
+warning=""
+
 if [ "$dnssec" != "yes" ]; then
-	notify-send \
-		"DNS security warning" \
-		"DNSSEC is not active (supported: $dnssec_supported)"
+	warning="DNSSEC is not active (supported: $dnssec_supported)"
 fi
 
 if [ "$dnsovertls" != "yes" ]; then
-	notify-send \
-		"DNS security warning" \
-		"DNS-over-TLS is not active"
+	[ -n "$warning" ] && warning="$warning"$'\n'
+	warning+="DNS-over-TLS is not active"
+fi
+
+if [ -n "$warning" ]; then
+	notify-send "DNS security warning" "$warning"
 fi
