@@ -33,6 +33,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g2"
@@ -43,6 +44,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g3"
@@ -53,6 +55,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g4"
@@ -63,6 +66,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g1"
@@ -73,16 +77,18 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g5"
-        members = [ "session", "wallpaper", "clipboard" ]
+        members = [ "session", "wallpaper", "clipboard", "recorder" ]
         opacity = 1.0
         padding = 6.0
 
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g6"
@@ -93,6 +99,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g7"
@@ -255,10 +262,10 @@ widget_order = [
     box_height = 196.0
     box_width = 720.0
     cx = 330.5
-    cy = 527.0
+    cy = 504.80508422851562
     output = "WL-1"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 978.0
+    placement_width = 938.0
     rotation = 0.0
     type = "login_box"
 
@@ -351,7 +358,8 @@ enabled = [
     "noctalia/kaomoji",
     "aurelia/bash_launcher",
     "noctalia/timer",
-    "cleboost/zed-provider"
+    "cleboost/zed-provider",
+    "noctalia/screen_recorder"
 ]
 
     [[plugins.source]]
@@ -496,16 +504,16 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.monitors.VGA-1]
-    path = "/home/aurelia/Pictures/wallpapers/forestriver.jpeg"
+    path = "/home/aurelia/Pictures/wallpapers/pinkriver.jpeg"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
@@ -547,6 +555,9 @@ format = "%a, %d %b, %Y-%m-%d"
 [widget.ram]
 display = "text"
 stat = "cpu_temp"
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
 
 [widget.summary]
 capsule = true
