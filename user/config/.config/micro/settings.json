@@ -1,6 +1,7 @@
 {
   "clipboard": "terminal",
   "colorscheme": "noctalia",
+  "indentchar": "→",
   "mkparents": true,
   "softwrap": true
 }
