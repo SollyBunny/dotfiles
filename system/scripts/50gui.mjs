@@ -2,6 +2,7 @@ import { pacmanInstall, serviceEnable, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall("xorg-xwayland", "xorg-xeyes");
 await pacmanInstall("wlr-randr", "wl-clipboard", "wtype", "wev");
+await pacmanInstall("xdg-desktop-portal", "xdg-desktop-portal-gtk", "xdg-desktop-portal-wlr");
 
 await pacmanInstall("qt5-wayland", "qt6-wayland");
 
