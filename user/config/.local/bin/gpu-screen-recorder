@@ -1,0 +1,4 @@
+#!/bin/sh
+exec /usr/bin/gpu-screen-recorder \
+    -fallback-cpu-encoding yes \
+    "$@"
