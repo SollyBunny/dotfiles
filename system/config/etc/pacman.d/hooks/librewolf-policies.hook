@@ -1,0 +1,13 @@
+# https://codeberg.org/librewolf/issues/issues/2847
+
+# Re-merge after every update so the overlay survives upgrades
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = librewolf
+
+[Action]
+Description = Regenerate LibreWolf policies.json
+When = PostTransaction
+Exec = /etc/librewolf/policies/merge.sh
