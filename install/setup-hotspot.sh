@@ -315,9 +315,8 @@ iptables -C FORWARD -i "$UPSTREAM" -o wlan+ -m conntrack --ctstate RELATED,ESTAB
 # --- start everything --------------------------------------------------------
 log "Starting services..."
 systemctl daemon-reload
-systemctl enable --now hotspot-setup.service   # runs the detector right away
-systemctl enable dnsmasq.service hostapd.service
-systemctl restart dnsmasq.service hostapd.service
+systemctl enable dnsmasq.service hostapd.service hotspot-setup.service
+systemctl restart dnsmasq.service hostapd.service hotspot-setup.service
 
 # --- report -------------------------------------------------------------------
 echo
