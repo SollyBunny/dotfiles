@@ -7,5 +7,5 @@
 	"Shift-Ctrl-Down": "SelectDown",
 	"Ctrl-Backspace": "DeleteWordLeft",
 	"Ctrl-Delete": "DeleteWordRight",
-	"Ctrl-G": "command-edit:goto ",
+	"Ctrl-G": "command-edit:goto "
 }

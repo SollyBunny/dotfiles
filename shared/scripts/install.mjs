@@ -3,12 +3,11 @@ import { rootshell, runShell, runShellRoot } from "./shell.mjs";
 import { getTempPath } from "./fs.mjs";
 
 export async function commandExists(command) {
-	try  {
+	try {
 		await runShell(`command -v "$command" >/dev/null 2>&1`, { command });
 		return true;
 	} catch (e) {
-		if (e.code === 1)
-			return false;
+		if (e.code === 1) return false;
 		throw e;
 	}
 }
@@ -22,8 +21,8 @@ async function getPacmanInstalledPkgs() {
 			await runShell(`pacman -Qeq > "$filename"`, { filename });
 			(await fs.readFile(filename, "utf-8"))
 				.split("\n")
-				.filter(v => v)
-				.forEach(v => _pacmanInstalledPkgs.add(v));
+				.filter((v) => v)
+				.forEach((v) => _pacmanInstalledPkgs.add(v));
 		} finally {
 			await fs.rm(filename);
 		}
@@ -33,8 +32,7 @@ async function getPacmanInstalledPkgs() {
 
 let _pacmanUpdateRepoDone = false;
 async function pacmanUpdateRepo() {
-	if (_pacmanUpdateRepoDone)
-		return;
+	if (_pacmanUpdateRepoDone) return;
 	await runShellRoot("pacman -Sy");
 	_pacmanUpdateRepoDone = true;
 }
@@ -42,35 +40,43 @@ async function pacmanUpdateRepo() {
 const _checkDuplicateInstallPkgs = new Set();
 function checkDuplicateInstall(packages) {
 	packages = new Set(packages);
-	const duplicates = new Set([...packages].filter(pkg => _checkDuplicateInstallPkgs.has(pkg)));
+	const duplicates = new Set([...packages].filter((pkg) => _checkDuplicateInstallPkgs.has(pkg)));
 	if (duplicates.size)
 		throw new Error(`Packages installed multiple times: ${[...duplicates].join(", ")}`);
-	for (const pkg of packages)
-		_checkDuplicateInstallPkgs.add(pkg);
+	for (const pkg of packages) _checkDuplicateInstallPkgs.add(pkg);
 }
 
 export async function pacmanInstall(...packages) {
 	checkDuplicateInstall(packages);
 	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
-	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
-	if (!packages.length)
-		return;
+	packages = packages.filter((v) => !pacmanInstalledPkgs.has(v));
+	if (!packages.length) return;
 	console.log("Installing", ...packages);
 	await pacmanUpdateRepo();
-	await runShellRoot(["pacman", "-S", "--noconfirm", "--needed", "--asexplicit", "--", ...packages]);
+	await runShellRoot([
+		"pacman",
+		"-S",
+		"--noconfirm",
+		"--needed",
+		"--asexplicit",
+		"--",
+		...packages,
+	]);
 	await runShellRoot(["pacman", "-D", "--asexplicit", "--", ...packages]);
 }
 
 export async function yayInstall(...packages) {
 	checkDuplicateInstall(packages);
 	const pacmanInstalledPkgs = await getPacmanInstalledPkgs();
-	packages = packages.filter(v => !pacmanInstalledPkgs.has(v))
-	if (!packages.length)
-		return;
+	packages = packages.filter((v) => !pacmanInstalledPkgs.has(v));
+	if (!packages.length) return;
 	console.log("Installing with yay", ...packages);
 	await pacmanUpdateRepo();
 	await rootshell.init();
-	await runShell(["yay", "-S", "--needed", "--asexplicit", "--sudo", "sudo", "--", ...packages], rootshell.ipcEnv);
+	await runShell(
+		["yay", "-S", "--needed", "--asexplicit", "--sudo", "sudo", "--", ...packages],
+		rootshell.ipcEnv,
+	);
 	await runShellRoot(["pacman", "-D", "--asexplicit", "--", ...packages]);
 }
 

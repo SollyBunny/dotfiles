@@ -5,7 +5,7 @@ import { exists, getThisDir } from "./fs.mjs";
 const CONFIG_FILE = path.join(getThisDir(import.meta.url), "../../config.json");
 
 async function readConfig() {
-	return await exists(CONFIG_FILE) ? JSON.parse(await fs.readFile(CONFIG_FILE)) : {};
+	return (await exists(CONFIG_FILE)) ? JSON.parse(await fs.readFile(CONFIG_FILE)) : {};
 }
 
 async function writeConfig(config) {

@@ -4,8 +4,7 @@ import net from "node:net";
 
 const spawnPpid = process.ppid;
 setInterval(() => {
-	if (process.ppid !== spawnPpid || process.ppid === 1)
-		process.exit(2);
+	if (process.ppid !== spawnPpid || process.ppid === 1) process.exit(2);
 }, 100);
 
 if (process.getuid() !== 0) {
@@ -26,15 +25,12 @@ const IPC_SOCKET_PASSWORD = process.env["IPC_SOCKET_PASSWORD"];
 const IPC_SOCKET_UID = Number(process.env["IPC_SOCKET_UID"]);
 const IPC_SOCKET_GID = Number(process.env["IPC_SOCKET_GID"]);
 
-for (const key of requiredEnv)
-	delete process.env[key];
+for (const key of requiredEnv) delete process.env[key];
 
 function populateEnv(env) {
-	if (!env)
-		return undefined;
+	if (!env) return undefined;
 	const out = structuredClone(process.env);
-	for (const key in env)
-		out[key] = env[key];
+	for (const key in env) out[key] = env[key];
 	return out;
 }
 
@@ -44,11 +40,13 @@ function runShell(command, env) {
 		let child;
 		if (Array.isArray(command)) {
 			child = spawn(command[0], command.slice(1), {
-				stdio: "inherit", env
+				stdio: "inherit",
+				env,
 			});
 		} else {
 			child = spawn("/bin/bash", ["-c", command], {
-				stdio: "inherit", env
+				stdio: "inherit",
+				env,
 			});
 		}
 		child.on("error", reject);
@@ -64,11 +62,10 @@ async function onMessage({ message, write, destroy }) {
 	} catch (e) {
 		write(JSON.stringify({ id: message.id, reject: e }));
 	}
-	if (message.id === "oneshot")
-		destroy();
+	if (message.id === "oneshot") destroy();
 }
 
-const server = net.createServer(socket => {
+const server = net.createServer((socket) => {
 	function write(message) {
 		socket.write(message);
 		socket.write("\n");
@@ -80,22 +77,19 @@ const server = net.createServer(socket => {
 	let ready = false;
 	function onMessageInternal(message) {
 		if (!ready) {
-			if (message === IPC_SOCKET_PASSWORD)
-				ready = true;
-			else
-				socket.destroy();
+			if (message === IPC_SOCKET_PASSWORD) ready = true;
+			else socket.destroy();
 			return;
 		}
 		onMessage({ message, write, destroy });
 	}
 
 	let messagePartial = "";
-	socket.on("data", data => {
+	socket.on("data", (data) => {
 		messagePartial += data;
 		const messages = messagePartial.split("\n");
 		messagePartial = messages.pop();
-		for (const message of messages)
-			onMessageInternal(message);
+		for (const message of messages) onMessageInternal(message);
 	});
 });
 

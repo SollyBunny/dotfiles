@@ -2,7 +2,7 @@ import { runShell, runShellRoot } from "#shared/shell.mjs";
 import { commandExists, pacmanInstall } from "#shared/install.mjs";
 import fs from "node:fs/promises";
 
-if (!await commandExists("yay")) {
+if (!(await commandExists("yay"))) {
 	await pacmanInstall("git", "fakeroot", "debugedit");
 	await fs.rm("/tmp/yay-bin/", { recursive: true, force: true });
 	await runShell("cd /tmp/ && git clone --depth 1 https://aur.archlinux.org/yay-bin.git");

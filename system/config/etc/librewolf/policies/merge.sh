@@ -9,4 +9,4 @@ src=/usr/lib/librewolf/distribution/policies.json
 dst=/etc/librewolf/policies/policies.json
 overlay=/etc/librewolf/policies/overlay.json
 mkdir -p /etc/librewolf/policies
-jq -s '.[0] * .[1]' "$src" "$overlay" > "$dst.tmp" && mv "$dst.tmp" "$dst"
+jq -s '.[0] * .[1]' "$src" "$overlay" >"$dst.tmp" && mv "$dst.tmp" "$dst"

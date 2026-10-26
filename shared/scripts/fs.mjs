@@ -21,8 +21,7 @@ export async function lstatSafe(...args) {
 	try {
 		return await fs.lstat(...args);
 	} catch (e) {
-		if (e.code === "ENOENT")
-			return undefined;
+		if (e.code === "ENOENT") return undefined;
 		throw e;
 	}
 }
@@ -36,8 +35,7 @@ export async function exists(file) {
 		await fs.stat(file);
 		return true;
 	} catch (e) {
-		if (e.code === "ENOENT")
-			return false;
+		if (e.code === "ENOENT") return false;
 		throw e;
 	}
 }
@@ -59,9 +57,8 @@ export async function getBackupPath(file) {
 	await fs.mkdir(backupPath, { recursive: true });
 	let fileName = path.resolve(file).replaceAll(path.sep, ".");
 	let fileExt;
-	const filePath = () => path.join(backupPath, [fileName, fileExt].filter(v => v).join("."));
-	for (let i = 0; i < 20 && await exists(filePath()); ++i)
-		fileExt = (fileExt ?? 0) + 1;
+	const filePath = () => path.join(backupPath, [fileName, fileExt].filter((v) => v).join("."));
+	for (let i = 0; i < 20 && (await exists(filePath())); ++i) fileExt = (fileExt ?? 0) + 1;
 	if (await exists(filePath()))
 		throw new Error(`Couldn't make backup path for ${file}, clear the backup folder`);
 	return filePath();
@@ -75,10 +72,8 @@ export async function moveToBackup(file) {
 		try {
 			await fs.unlink(file);
 		} catch (e) {
-			if (e.code === "EACCES")
-				await runShellRoot(`unlink -- "$file"`, { file });
-			else
-				throw e;
+			if (e.code === "EACCES") await runShellRoot(`unlink -- "$file"`, { file });
+			else throw e;
 		}
 		return;
 	}
@@ -96,21 +91,21 @@ export async function moveToBackup(file) {
 			recursive: true,
 		});
 	} catch (e) {
-		if (e.code === "EACCES")
-			await runShellRoot(`rm -rf -- "$file"`, { file });
-		else
-			throw e;
+		if (e.code === "EACCES") await runShellRoot(`rm -rf -- "$file"`, { file });
+		else throw e;
 	}
 }
 
 export function getTempPath(ext) {
-	return path.join(process.env.XDG_RUNTIME_DIR || "/tmp", `${process.pid}.${crypto.randomBytes(8).toString("hex")}${ext ?? ".tmp"}`);
+	return path.join(
+		process.env.XDG_RUNTIME_DIR || "/tmp",
+		`${process.pid}.${crypto.randomBytes(8).toString("hex")}${ext ?? ".tmp"}`,
+	);
 }
 
 export async function safeWrite(file, text) {
 	if (await exists(file)) {
-		if (await fs.readFile(file, "utf-8") === text)
-			return; // Do nothing!
+		if ((await fs.readFile(file, "utf-8")) === text) return; // Do nothing!
 		await moveToBackup(file);
 	}
 	const fileTemp = file + `${crypto.randomBytes(8).toString("hex")}.tmp`;
@@ -124,8 +119,7 @@ export async function safeWrite(file, text) {
 		} catch (e) {
 			if (e.code === "EACCES")
 				await runShellRoot(`cp -- "$fileTempTemp" "$fileTemp"`, { fileTempTemp, fileTemp });
-			else
-				throw e;
+			else throw e;
 		}
 	}
 	// Atomic move
@@ -134,7 +128,6 @@ export async function safeWrite(file, text) {
 	} catch (e) {
 		if (e.code === "EACCES")
 			await runShellRoot(`mv -- "$fileTemp" "$file"`, { fileTemp, file });
-		else
-			throw e;
+		else throw e;
 	}
 }

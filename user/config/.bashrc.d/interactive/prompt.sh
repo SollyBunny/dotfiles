@@ -2,7 +2,7 @@
 
 rgbtohex() {
 	local r g b
-	IFS=';' read -r r g b <<< "$1"
+	IFS=';' read -r r g b <<<"$1"
 	printf '#%02x%02x%02x\n' "$r" "$g" "$b"
 }
 
@@ -26,12 +26,11 @@ _postexec() {
 	fi
 }
 
-PS1=\
-"$(escape $'$(settitle "\W — \u@\H")')"\
-"$(escape $'\e[0m') "\
-"$(escape $'\e[0;1m\e[38;2;0;0;0m\e[48;2;'${TERM_THEME_COLOR}'m') \u@\H \W "\
-"$(escape $'\e[0;1m') \$ "\
-"$(escape $'\e[0m')"
+PS1="$(escape $'$(settitle "\W — \u@\H")')""\
+$(escape $'\e[0m') ""\
+$(escape $'\e[0;1m\e[38;2;0;0;0m\e[48;2;'${TERM_THEME_COLOR}'m') \u@\H \W ""\
+$(escape $'\e[0;1m') \$ ""\
+$(escape $'\e[0m')"
 
 echo
 fastfetch -c ~/.config/fastfetch/small.jsonc

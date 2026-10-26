@@ -2,13 +2,17 @@ import { pacmanInstall } from "#shared/install.mjs";
 
 // C/CPP
 await pacmanInstall(
-	"base-devel", "clang", "llvm", "jemalloc", "pkgconf",
-	"just", "meson", "ninja", "cmake", "mold",
+	"base-devel",
+	"clang",
+	"llvm",
+	"jemalloc",
+	"pkgconf",
+	"just",
+	"meson",
+	"ninja",
+	"cmake",
+	"mold",
 );
 
 // Everything else
-await pacmanInstall(
-	"nodejs", "npm",
-	"shfmt",
-	"jdk-openjdk",
-);
+await pacmanInstall("nodejs", "npm", "shfmt", "jdk-openjdk");

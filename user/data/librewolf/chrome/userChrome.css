@@ -25,7 +25,8 @@ html#main-window body {
 	background-color: var(--panel-background-color) !important;
 }
 
-.browserContainer, toolbox {
+.browserContainer,
+toolbox {
 	background-color: transparent !important;
 	border-radius: 0 !important;
 }
@@ -35,7 +36,10 @@ html#main-window body {
 	background-image: none !important;
 }
 
-#nav-bar, tooltip, toolbox, panel {
+#nav-bar,
+tooltip,
+toolbox,
+panel {
 	border: none !important;
 }
 
@@ -98,7 +102,8 @@ h4 {
 }
 
 /* Make sidebar and tab splitter the same */
-#sidebar-splitter, .split-view-splitter {
+#sidebar-splitter,
+.split-view-splitter {
 	background-color: var(--toolbar-bgcolor) !important;
 	border: none !important;
 	margin: 0 !important;
@@ -119,7 +124,8 @@ menupopup {
 	--panel-border-color: inherit !important;
 }
 
-menu, menuitem {
+menu,
+menuitem {
 	&:where([_moz-menuactive]:not([disabled])) {
 		color: var(--button-text-color-ghost-hover) !important;
 		background-color: var(--button-background-color-ghost-hover) !important;

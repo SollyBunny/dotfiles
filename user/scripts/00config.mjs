@@ -28,8 +28,7 @@ async function getPathsToLink() {
 	for (const dirent of dirents) {
 		if (dirent.parentPath === configRoot && dirent.isFile())
 			out.push(path.join(dirent.parentPath, dirent.name));
-		else if (dirent.name === "__link")
-			out.push(dirent.parentPath);
+		else if (dirent.name === "__link") out.push(dirent.parentPath);
 		else if (dirent.name.startsWith("__link."))
 			out.push(path.join(dirent.parentPath, dirent.name));
 	}
@@ -46,7 +45,10 @@ for (const target of pathsToLink) {
 		// Remove __link. prefix after figuring out the targetRel
 		const linkPathParsed = path.parse(linkPath);
 		if (linkPathParsed.name.startsWith("__link."))
-			linkPath = path.join(linkPathParsed.dir, linkPathParsed.name.slice("__link.".length) + linkPathParsed.ext);
+			linkPath = path.join(
+				linkPathParsed.dir,
+				linkPathParsed.name.slice("__link.".length) + linkPathParsed.ext,
+			);
 	}
 	await moveToBackup(linkPath);
 	await fs.mkdir(path.dirname(linkPath), { recursive: true });

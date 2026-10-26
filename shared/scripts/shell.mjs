@@ -6,8 +6,7 @@ export const rootshell = new RootShell();
 
 function errorFromCommandRes({ command, code, signal }) {
 	let err;
-	if (signal !== null)
-		err = new Error(`Signal raised: ${signal}`, { cause: command });
+	if (signal !== null) err = new Error(`Signal raised: ${signal}`, { cause: command });
 	else if (code !== null && code !== 0)
 		err = new Error(`Non zero status code: ${code}`, { cause: command });
 	if (err) {
@@ -18,11 +17,9 @@ function errorFromCommandRes({ command, code, signal }) {
 }
 
 function populateEnv(env) {
-	if (!env)
-		return undefined;
+	if (!env) return undefined;
 	const out = structuredClone(process.env);
-	for (const key in env)
-		out[key] = env[key];
+	for (const key in env) out[key] = env[key];
 	return out;
 }
 
@@ -47,7 +44,7 @@ export async function askChoice(question, choices) {
 }
 
 export async function askConfirm(question) {
-	return await askChoice(question, ["y", "n"]) === "y";
+	return (await askChoice(question, ["y", "n"])) === "y";
 }
 
 export function runShell(command, env = undefined) {
@@ -56,20 +53,20 @@ export function runShell(command, env = undefined) {
 		let child;
 		if (Array.isArray(command)) {
 			child = spawn(command[0], command.slice(1), {
-				stdio: "inherit", env
+				stdio: "inherit",
+				env,
 			});
 		} else {
 			child = spawn("/bin/bash", ["-c", command], {
-				stdio: "inherit", env
+				stdio: "inherit",
+				env,
 			});
 		}
 		child.on("error", reject);
 		child.on("close", (code, signal) => {
 			const err = errorFromCommandRes({ command, code, signal });
-			if (err)
-				reject(err);
-			else
-				resolve();
+			if (err) reject(err);
+			else resolve();
 		});
 	});
 }
@@ -77,6 +74,5 @@ export function runShell(command, env = undefined) {
 export async function runShellRoot(command, env = undefined) {
 	const { code, signal } = await rootshell.run(command, env);
 	const err = errorFromCommandRes({ command, code, signal });
-	if (err)
-		throw err;
+	if (err) throw err;
 }

@@ -3,7 +3,10 @@ import { pacmanInstall } from "#shared/install.mjs";
 import { exists, safeWrite } from "#shared/fs.mjs";
 import { getConfigOr } from "#shared/config.mjs";
 
-const graphics = await getConfigOr("graphics backend", async () => await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]));
+const graphics = await getConfigOr(
+	"graphics backend",
+	async () => await askChoice("What graphics backend to use?", ["intel", "nvidia", "amd"]),
+);
 
 // https://wiki.archlinux.org/title/Hardware_video_acceleration
 
@@ -13,21 +16,19 @@ let LIBVA_DRIVER_NAME, VDPAU_DRIVER;
 
 if (graphics === "intel") {
 	await pacmanInstall(
-		"vulkan-intel", "lib32-vulkan-intel",
-		"libva-intel-driver", "libvdpau-va-gl",
+		"vulkan-intel",
+		"lib32-vulkan-intel",
+		"libva-intel-driver",
+		"libvdpau-va-gl",
 	);
 	LIBVA_DRIVER_NAME = "i965";
 	VDPAU_DRIVER = "va_gl";
 } else if (graphics === "nvidia") {
-	await pacmanInstall(
-		"nvidia-utils", "lib32-nvidia-utils"
-	);
+	await pacmanInstall("nvidia-utils", "lib32-nvidia-utils");
 	LIBVA_DRIVER_NAME = "nvidia";
 	VDPAU_DRIVER = "nvidia";
 } else if (graphics === "amd") {
-	await pacmanInstall(
-		"vulkan-radeon", "lib32-vulkan-radeon",
-	);
+	await pacmanInstall("vulkan-radeon", "lib32-vulkan-radeon");
 	LIBVA_DRIVER_NAME = "radeonsi";
 	VDPAU_DRIVER = "va_gl";
 } else {
@@ -36,7 +37,8 @@ if (graphics === "intel") {
 
 await pacmanInstall("vulkan-tools", "vdpauinfo", "libva-utils", "mesa-utils");
 
-const rcFileContents = "" +
+const rcFileContents =
+	"" +
 	`export LIBVA_DRIVER_NAME=${LIBVA_DRIVER_NAME}\n` +
 	`export VDPAU_DRIVER=${VDPAU_DRIVER}\n`;
 

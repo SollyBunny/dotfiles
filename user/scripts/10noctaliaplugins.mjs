@@ -12,5 +12,8 @@ if (await exists(path.join(localPluginsPath, ".git"))) {
 	await runShell(`cd "$localPluginsPath" && git pull`, { localPluginsPath });
 } else {
 	await fs.mkdir(localPluginsPath, { recursive: true });
-	await runShell(`git clone --depth 1 "$LOCAL_PLUGINS_URL" "$localPluginsPath"`, { LOCAL_PLUGINS_URL, localPluginsPath });
+	await runShell(`git clone --depth 1 "$LOCAL_PLUGINS_URL" "$localPluginsPath"`, {
+		LOCAL_PLUGINS_URL,
+		localPluginsPath,
+	});
 }
