@@ -9,5 +9,6 @@ await pacmanInstall(
 // Everything else
 await pacmanInstall(
 	"nodejs", "npm",
+	"shfmt",
 	"jdk-openjdk",
 );
