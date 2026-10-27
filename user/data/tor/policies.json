@@ -1,0 +1,18 @@
+{
+	"$comment": "Partially mirrors librewolf overlay.json",
+	"policies": {
+		"$schema": "https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/components/enterprisepolicies/schemas/policies-schema.json",
+		"ExtensionSettings": {
+			"uBlock0@raymondhill.net": {
+				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi",
+				"installation_mode": "normal_installed",
+				"private_browsing": true
+			},
+			"pywalfox@frewacom.org": {
+				"install_url": "file:///etc/librewolf/policies/pywalfox@frewacom.org.xpi",
+				"installation_mode": "normal_installed",
+				"private_browsing": true
+			}
+		}
+	}
+}
