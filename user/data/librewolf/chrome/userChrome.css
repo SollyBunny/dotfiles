@@ -1,24 +1,19 @@
 :root {
-	--tab-min-height: 2em !important;
 	--tab-label-height: 2.5em !important;
-	--tab-block-margin: 0 !important; /* Old versions */
-	--tab-margin-block: 0 !important;
+	--tab-min-height: var(--tab-label-height) !important;
+	--toolbar-field-border-color: transparent !important;
+	--tab-block-margin: 0 !important; /* Both used */
+	--tab-margin-block: 0 !important; /* Both used */
 	--split-view-padding-block: 0 !important;
 	--urlbar-container-border-width: 0 !important;
 	--border-width: 0 !important;
 	--badge-border-width: 0 !important;
 	--letterboxing-bgcolor: transparent !important;
 	--tab-selected-shadow: none !important;
-	--panel-padding: 2px !important;
-	--panel-subview-body-padding: 2px !important;
-	--panel-header-back-icon-padding: 2px !important;
-	--panel-menuitem-padding: 4px !important;
-	--panel-menuitem-margin: 1px 5px !important;
-	/* TorBrowser doesn't do this automatically yet */
-	--panel-background: var(--arrowpanel-background);
-	--panel-background-color: var(--arrowpanel-background); /* New versions */
-	--panel-color: var(--arrowpanel-color);
-	--panel-border-color: var(--arrowpanel-border-color);
+	/* urlbar buttons that for some reason don't use the right variables */
+	--button-background-color-muted: var(--urlbar-box-background-color) !important;
+	--button-background-color-muted-hover: var(--urlbar-box-background-color-hover) !important;
+	--button-background-color-muted-active: var(--urlbar-box-background-color-active) !important;
 }
 
 html#main-window body {
@@ -52,6 +47,7 @@ spacer {
 	outline: 0 !important;
 	margin-inline: 0 !important;
 	border-radius: 0 !important;
+	width: unset !important; /* Fix vertical tabs */
 }
 
 #tabbrowser-tabs tab-split-view-wrapper {
@@ -97,11 +93,12 @@ h4 {
 	margin: 0 !important;
 }
 
+/* Make sidebar and tab splitter the same */
+
 .split-view-panel {
 	margin: 2px !important;
 }
 
-/* Make sidebar and tab splitter the same */
 #sidebar-splitter,
 .split-view-splitter {
 	background-color: var(--toolbar-bgcolor) !important;
@@ -122,6 +119,13 @@ menupopup {
 	--panel-padding: inherit !important;
 	--panel-border-radius: inherit !important;
 	--panel-border-color: inherit !important;
+	/* Too much padding */
+	--panel-padding: 6px 2px !important;
+	/* TorBrowser doesn't do this yet */
+	--panel-background: var(--arrowpanel-background);
+	--panel-background-color: var(--arrowpanel-background); /* New versions */
+	--panel-color: var(--arrowpanel-color);
+	--panel-border-color: var(--arrowpanel-border-color);
 }
 
 menu,
@@ -130,4 +134,55 @@ menuitem {
 		color: var(--button-text-color-ghost-hover) !important;
 		background-color: var(--button-background-color-ghost-hover) !important;
 	}
+}
+
+/* Remove + and - buttons */
+
+#zoom-out-button, #zoom-in-button, #zoom-controls > separator {
+	display: none;
+}
+
+#zoom-controls {
+	margin: 0 !important;
+}
+
+#zoom-control .toolbarbutton-text {
+	min-width: 5ch !important;
+}
+
+/* Hide buttons on sidebar */
+
+#vertical-tabs {
+	min-width: var(--tab-collapsed-width);
+}
+
+.actions-list moz-button[view="viewCustomizeSidebar"], moz-button.more-tools-button {
+	display: none !important;
+}
+
+/* Hide quit button */
+
+.titlebar-button.titlebar-close {
+	display: none !important;
+}
+
+/* Usual browser CSS nonsense and Nova had a baby and forced me to do this (variables stopped working) */
+
+.urlbar-background {
+	outline: none !important;
+	border: none !important;
+}
+
+.urlbarView-row {
+	padding: 0.5em !important;
+	min-height: unset !important;
+}
+
+.urlbarView-row-inner {
+	padding: 0.2em !important;
+}
+
+.urlbar-input-container {
+	border: none !important;
+	outline: none !important;
 }
