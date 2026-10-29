@@ -1,4 +1,4 @@
-config_version = 15
+config_version = 16
 
 [accessibility]
 ui_scale = 0.7500000037252903
@@ -35,7 +35,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g2"
         members = [ "workspaces" ]
         opacity = 1.0
@@ -46,7 +46,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g3"
         members = [ "date", "clock" ]
         opacity = 1.0
@@ -57,7 +57,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g4"
         members = [ "volume", "brightness" ]
         opacity = 1.0
@@ -68,7 +68,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g1"
         members = [ "network", "bluetooth" ]
         opacity = 1.0
@@ -79,7 +79,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g5"
         members = [ "session", "wallpaper", "clipboard", "recorder" ]
         opacity = 1.0
@@ -90,7 +90,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g6"
         members = [ "battery", "temp", "cpu", "widget" ]
         opacity = 1.0
@@ -101,7 +101,7 @@ order = [ "default" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g7"
         members = [ "network_rx", "network_tx" ]
         opacity = 1.0
@@ -216,7 +216,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -243,7 +243,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@VGA-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -270,7 +270,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@WL-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -297,7 +297,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@X11-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -324,7 +324,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -473,9 +473,6 @@ ui_scale = 0.80000000000000004
     countdown_seconds = 0.0
     enabled = true
     variant = "destructive"
-
-[system.monitor]
-gpu_poll_seconds = 2
 
 [theme]
 builtin = "Dracula"
