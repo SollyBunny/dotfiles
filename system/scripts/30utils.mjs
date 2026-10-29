@@ -21,6 +21,7 @@ await pacmanInstall(
 	"curl",
 	"wget",
 	"openssh",
+	"git-filter-repo",
 	"git-credential-oauth",
 	"zip",
 	"unzip",
