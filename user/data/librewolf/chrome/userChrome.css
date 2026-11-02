@@ -138,7 +138,9 @@ menuitem {
 
 /* Remove + and - buttons */
 
-#zoom-out-button, #zoom-in-button, #zoom-controls > separator {
+#zoom-out-button,
+#zoom-in-button,
+#zoom-controls > separator {
 	display: none;
 }
 
@@ -156,7 +158,8 @@ menuitem {
 	min-width: var(--tab-collapsed-width);
 }
 
-.actions-list moz-button[view="viewCustomizeSidebar"], moz-button.more-tools-button {
+.actions-list moz-button[view="viewCustomizeSidebar"],
+moz-button.more-tools-button {
 	display: none !important;
 }
 

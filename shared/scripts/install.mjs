@@ -106,6 +106,6 @@ export async function gitUpdate(url, dest) {
 		await runShell(`cd -- "$dest" && git pull`, { dest });
 	} else {
 		await fs.mkdir(dest, { recursive: true });
-		await runShell(`git clone --depth 1 "$url" "$dest"`, { url, dest, });
+		await runShell(`git clone --depth 1 "$url" "$dest"`, { url, dest });
 	}
 }
