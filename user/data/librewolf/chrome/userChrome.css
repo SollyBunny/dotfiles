@@ -14,6 +14,11 @@
 	--button-background-color-muted: var(--urlbar-box-background-color) !important;
 	--button-background-color-muted-hover: var(--urlbar-box-background-color-hover) !important;
 	--button-background-color-muted-active: var(--urlbar-box-background-color-active) !important;
+	/* TorBrowser doesn't do this yet */
+	--panel-background: var(--arrowpanel-background);
+	--panel-background-color: var(--arrowpanel-background); /* New versions */
+	--panel-color: var(--arrowpanel-color);
+	--panel-border-color: var(--arrowpanel-border-color);
 }
 
 html#main-window body {
@@ -121,11 +126,6 @@ menupopup {
 	--panel-border-color: inherit !important;
 	/* Too much padding */
 	--panel-padding: 6px 2px !important;
-	/* TorBrowser doesn't do this yet */
-	--panel-background: var(--arrowpanel-background);
-	--panel-background-color: var(--arrowpanel-background); /* New versions */
-	--panel-color: var(--arrowpanel-color);
-	--panel-border-color: var(--arrowpanel-border-color);
 }
 
 menu,
