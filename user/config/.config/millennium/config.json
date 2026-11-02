@@ -23,7 +23,7 @@
     "showUpdateNotifications": true
   },
   "themes": {
-    "activeTheme": "default",
+    "activeTheme": "Material-Theme",
     "allowedScripts": true,
     "allowedStyles": true,
     "conditions": {
@@ -39,6 +39,8 @@
         "Achievements Icons Shape": "Circle",
         "Animations": "Enabled",
         "Appearance": "Dark",
+        "Background Opacity Slider": "100",
+        "Background Opacity Toggle": "no",
         "Badges for Contributors": "yes",
         "Big Game Card Hover Animation": "Default",
         "Big Picture Mode Bottom Bar Style": "Default",
@@ -64,6 +66,7 @@
         "Hide URL Bar": "no",
         "Hide Window Control Buttons": "no",
         "Icons": "Default",
+        "Library Slide In Animation": "no",
         "Loading Style": "Color Scheme",
         "Menu Style": "Expressive",
         "Online Indicator": "Alternative",
