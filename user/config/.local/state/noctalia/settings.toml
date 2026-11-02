@@ -377,7 +377,7 @@ enabled = [
 
     [[plugins.source]]
     kind = "path"
-    location = "~/.config/noctalia/local-plugins"
+    location = "~/Code/noctalia-plugins"
     name = "Local"
 
 [shell]

@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import { rootshell, runShell, runShellRoot } from "./shell.mjs";
-import { getTempPath } from "./fs.mjs";
+import { exists, getTempPath } from "./fs.mjs";
+import path from "node:path";
 
 export async function commandExists(command) {
 	try {
@@ -97,5 +98,14 @@ export async function serviceEnable(...services) {
 			default:
 				throw new Error(`Service ${service} is unknown state: ${enabled}`);
 		}
+	}
+}
+
+export async function gitUpdate(url, dest) {
+	if (await exists(path.join(dest, ".git"))) {
+		await runShell(`cd -- "$dest" && git pull`, { dest });
+	} else {
+		await fs.mkdir(dest, { recursive: true });
+		await runShell(`git clone --depth 1 "$url" "$dest"`, { url, dest, });
 	}
 }
