@@ -117,7 +117,6 @@ _postexec() {
 
 PROMPT_COMMAND="_set_prompt"
 
-echo
 fastfetch -c ~/.config/fastfetch/small.jsonc
 
 unset rgbtohex
