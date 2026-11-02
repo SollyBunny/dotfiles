@@ -36,6 +36,7 @@ await pacmanInstall(
 	"man-db",
 	"bind",
 	"ethtool",
+	"figlet",
 );
 
 await yayInstall("cpulimit");
