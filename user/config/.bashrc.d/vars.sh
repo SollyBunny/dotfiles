@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export EDITOR=micro
+export HISTCONTROL=ignoredups
 
 # Config Dirs
 export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
