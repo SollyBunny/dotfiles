@@ -15,6 +15,9 @@ if [ ! -f "$video" ]; then
 	exit 0
 fi
 
+# Wait for noctalia transition
+sleep 0.5
+
 # Check whether mpvpaper is already displaying this video
 for pid in $(pgrep -x mpvpaper); do
 	current=$(tr '\0' '\n' < "/proc/$pid/cmdline")
