@@ -53,6 +53,7 @@ _set_prompt() {
 	local color dir pwd_display git_branch git_state git_mark git_mark_color
 	local cmd_marker cmd_value
 	local reset black white bold nobold user_bg cmd_bg pwd_bg git_bg
+	local venv_dir venv_display venv_bg venv_fg
 
 	color="${USER_COLOR:-255;255;255}"
 	dir="${PWD/#$HOME/\~}"
@@ -79,12 +80,23 @@ _set_prompt() {
 	cmd_bg="$(escape $'\e[46m')"
 	pwd_bg="$(escape $'\e[43m')"
 	git_bg="$(escape $'\e[40m')"
+	venv_bg="$(escape $'\e[48;5;24m')"
+	venv_fg="$(escape $'\e[38;5;226m')"
 
 	PS1=""
 	[ "$EUID" -eq 0 ] && PS1+="☢️ "
 	PS1+="${reset}${black}${cmd_bg} ${cmd_marker}${cmd_value} ${reset}"
 	PS1+=" ${reset}${black}${user_bg} \u${bold}@${nobold}\h ${reset}"
 	PS1+=" ${reset}${black}${pwd_bg} ${pwd_display} ${reset}"
+
+	if [ -n "$VIRTUAL_ENV" ] && [ -d "$VIRTUAL_ENV" ]; then
+	    venv_dir="$(realpath --relative-to="$PWD" "$VIRTUAL_ENV")"
+	    venv_display="${venv_dir//\\/\\\\}"
+	    venv_display="${venv_display//\$/\\\$}"
+	    venv_display="${venv_display//\`/\\\`}"
+
+	    PS1+=" ${reset}${venv_fg}${venv_bg} ${venv_display} ${reset}"
+	fi
 
 	if [ -n "$git_branch" ]; then
 		git_mark=""
