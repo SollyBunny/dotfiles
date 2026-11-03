@@ -359,6 +359,10 @@ background_opacity = 0.5
 [plugin_settings."gustav0ar/drive-health"]
 system_collector_enabled = true
 
+[plugin_settings."noctalia/screen_recorder"]
+directory = "~/Videos/recordings"
+frame_rate = 30
+
 [plugins]
 auto_update = "official"
 enabled = [
