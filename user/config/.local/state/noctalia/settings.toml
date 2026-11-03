@@ -398,6 +398,7 @@ button_borders = false
 card_borders = false
 date_format = "%a, %d %b, %Y-%m-%d"
 input_borders = false
+launch_apps_custom_command = "run-bashrc $CMD"
 password_style = "random"
 polkit_agent = true
 popup_borders = false

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+. ~/.bashrc
+
+if (($# > 0)); then
+	exec "$@"
+fi
