@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-notify-send "Reloaded MangoWM config"
-
 cd "$(dirname "$0")"
 
 formatted_env=$(
