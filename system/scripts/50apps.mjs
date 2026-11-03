@@ -2,6 +2,7 @@ import { pacmanInstall, serviceEnable, yayInstall } from "#shared/install.mjs";
 
 await pacmanInstall("kitty", "pavucontrol", "zed", "qbittorrent", "gimp");
 await pacmanInstall("mpv", "mpv-mpris");
+await yayInstall("mpvpaper");
 await pacmanInstall("libreoffice-fresh");
 await pacmanInstall("keepassxc");
 
