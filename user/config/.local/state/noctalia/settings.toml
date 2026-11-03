@@ -173,6 +173,9 @@ widget_order = [ "desktop-widget-0000000000000001" ]
 background_opacity = 0.80000000000000004
 radius = 15
 
+[hooks]
+wallpaper_changed = "~/.local/bin/noctalia-mpvpaper"
+
 [idle]
 behavior_order = [ "lock", "Sleep" ]
 pre_action_fade_seconds = 10
@@ -511,16 +514,16 @@ directory = "~/Pictures/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/frieren.jpeg"
 
     [wallpaper.last]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/frieren.jpeg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/frieren.jpeg"
 
     [wallpaper.monitors.VGA-1]
-    path = "/home/aurelia/Pictures/wallpapers/minecraft/a-little-over-grown-pond-between-some-houses-v0-74xlrfxsm1h61.webp"
+    path = "/home/aurelia/Pictures/wallpapers/frieren.jpeg"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"

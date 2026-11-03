@@ -1,0 +1,29 @@
+#!/bin/sh
+
+file="${NOCTALIA_WALLPAPER_PATH%.*}"
+
+# Find the first matching video file
+for ext in mp4 mkv webm; do
+	if [ -f "$file.$ext" ]; then
+		video="$file.$ext"
+		break
+	fi
+done
+
+if [ ! -f "$video" ]; then
+	killall -9 mpvpaper
+	exit 0
+fi
+
+# Check whether mpvpaper is already displaying this video
+for pid in $(pgrep -x mpvpaper); do
+	current=$(tr '\0' '\n' < "/proc/$pid/cmdline")
+
+	if printf '%s\n' "$current" | grep -Fxq -- "$video"; then
+		exit 0
+	fi
+done
+
+exec mpvpaper -s ALL "$video" \
+	-o "mute loop load-scripts=no --no-config hwdec=vaapi profile=fast \
+	cache=yes demuxer-max-bytes=16MiB demuxer-max-back-bytes=16MiB really-quiet=yes"
