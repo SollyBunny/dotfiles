@@ -1,3 +1,4 @@
 #!/bin/sh
-cd ~/.steam/steam/steamapps/common/Transformice/ 
-./transformice.sh
+
+cd ~/.steam/steam/steamapps/common/Transformice/
+exec ./transformice.sh
