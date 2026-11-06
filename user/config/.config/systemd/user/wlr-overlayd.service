@@ -1,0 +1,12 @@
+[Unit]
+Description=WLR Overlay Daemon
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.cargo/bin/wlr-overlayd
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

@@ -1,5 +1,5 @@
 [screencast]
-chooser_type=dmenu
-chooser_cmd=noctalia dmenu -p "Select Screen"
+chooser_type=simple
+chooser_cmd=wlr-chooser --include-system --window-order mru --both
 max_fps=30
 force_mod_linear=true

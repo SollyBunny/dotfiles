@@ -18,6 +18,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Path
+# Keep in sync with ~/.config/environment.d/10-path.conf
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/opt/clang-format-static:$PATH"

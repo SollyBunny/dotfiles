@@ -491,6 +491,9 @@ ui_scale = 0.80000000000000004
     enabled = true
     variant = "destructive"
 
+    [shell.window_switcher]
+    mru = true
+
 [theme]
 builtin = "Dracula"
 mode = "dark"
