@@ -85,7 +85,7 @@ _set_prompt() {
 	settitle "${dir##*/} — $(whoami)@$(hostnamectl hostname)"
 
 	PS1=""
-	[ "$EUID" -eq 0 ] && PS1+="☢️ "
+	[ "$EUID" -eq 0 ] && PS1+=" "
 	PS1+="${reset}${black}${cmd_bg} ${cmd_marker}${cmd_value} ${reset}"
 	PS1+=" ${reset}${black}${user_bg} \u${bold}@${nobold}\h ${reset}"
 	PS1+=" ${reset}${black}${pwd_bg} ${pwd_display} ${reset}"
@@ -96,7 +96,7 @@ _set_prompt() {
 	    venv_display="${venv_display//\$/\\\$}"
 	    venv_display="${venv_display//\`/\\\`}"
 
-	    PS1+=" ${reset}${venv_fg}${venv_bg} ${venv_display} ${reset}"
+	    PS1+=" ${reset}${venv_fg}${venv_bg}  ${venv_display} ${reset}"
 	fi
 
 	if [ -n "$git_branch" ]; then
@@ -117,7 +117,7 @@ _set_prompt() {
 			;;
 		esac
 
-		PS1+=" ${reset}${white}${git_bg} ${git_branch}${git_mark_color}${git_mark}${white} ${reset}"
+		PS1+=" ${reset}${white}${git_bg}  ${git_branch}${git_mark_color}${git_mark}${white} ${reset}"
 	fi
 	PS1+=$'\n'"${reset}${bold}> ${reset}"
 }
