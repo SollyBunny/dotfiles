@@ -56,21 +56,6 @@ _set_prompt() {
 	local venv_dir venv_display venv_bg venv_fg
 
 	color="${USER_COLOR:-255;255;255}"
-	dir="${PWD/#$HOME/\~}"
-	pwd_display="${PWD//\\/\\\\}"
-	pwd_display="${pwd_display//\$/\\\$}"
-	pwd_display="${pwd_display//\`/\\\`}"
-	cmd_marker="#"
-	cmd_value='\#'
-	if [ "$last_status" -ne 0 ] && [ "$last_status" -ne 127 ] && [ "$last_status" -ne 130 ]; then
-		cmd_marker="!"
-		cmd_value="$last_status"
-	fi
-
-	IFS=$'\t' read -r git_branch git_state <<<"$(_git_prompt)"
-
-	settitle "${dir##*/} — $(whoami)@$(hostnamectl hostname)"
-
 	reset="$(escape $'\e[0m')"
 	black="$(escape $'\e[30m')"
 	white="$(escape $'\e[97m')"
@@ -82,6 +67,22 @@ _set_prompt() {
 	git_bg="$(escape $'\e[40m')"
 	venv_bg="$(escape $'\e[48;5;24m')"
 	venv_fg="$(escape $'\e[38;5;226m')"
+
+	dir="${PWD/#$HOME/\~}"
+	pwd_display="${PWD//\\/\\\\}"
+	pwd_display="${pwd_display//\$/\\\$}"
+	pwd_display="${pwd_display//\`/\\\`}"
+	pwd_display="${PWD//\//$bold\/$nobold}"
+	cmd_marker="#"
+	cmd_value='\#'
+	if [ "$last_status" -ne 0 ] && [ "$last_status" -ne 127 ] && [ "$last_status" -ne 130 ]; then
+		cmd_marker="!"
+		cmd_value="$last_status"
+	fi
+
+	IFS=$'\t' read -r git_branch git_state <<<"$(_git_prompt)"
+
+	settitle "${dir##*/} — $(whoami)@$(hostnamectl hostname)"
 
 	PS1=""
 	[ "$EUID" -eq 0 ] && PS1+="☢️ "

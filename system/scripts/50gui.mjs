@@ -21,3 +21,5 @@ await yayInstall("python-pywalfox");
 // Required by noctalia greeter
 await pacmanInstall("accountsservice");
 await serviceEnable("accounts-daemon");
+
+await pacmanInstall("ttf-jetbrains-mono-nerd");

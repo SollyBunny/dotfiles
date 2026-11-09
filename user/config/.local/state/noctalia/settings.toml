@@ -397,6 +397,7 @@ avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
 button_borders = false
 card_borders = false
 date_format = "%a, %d %b, %Y-%m-%d"
+font_family = "JetBrainsMono Nerd Font"
 input_borders = false
 launch_apps_custom_command = "run-bashrc $CMD"
 password_style = "random"
