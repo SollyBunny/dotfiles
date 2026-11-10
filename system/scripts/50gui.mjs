@@ -8,6 +8,8 @@ await pacmanInstall("qt5-wayland", "qt6-wayland");
 
 await pacmanInstall("cage", "ddcutil");
 
+await pacmanInstall("thunar", "gvfs");
+
 await pacmanInstall("greetd");
 await serviceEnable("greetd");
 
