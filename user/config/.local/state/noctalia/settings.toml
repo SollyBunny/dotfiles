@@ -393,6 +393,7 @@ enabled = [
     name = "Local"
 
 [shell]
+app_icon_color = "primary"
 avatar_path = "/home/aurelia/Pictures/icons/pfptrans.png"
 button_borders = false
 card_borders = false
@@ -428,6 +429,8 @@ ui_scale = 0.80000000000000004
         global = true
 
     [shell.panel]
+    border_color = "primary"
+    border_width = 2.0
     control_center_placement = "floating"
     control_center_position = "center"
     floating_offset = 10
@@ -498,9 +501,10 @@ ui_scale = 0.80000000000000004
 
 [theme]
 builtin = "Dracula"
+community_palette = "Oxocarbon"
 mode = "dark"
 source = "wallpaper"
-wallpaper_scheme = "m3-content"
+wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "qt" ]
@@ -536,6 +540,9 @@ transition_on_startup = true
 
     [wallpaper.monitors.eDP-1]
     path = "/home/aurelia/Pictures/wallpapers/minecraft/hwjes6je1tcf1.png"
+
+    [[wallpaper.favorite]]
+    path = "/home/aurelia/Pictures/wallpapers/Violet Evergarden by Guant Tai Lang Dian.jpg"
 
 [widget.Freq]
 glyph = "clock"
