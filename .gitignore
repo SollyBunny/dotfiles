@@ -22,3 +22,5 @@ user/config/.local/state/noctalia/**
 user/config/.config/noctalia/local-plugins
 
 user/config/.config/htop/htop_history
+
+user/config/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
