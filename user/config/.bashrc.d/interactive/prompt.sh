@@ -119,7 +119,7 @@ _set_prompt() {
 
 		PS1+=" ${reset}${git_fg}${git_bg}  ${git_branch}${git_mark_color}${git_mark} ${reset}"
 	fi
-	PS1+=$'\n'"${reset}${bold}> ${reset}"
+	PS1+=$'\n'"${reset}${bold}\$ ${reset}"
 }
 
 _postexec() {
