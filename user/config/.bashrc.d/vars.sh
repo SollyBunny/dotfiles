@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export TERMINAL="$HOME/.local/bin/term"
 export EDITOR=micro
 export HISTCONTROL=ignoredups
 
