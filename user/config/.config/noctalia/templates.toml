@@ -1,0 +1,3 @@
+[theme.templates.user.aurelia-firefox]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/aurelia-firefox.json"
+output_path_dynamic = "$XDG_CONFIG_HOME/Dotfiles/generated/aurelia-firefox.json"
