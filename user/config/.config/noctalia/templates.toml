@@ -1,3 +1,23 @@
-[theme.templates.user.aurelia-firefox]
-input_path = "$XDG_CONFIG_HOME/noctalia/templates/aurelia-firefox.json"
-output_path_dynamic = "$XDG_CONFIG_HOME/Dotfiles/generated/aurelia-firefox.json"
+# Transparent GTK 3/4 variants of Noctalia's built-in GTK templates.
+#
+# They render to the same noctalia.css paths as the built-in gtk3/gtk4 templates.
+# User templates run after built-in templates, so the transparent version wins
+# deterministically. Disabling these entries lets the next built-in apply restore
+# the opaque theme.
+#
+# Only background roles are made translucent (alpha 0.4); every text/foreground
+# color stays fully opaque.
+
+[theme.templates.user.gtk3-trans]
+input_path  = "templates/gtk/gtk3-trans.css"
+output_path = "$XDG_CONFIG_HOME/gtk-3.0/noctalia.css"
+post_hook   = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk3 {{ mode }}"
+hook_async  = false
+index       = 10
+
+[theme.templates.user.gtk4-trans]
+input_path  = "templates/gtk/gtk4-trans.css"
+output_path = "$XDG_CONFIG_HOME/gtk-4.0/noctalia.css"
+post_hook   = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk4 {{ mode }}"
+hook_async  = false
+index       = 10

@@ -507,7 +507,7 @@ source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "qt" ]
+    builtin_ids = [ "btop", "kcolorscheme", "kitty", "mango", "qt" ]
     community_ids = [
         "opencode",
         "pywalfox",
