@@ -504,7 +504,7 @@ builtin = "Dracula"
 community_palette = "Oxocarbon"
 mode = "dark"
 source = "wallpaper"
-wallpaper_scheme = "m3-rainbow"
+wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
     builtin_ids = [ "btop", "kcolorscheme", "kitty", "mango", "qt" ]
