@@ -57,14 +57,14 @@ _set_prompt() {
 
 	color="${USER_COLOR:-255;255;255}"
 	reset="$(escape $'\e[0m')"
-	black="$(escape $'\e[30m')"
-	white="$(escape $'\e[97m')"
+	black="$(escape $'\e[38;5;232m')"
 	bold="$(escape $'\e[1m')"
 	nobold="$(escape $'\e[22m')"
 	user_bg="$(escape $'\e[48;2;'"$color"$'m')"
 	cmd_bg="$(escape $'\e[46m')"
 	pwd_bg="$(escape $'\e[43m')"
 	git_bg="$(escape $'\e[40m')"
+	git_fg="$(escape $'\e[37m')"
 	venv_bg="$(escape $'\e[48;5;24m')"
 	venv_fg="$(escape $'\e[38;5;226m')"
 
@@ -117,7 +117,7 @@ _set_prompt() {
 			;;
 		esac
 
-		PS1+=" ${reset}${white}${git_bg}  ${git_branch}${git_mark_color}${git_mark}${white} ${reset}"
+		PS1+=" ${reset}${git_fg}${git_bg}  ${git_branch}${git_mark_color}${git_mark} ${reset}"
 	fi
 	PS1+=$'\n'"${reset}${bold}> ${reset}"
 }
