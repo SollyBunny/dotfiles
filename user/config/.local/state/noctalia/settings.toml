@@ -194,6 +194,9 @@ pre_action_fade_seconds = 10
 [location]
 auto_locate = true
 
+[lockscreen]
+transition_duration = 500
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
