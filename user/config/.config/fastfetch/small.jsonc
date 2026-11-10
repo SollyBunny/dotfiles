@@ -14,10 +14,10 @@
 	"logo": {
 		"type": "kitty",
 		"source": "~/.config/fastfetch/transarch.png",
-		"width": 15,
+		"width": 14,
 		"padding": {
-   			"top": 1,
-            "bottom": 0,
+			"top": 1,
+			"bottom": 0,
 			"left": 2,
 			"right": 2
 		}
