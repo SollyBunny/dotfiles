@@ -15,4 +15,4 @@ await pacmanInstall(
 );
 
 // Everything else
-await pacmanInstall("nodejs", "npm", "shfmt", "jdk-openjdk");
+await pacmanInstall("nodejs", "npm", "shfmt", "jdk-openjdk", "rustup");
