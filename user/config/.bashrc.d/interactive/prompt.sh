@@ -91,12 +91,12 @@ _set_prompt() {
 	PS1+=" ${reset}${black}${pwd_bg} ${pwd_display} ${reset}"
 
 	if [ -n "$VIRTUAL_ENV" ] && [ -d "$VIRTUAL_ENV" ]; then
-	    venv_dir="$(realpath --relative-to="$PWD" "$VIRTUAL_ENV")"
-	    venv_display="${venv_dir//\\/\\\\}"
-	    venv_display="${venv_display//\$/\\\$}"
-	    venv_display="${venv_display//\`/\\\`}"
+		venv_dir="$(realpath --relative-to="$PWD" "$VIRTUAL_ENV")"
+		venv_display="${venv_dir//\\/\\\\}"
+		venv_display="${venv_display//\$/\\\$}"
+		venv_display="${venv_display//\`/\\\`}"
 
-	    PS1+=" ${reset}${venv_fg}${venv_bg}  ${venv_display} ${reset}"
+		PS1+=" ${reset}${venv_fg}${venv_bg}  ${venv_display} ${reset}"
 	fi
 
 	if [ -n "$git_branch" ]; then

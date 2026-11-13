@@ -9,15 +9,15 @@
 # color stays fully opaque.
 
 [theme.templates.user.gtk3-trans]
-input_path  = "templates/gtk/gtk3-trans.css"
+input_path = "templates/gtk/gtk3-trans.css"
 output_path = "$XDG_CONFIG_HOME/gtk-3.0/noctalia.css"
-post_hook   = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk3 {{ mode }}"
-hook_async  = false
-index       = 10
+post_hook = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk3 {{ mode }}"
+hook_async = false
+index = 10
 
 [theme.templates.user.gtk4-trans]
-input_path  = "templates/gtk/gtk4-trans.css"
+input_path = "templates/gtk/gtk4-trans.css"
 output_path = "$XDG_CONFIG_HOME/gtk-4.0/noctalia.css"
-post_hook   = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk4 {{ mode }}"
-hook_async  = false
-index       = 10
+post_hook = "bash '{{ config_dir }}/templates/gtk/apply.sh' gtk4 {{ mode }}"
+hook_async = false
+index = 10
